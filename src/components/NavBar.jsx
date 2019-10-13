@@ -22,8 +22,13 @@ const StyledImg = styled('img')`
     margin-bottom: 6px;
 `
 
+const BasketLink = styled(StyledLink)`
+    margin-right: 30px;
+`
+
 const StyledBrand = styled(Navbar.Brand)`
     font-size: 26px;
+    margin-left: 18px;
 `
 
 function NavBar () {
@@ -36,9 +41,9 @@ function NavBar () {
                     <StyledLink href="#shop">Shop</StyledLink>
                     <StyledLink href="#event">Event</StyledLink>
                     <StyledLink href="#about">About</StyledLink>
-                    <StyledLink href="#basket">
+                    <BasketLink href="#basket">
                         <StyledImg src={Basket} alt="basket"/>
-                    </StyledLink>
+                    </BasketLink>
                 </Nav>
             </Navbar.Collapse>
         </StyledNavbar>

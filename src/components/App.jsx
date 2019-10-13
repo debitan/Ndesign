@@ -1,8 +1,16 @@
 import React from 'React'
+import styled from 'styled-components'
+
 // import items from '../api'
 import SEO from '../components/SEO'
 import NavBar from '../components/NavBar'
+import Footer from '../components/Footer'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import Container from 'react-bootstrap/Container'
+
+const StyledContainer = styled(Container)`
+  align-content: center;
+`
 
 function App ({ children }) {
 //     const [itemsInCart, setItemsInCart] = useState([]);
@@ -34,7 +42,10 @@ function App ({ children }) {
       <>
         <NavBar />
         <SEO title="±Ndesign"/>
+        <StyledContainer>
           {children}
+        </StyledContainer>
+        <Footer />
       </>
   )
 }
