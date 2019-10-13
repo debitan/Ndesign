@@ -2,16 +2,14 @@
 
 import React from 'react'
 import App from '../components/App'
+import Products from '../components/Shop/Products'
 import ShopHeader from '../components/Shop/ShopHeader'
-import ShopDivider from '../components/Shop/ShopDivider'
 
 function Shop() {
     return (
         <App>
             <ShopHeader />
-            <ShopDivider ProductTypeEN="Bouquet" ProductTypeJP="ブーケ" />
-            <ShopDivider ProductTypeEN="Decoration" ProductTypeJP="デコレーション" />
-            <ShopDivider ProductTypeEN="Accessories" ProductTypeJP="アクセサリー" />
+            <Products />
         </App>
     )
 }

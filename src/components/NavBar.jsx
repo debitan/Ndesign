@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
+import Container from 'react-bootstrap/Container'
 
 import Basket from '../images/basket.svg'
 
@@ -31,21 +32,27 @@ const StyledBrand = styled(Navbar.Brand)`
     margin-left: 18px;
 `
 
+const StyledContainer = styled(Container)`
+  align-content: center;
+`
+
 function NavBar () {
     return (
         <StyledNavbar expand="lg" sticky="top">
-            <StyledBrand href="#home">±Ndesign</StyledBrand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="ml-auto">
-                    <StyledLink href="#shop">Shop</StyledLink>
-                    <StyledLink href="#event">Event</StyledLink>
-                    <StyledLink href="#about">About</StyledLink>
-                    <BasketLink href="#basket">
-                        <StyledImg src={Basket} alt="basket"/>
-                    </BasketLink>
-                </Nav>
-            </Navbar.Collapse>
+            <StyledContainer>
+                <StyledBrand href="#home">±Ndesign</StyledBrand>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                    <Nav className="ml-auto">
+                        <StyledLink href="#shop">Shop</StyledLink>
+                        <StyledLink href="#event">Event</StyledLink>
+                        <StyledLink href="#about">About</StyledLink>
+                        <BasketLink href="#basket">
+                            <StyledImg src={Basket} alt="basket"/>
+                        </BasketLink>
+                    </Nav>
+                </Navbar.Collapse>
+            </StyledContainer>
         </StyledNavbar>
     )
 }

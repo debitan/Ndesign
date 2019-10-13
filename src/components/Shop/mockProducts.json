@@ -1,0 +1,66 @@
+[
+    {
+        "title": "ドライフラワーブーケ　ブルー",
+        "flower": "ドライフラワー",
+        "type": "ブーケ",
+        "price": "5000",
+        "category": "bouquet",
+        "url": "/product-1"
+    },
+    {
+        "title": "ドライフラワーブーケ　ブルー",
+        "flower": "ドライフラワー",
+        "type": "ブーケ",
+        "price": "5000",
+        "category": "bouquet",
+        "url": "/product-2"
+    },
+    {
+        "title": "ドライフラワーブーケ　ブルー",
+        "flower": "ドライフラワー",
+        "type": "ブーケ",
+        "price": "5000",
+        "category": "bouquet",
+        "url": "/product-3"
+    },
+    {
+        "title": "ドライフラワーブーケ　ブルー",
+        "flower": "ドライフラワー",
+        "type": "ブーケ",
+        "price": "5000",
+        "category": "decoration",
+        "url": "/product-4"
+    },
+    {
+        "title": "ドライフラワーブーケ　ブルー",
+        "flower": "ドライフラワー",
+        "type": "ブーケ",
+        "price": "5000",
+        "category": "decoration",
+        "url": "/product-5"
+    },
+    {
+        "title": "ドライフラワーブーケ　ブルー",
+        "flower": "ドライフラワー",
+        "type": "ブーケ",
+        "price": "5000",
+        "category": "decoration",
+        "url": "/product-6"
+    },
+    {
+        "title": "ドライフラワーブーケ　ブルー",
+        "flower": "ドライフラワー",
+        "type": "ブーケ",
+        "price": "5000",
+        "category": "decoration",
+        "url": "/product-7"
+    },
+    {
+        "title": "ドライフラワーブーケ　ブルー",
+        "flower": "ドライフラワー",
+        "type": "ブーケ",
+        "price": "5000",
+        "category": "accessory",
+        "url": "/product-8"
+    }
+]

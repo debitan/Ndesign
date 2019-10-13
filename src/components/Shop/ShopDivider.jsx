@@ -5,7 +5,6 @@ const StyledContainer = styled('div')`
     display: flex;
     align-items: center;
     flex-direction: row;
-
 `
 
 const StyledDiv = styled('div')`
