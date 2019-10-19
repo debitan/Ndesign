@@ -1,12 +1,21 @@
 import React from 'react'
 import App from '../components/App'
+import productImage from '../images/product1.jpg'
 
-const ProductPage = (product) => (
+const ProductPage = ({ pageContext }) => {
+    return (
     <App>
-        <h1>{product.title}</h1>
+        <div>
+             <h1>{pageContext.title}</h1>
+             <p>{pageContext.flower}</p>
+             <p>{pageContext.type}</p>
+             <p>{pageContext.price}</p>
+             <p>{pageContext.category}</p>
+             <p>{pageContext.slug}</p>
+             <img src={productImage} style={{ width: "600px", height: "400px" }} />
+        </div>
     </App>
-)
+    )
+}
 
 export default ProductPage
-
-// carry on from here https://www.gatsbyjs.org/blog/2019-05-02-how-to-build-a-blog-with-wordpress-and-gatsby-part-3/#adding-pages-to-gatsby-nodejs

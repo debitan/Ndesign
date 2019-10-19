@@ -28,7 +28,7 @@ function ProductCard({ title, sku, flower, type, price, image, url }) {
     return (
       <StyledAnchor href={url}>
         <Card key={sku}>
-          <img style={{ width: '100%' }} src={image} />
+          <img style={{ width: '100%' }} src={image} alt={title} />
           <h4>{title}</h4>
           <p>¥{price}</p>
           <p>花材：{flower}</p>

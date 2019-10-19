@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import ShopDivider from './ShopDivider'
 import ProductCard from './ProductCard'
 
-import mockProducts from './mockProducts.json'
+import mockProducts from '../../mockProducts.json'
 import product1 from '../../images/product1.jpg'
 
 const StyledContainer = styled('div')`
@@ -33,7 +33,7 @@ function Products () {
                             flower={product.flower}
                             type={product.type}
                             price={product.price}
-                            url={product.url}
+                            url={`/shop/${product.slug}`}
                         />
                     : null
                     )}
@@ -47,7 +47,7 @@ function Products () {
                             flower={product.flower}
                             type={product.type}
                             price={product.price}
-                            url={product.url}
+                            url={`/shop/${product.slug}`}
                         />
                     : null
                     )}
@@ -61,7 +61,7 @@ function Products () {
                             flower={product.flower}
                             type={product.type}
                             price={product.price}
-                            url={product.url}
+                            url={`/shop/${product.slug}`}
                         />
                     : null
                     )}
