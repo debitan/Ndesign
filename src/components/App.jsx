@@ -10,6 +10,7 @@ import Container from 'react-bootstrap/Container'
 
 const StyledContainer = styled(Container)`
   align-content: center;
+  font-family: 'ＭＳ Ｐゴシック', 'MS PGothic', 'メイリオ', 'Meiryo';
 `
 
 function App ({ children }) {
