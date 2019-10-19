@@ -12,19 +12,31 @@ const StyledNavbar = styled(Navbar)`
 `
 
 const StyledLink = styled(Nav.Link)`
-    margin: 10px;
+    margin: auto;
     font-weight: bold;
     align-self: center;
+
+    @media (min-width: 768px) {
+        margin: 10px;
+    }
 `
 
 const StyledImg = styled('img')`
     height: 22px;
     width: 22px;
+
+
+    @media (min-width: 768px) {
     margin-bottom: 6px;
+    }
 `
 
 const BasketLink = styled(StyledLink)`
-    margin-right: 30px;
+    margin: 0;
+
+    @media (min-width: 1090px) {
+        margin-right: 30px;
+    }
 `
 
 const StyledBrand = styled(Navbar.Brand)`
