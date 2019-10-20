@@ -52,14 +52,14 @@ function NavBar () {
     return (
         <StyledNavbar expand="lg" sticky="top">
             <StyledContainer>
-                <StyledBrand href="#home">±Ndesign</StyledBrand>
+                <StyledBrand href="/">±Ndesign</StyledBrand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ml-auto">
                         <StyledLink href="#shop">Shop</StyledLink>
                         <StyledLink href="#event">Event</StyledLink>
                         <StyledLink href="#about">About</StyledLink>
-                        <BasketLink href="#basket">
+                        <BasketLink href="/checkout">
                             <StyledImg src={Basket} alt="basket"/>
                         </BasketLink>
                     </Nav>

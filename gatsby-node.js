@@ -36,19 +36,3 @@ exports.createPages = ({ graphql, actions }) => {
         });
     })
 }
-
-// exports.createPages = ({ actions }) => {
-//     const { createPage } = actions
-//     const ProductPageTemplate = path.resolve('./src/templates/ProductPage.js')
-//     mockProducts.forEach(product => {
-//         createPage({
-//             path: `/products/${product.slug}`,
-//             component: ProductPageTemplate,
-//             context: {
-//                 id: product.slug,
-//             }
-//         })
-//     })
-// }
-
-

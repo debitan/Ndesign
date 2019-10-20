@@ -1,7 +1,6 @@
 import React from 'React'
 import styled from 'styled-components'
 
-// import items from '../api'
 import SEO from '../components/SEO'
 import NavBar from '../components/NavBar'
 import Footer from '../components/Footer'
@@ -13,14 +12,9 @@ const StyledContainer = styled(Container)`
   font-family: 'ＭＳ Ｐゴシック', 'MS PGothic', 'メイリオ', 'Meiryo', sans-serif;
 `
 
-function App ({ children }) {
-  // const totalCost = itemsInBasket.reduce(
-  //   (acc, item) => acc + item.price * item.quantity,
-  //   0
-  // )
-
+function App ({children}) {
   return (
-      <>
+    <>
         <NavBar />
         <SEO title="±Ndesign"/>
         <StyledContainer>

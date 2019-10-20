@@ -27,8 +27,8 @@ const CheckoutFormButton = styled('button')`
   font-weight: 600;
   line-height: 1;
   text-align: center;
-  background-color: #7fdc45;
-  color: #fff;
+  background-color: black;
+  color: white;
   cursor: pointer;
   transition-property: background-color, color;
   transition-duration: 0.25s;
@@ -91,13 +91,12 @@ function CheckoutForm({ stripe, totalCost }) {
 
     return (
         <CheckoutFormWrapper onSubmit={submit}>
-            <h4>Would you like to complete the purchase?</h4>
             <StyledCardElement />
             <CheckoutFormButton
                 type="submit"
                 disabled={status === 'submitting'}
             >
-                {status === 'submitting' ? 'Submitting' : 'Submit Order'}
+                {status === 'submitting' ? 'Submitting' : '注文を確定する'}
             </CheckoutFormButton>
             {status === 'error' && (
                 <CheckoutFormError>Something went wrong</CheckoutFormError>
