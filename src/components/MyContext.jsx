@@ -1,18 +1,13 @@
-import React, { createContext, useState, useEffect } from 'react'
-
+import React, { createContext } from 'react'
+import createPersistedState from 'use-persisted-state';
 import Products from '../mockProducts.json'
+
+const usePersistedState = createPersistedState('itemsInBasket')
 
 const MyContext = createContext()
 
 function MyProvider ({children}) {
-  const [itemsInBasket, setItemsInBasket] = useState([]);
-
-  // useEffect(() => {const existingCart = JSON.parse(
-  //   localStorage.getItem('stripe_checkout_items')
-  // )
-  // if (existingCart && existingCart.length) {
-  //   setItemsInBasket({ itemsInBasket: existingCart })}
-  // })
+  const [itemsInBasket, setItemsInBasket] = usePersistedState();
 
   const handleAddToBasketClick = slug => {
     setItemsInBasket(itemsInBasket => {
