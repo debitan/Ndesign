@@ -7,7 +7,7 @@ const usePersistedState = createPersistedState('itemsInBasket')
 const MyContext = createContext()
 
 function MyProvider ({children}) {
-  const [itemsInBasket, setItemsInBasket] = usePersistedState();
+  const [itemsInBasket, setItemsInBasket] = usePersistedState([]);
 
   const handleAddToBasketClick = slug => {
     setItemsInBasket(itemsInBasket => {
