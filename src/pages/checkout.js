@@ -5,6 +5,9 @@ import { Elements, StripeProvider } from 'react-stripe-elements'
 import App from '../components/App'
 import CheckoutForm from '../components/CheckoutForm'
 import MyContext from '../components/MyContext'
+import CustomerInformation from '../components/CustomerInformation'
+
+import ProductImage from '../images/product1.jpg'
 
 const StyledWrapper = styled('div')`
     display: grid;
@@ -34,24 +37,27 @@ const RightSide = styled('div')`
 function Checkout() {
     return (
         <MyContext.Consumer>
-            {({ totalCost }) => (
+            {({ totalCost, itemsInBasket }) => (
                 <App>
                     <StyledWrapper>
                         <LeftSide>
                             <h3>Shopping Cart</h3>
-                            <StripeProvider apiKey="pk_test_hJ3fbHvbQZFxyrbtjNnBrU4k00A6Mx6jvD">
-                                <Elements>
-                                    <CheckoutForm />
-                                </Elements>
-                            </StripeProvider>
+                            <hr/>
+                            {itemsInBasket.map(item => {
+                                return(
+                                    <div>
+                                        <img src={ProductImage} style={{width: "200px"}} />
+                                        <p>{item.title}</p>
+                                        <p>¥{item.price}</p>
+                                        <p>{item.flower}</p>
+                                        <p>{item.type}</p>
+                                    </div>
+                                )
+                            })}
                         </LeftSide>
                         <LeftSide>
                             <h3>Customer Information</h3>
-                            <StripeProvider apiKey="pk_test_hJ3fbHvbQZFxyrbtjNnBrU4k00A6Mx6jvD">
-                                <Elements>
-                                    <CheckoutForm />
-                                </Elements>
-                            </StripeProvider>
+                            <CustomerInformation />
                         </LeftSide>
                         <LeftSide>
                             <h3>Delivery</h3>
