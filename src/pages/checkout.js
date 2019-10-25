@@ -6,6 +6,7 @@ import App from '../components/App'
 import CheckoutForm from '../components/CheckoutForm'
 import MyContext from '../components/MyContext'
 import CustomerInformation from '../components/CustomerInformation'
+import DeliveryInformation from '../components/DeliveryInformation'
 
 import ProductImage from '../images/product1.jpg'
 
@@ -57,15 +58,13 @@ function Checkout() {
                         </LeftSide>
                         <LeftSide>
                             <h3>Customer Information</h3>
+                            <hr/>
                             <CustomerInformation />
                         </LeftSide>
                         <LeftSide>
                             <h3>Delivery</h3>
-                            <StripeProvider apiKey="pk_test_hJ3fbHvbQZFxyrbtjNnBrU4k00A6Mx6jvD">
-                                <Elements>
-                                    <CheckoutForm />
-                                </Elements>
-                            </StripeProvider>
+                            <hr/>
+                            <DeliveryInformation />
                         </LeftSide>
                         <LeftSide>
                             <h3>Payment</h3>
