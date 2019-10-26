@@ -96,10 +96,10 @@ function CheckoutForm({ stripe, totalCost }) {
                 type="submit"
                 disabled={status === 'submitting'}
             >
-                {status === 'submitting' ? 'Submitting' : '注文を確定する'}
+                {status === 'submitting' ? '注文中' : '注文を確定する'}
             </CheckoutFormButton>
             {status === 'error' && (
-                <CheckoutFormError>Something went wrong</CheckoutFormError>
+                <CheckoutFormError>あ、なぜかダメだった</CheckoutFormError>
             )}
         </CheckoutFormWrapper>
     )

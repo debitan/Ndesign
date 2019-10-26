@@ -44,7 +44,7 @@ function Checkout() {
                         <LeftSide>
                             <h3>Shopping Cart</h3>
                             <hr/>
-                            {itemsInBasket.map(item => {
+                            {itemsInBasket ? itemsInBasket.map(item => {
                                 return(
                                     <div>
                                         <img src={ProductImage} style={{width: "200px"}} />
@@ -54,7 +54,7 @@ function Checkout() {
                                         <p>{item.type}</p>
                                     </div>
                                 )
-                            })}
+                            }) : null}
                         </LeftSide>
                         <LeftSide>
                             <h3>Customer Information</h3>
