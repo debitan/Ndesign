@@ -1,10 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Elements, StripeProvider } from 'react-stripe-elements'
+import { Elements, StripeProvider } from 'react-stripe-elements-universal'
 
 import App from '../components/App'
 import CheckoutForm from '../components/CheckoutForm'
 import MyContext from '../components/MyContext'
+import CustomerInformation from '../components/CustomerInformation'
+import DeliveryInformation from '../components/DeliveryInformation'
+
+import ProductImage from '../images/product1.jpg'
 
 const StyledWrapper = styled('div')`
     display: grid;
@@ -34,32 +38,33 @@ const RightSide = styled('div')`
 function Checkout() {
     return (
         <MyContext.Consumer>
-            {({ totalCost }) => (
+            {context => (
                 <App>
                     <StyledWrapper>
                         <LeftSide>
                             <h3>Shopping Cart</h3>
-                            <StripeProvider apiKey="pk_test_hJ3fbHvbQZFxyrbtjNnBrU4k00A6Mx6jvD">
-                                <Elements>
-                                    <CheckoutForm />
-                                </Elements>
-                            </StripeProvider>
+                            <hr/>
+                            {context.itemsInBasket ? context.itemsInBasket.map(item => {
+                                return(
+                                    <div>
+                                        <img src={ProductImage} style={{width: "200px"}} />
+                                        <p>{item.title}</p>
+                                        <p>¥{item.price}</p>
+                                        <p>{item.flower}</p>
+                                        <p>{item.type}</p>
+                                    </div>
+                                )
+                            }) : null}
                         </LeftSide>
                         <LeftSide>
                             <h3>Customer Information</h3>
-                            <StripeProvider apiKey="pk_test_hJ3fbHvbQZFxyrbtjNnBrU4k00A6Mx6jvD">
-                                <Elements>
-                                    <CheckoutForm />
-                                </Elements>
-                            </StripeProvider>
+                            <hr/>
+                            <CustomerInformation />
                         </LeftSide>
                         <LeftSide>
                             <h3>Delivery</h3>
-                            <StripeProvider apiKey="pk_test_hJ3fbHvbQZFxyrbtjNnBrU4k00A6Mx6jvD">
-                                <Elements>
-                                    <CheckoutForm />
-                                </Elements>
-                            </StripeProvider>
+                            <hr/>
+                            <DeliveryInformation />
                         </LeftSide>
                         <LeftSide>
                             <h3>Payment</h3>
@@ -70,7 +75,7 @@ function Checkout() {
                             </StripeProvider>
                         </LeftSide>
                         <RightSide>
-                            <h3>合計　¥{totalCost}</h3>
+                            <h3>合計　¥{context.totalCost}</h3>
                         </RightSide>
                     </StyledWrapper>
                 </App>
