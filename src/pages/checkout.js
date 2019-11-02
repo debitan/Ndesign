@@ -40,7 +40,6 @@ function Checkout() {
         <MyContext.Consumer>
             {context => (
                 <App>
-                {console.log(context)}
                     <StyledWrapper>
                         <LeftSide>
                             <h3>Shopping Cart</h3>
