@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import App from '../components/App'
 import MyContext from '../components/MyContext'
 
-import productImage from '../images/Product1.jpg'
+import productImage from '../images/product1.jpg'
 
 const BuyButton = styled('button')`
     width: 400px;
@@ -19,7 +19,7 @@ const ProductPage = ({ pageContext }) => {
     return (
     <App>
         <MyContext.Consumer>
-            {({ handleAddToBasketClick }) => (
+            {( handleAddToBasketClick ) => (
                 <div>
                     <h1>{pageContext.title}</h1>
                     <p>{pageContext.flower}</p>

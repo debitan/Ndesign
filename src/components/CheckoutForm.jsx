@@ -1,6 +1,6 @@
 import React, { useState} from 'react'
 import styled from 'styled-components'
-import { CardElement, injectStripe } from 'react-stripe-elements'
+import { CardElement, injectStripe } from 'react-stripe-elements-universal'
 
 const CheckoutFormComplete = styled('div')`
   color: #7fdc45;

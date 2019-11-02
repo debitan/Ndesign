@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Elements, StripeProvider } from 'react-stripe-elements'
+import { Elements, StripeProvider } from 'react-stripe-elements-universal'
 
 import App from '../components/App'
 import CheckoutForm from '../components/CheckoutForm'
@@ -38,7 +38,7 @@ const RightSide = styled('div')`
 function Checkout() {
     return (
         <MyContext.Consumer>
-            {({ totalCost, itemsInBasket }) => (
+            {( totalCost, itemsInBasket ) => (
                 <App>
                     <StyledWrapper>
                         <LeftSide>
