@@ -19,7 +19,7 @@ const ProductPage = ({ pageContext }) => {
     return (
     <App>
         <MyContext.Consumer>
-            {( handleAddToBasketClick ) => (
+            {context => (
                 <div>
                     <h1>{pageContext.title}</h1>
                     <p>{pageContext.flower}</p>
@@ -28,7 +28,7 @@ const ProductPage = ({ pageContext }) => {
                     <p>{pageContext.category}</p>
                     <p>{pageContext.slug}</p>
                     <img src={productImage} style={{ width: "500px"}} alt={pageContext.title} />
-                    <BuyButton onClick={() => handleAddToBasketClick(pageContext.slug)}>
+                    <BuyButton onClick={() => {context.handleAddToBasketClick(pageContext.slug)}}>
                         カートに入れる
                     </BuyButton>
                 </div>)}

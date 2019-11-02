@@ -38,13 +38,14 @@ const RightSide = styled('div')`
 function Checkout() {
     return (
         <MyContext.Consumer>
-            {( totalCost, itemsInBasket ) => (
+            {context => (
                 <App>
+                {console.log(context)}
                     <StyledWrapper>
                         <LeftSide>
                             <h3>Shopping Cart</h3>
                             <hr/>
-                            {itemsInBasket ? itemsInBasket.map(item => {
+                            {context.itemsInBasket ? context.itemsInBasket.map(item => {
                                 return(
                                     <div>
                                         <img src={ProductImage} style={{width: "200px"}} />
@@ -75,7 +76,7 @@ function Checkout() {
                             </StripeProvider>
                         </LeftSide>
                         <RightSide>
-                            <h3>合計　¥{totalCost}</h3>
+                            <h3>合計　¥{context.totalCost}</h3>
                         </RightSide>
                     </StyledWrapper>
                 </App>
