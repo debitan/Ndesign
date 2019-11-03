@@ -1,3 +1,7 @@
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
+
 var proxy = require('http-proxy-middleware')
 
 module.exports = {
@@ -49,7 +53,7 @@ module.exports = {
       "/.netlify/functions/",
       proxy({
         target: "http://localhost:9000",
-        secure: true,
+        secure: false,
         pathRewrite: {
           "/.netlify/functions/": "",
         },

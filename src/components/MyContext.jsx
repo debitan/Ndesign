@@ -12,11 +12,11 @@ const StripeWrapper = ({ children }) => {
 
     // for browser
     if (window.Stripe) {
-      setStripe(window.Stripe("pk_test_hJ3fbHvbQZFxyrbtjNnBrU4k00A6Mx6jvD"))
+      setStripe(window.Stripe(process.env.STRIPE_PUBLIC_KEY))
     } else {
       const stripeScript = document.querySelector('#stripe-js')
       stripeScript.onload = () => {
-        setStripe(window.Stripe("pk_test_hJ3fbHvbQZFxyrbtjNnBrU4k00A6Mx6jvD"))
+        setStripe(window.Stripe(process.env.STRIPE_PUBLIC_KEY))
       }
     }
   }, []) // <-- passing in an empty array since I only want to run this hook once
