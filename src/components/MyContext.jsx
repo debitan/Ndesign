@@ -1,6 +1,34 @@
-import React, { createContext } from 'react'
+import React, { createContext, useState, useEffect } from 'react'
 import createPersistedState from 'use-persisted-state';
 import Products from '../mockProducts.json'
+import { StripeProvider } from 'react-stripe-elements'
+
+const StripeWrapper = ({ children }) => {
+  const [ stripe, setStripe ] = useState(null)
+
+  useEffect(() => {
+    // for SSR
+    if (typeof window == 'undefined') return
+
+    // for browser
+    if (window.Stripe) {
+      setStripe(window.Stripe("pk_test_hJ3fbHvbQZFxyrbtjNnBrU4k00A6Mx6jvD"))
+    } else {
+      const stripeScript = document.querySelector('#stripe-js')
+      stripeScript.onload = () => {
+        setStripe(window.Stripe("pk_test_hJ3fbHvbQZFxyrbtjNnBrU4k00A6Mx6jvD"))
+      }
+    }
+  }, []) // <-- passing in an empty array since I only want to run this hook once
+
+  return (
+    <StripeProvider stripe={stripe}>
+      {children}
+    </StripeProvider>
+  )
+}
+
+
 
 const usePersistedState = createPersistedState('itemsInBasket')
 
@@ -41,4 +69,4 @@ function MyProvider ({children}) {
 
 export default MyContext
 
-export { MyProvider }
+export { MyProvider, StripeWrapper }

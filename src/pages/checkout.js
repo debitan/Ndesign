@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Elements, StripeProvider } from 'react-stripe-elements-universal'
+import { Elements } from 'react-stripe-elements'
 
 import App from '../components/App'
 import CheckoutForm from '../components/CheckoutForm'
@@ -68,11 +68,9 @@ function Checkout() {
                         </LeftSide>
                         <LeftSide>
                             <h3>Payment</h3>
-                            <StripeProvider apiKey="pk_test_hJ3fbHvbQZFxyrbtjNnBrU4k00A6Mx6jvD">
                                 <Elements>
-                                    <CheckoutForm />
+                                    <CheckoutForm totalCost={context.totalCost} />
                                 </Elements>
-                            </StripeProvider>
                         </LeftSide>
                         <RightSide>
                             <h3>合計　¥{context.totalCost}</h3>

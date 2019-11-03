@@ -30,7 +30,12 @@ module.exports = {
       },
     },
     `gatsby-plugin-offline`,
-    'gatsby-plugin-stripe',
+    {
+      resolve: `gatsby-plugin-stripe`,
+      options: {
+        async: true,
+      },
+    },
     {
       resolve: `gatsby-plugin-netlify-functions`,
       options: {

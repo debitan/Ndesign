@@ -1,6 +1,6 @@
 import React, { useState} from 'react'
 import styled from 'styled-components'
-import { CardElement, injectStripe } from 'react-stripe-elements-universal'
+import { CardElement, injectStripe } from 'react-stripe-elements'
 
 const CheckoutFormComplete = styled('div')`
   color: #7fdc45;
@@ -70,7 +70,7 @@ function CheckoutForm({ stripe, totalCost }) {
             let response = await fetch('/.netlify/functions/charge', {
                 method: 'POST',
                 body: JSON.stringify({
-                    amount: totalCost * 100,
+                    amount: totalCost,
                     token: token.id,
                 }),
             })

@@ -1,5 +1,9 @@
 import React from 'react'
-import { MyProvider } from './src/components/MyContext'
+import { MyProvider, StripeWrapper } from './src/components/MyContext'
 export const wrapRootElement = ({ element }) => (
-  <MyProvider>{element}</MyProvider>
+  <MyProvider>
+    <StripeWrapper>
+      {element}
+    </StripeWrapper>
+  </MyProvider>
 )
