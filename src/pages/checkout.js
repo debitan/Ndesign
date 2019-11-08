@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { Elements } from 'react-stripe-elements'
 
@@ -36,6 +36,15 @@ const RightSide = styled('div')`
 `
 
 function Checkout() {
+    const [kanjiName, setKanjiName] = useState('')
+    const [furiganaName, setFuriganaName] = useState('')
+    const [email, setEmail] = useState('')
+    const [postcode, setPostcode] = useState('')
+    const [prefecture, setPrefecture] = useState('')
+    const [addressLine1, setAddressLine1] = useState('')
+    const [addressLine2, setAddressLine2] = useState('')
+    const [phone, setPhone] = useState('')
+
     return (
         <MyContext.Consumer>
             {context => (
@@ -47,7 +56,7 @@ function Checkout() {
                             {context.itemsInBasket ? context.itemsInBasket.map(item => {
                                 return(
                                     <div>
-                                        <img src={ProductImage} style={{width: "200px"}} />
+                                        <img src={ProductImage} style={{width: "200px"}} alt={item.title} />
                                         <p>{item.title}</p>
                                         <p>¥{item.price}</p>
                                         <p>{item.flower}</p>
@@ -56,22 +65,43 @@ function Checkout() {
                                 )
                             }) : null}
                         </LeftSide>
-                        <LeftSide>
-                            <h3>Customer Information</h3>
-                            <hr/>
-                            <CustomerInformation />
-                        </LeftSide>
-                        <LeftSide>
-                            <h3>Delivery</h3>
-                            <hr/>
-                            <DeliveryInformation />
-                        </LeftSide>
-                        <LeftSide>
-                            <h3>Payment</h3>
-                                <Elements>
-                                    <CheckoutForm totalCost={context.totalCost} />
-                                </Elements>
-                        </LeftSide>
+                        <Elements>
+                            <>
+                            <LeftSide>
+                                <h3>Customer Information</h3>
+                                <hr/>
+                                <CustomerInformation
+                                    setKanjiName={setKanjiName}
+                                    setFuriganaName={setFuriganaName}
+                                    setEmail={setEmail}
+                                    setPostcode={setPostcode}
+                                    setPrefecture={setPrefecture}
+                                    setAddressLine1={setAddressLine1}
+                                    setAddressLine2={setAddressLine2}
+                                    setPhone={setPhone}
+                                />
+                            </LeftSide>
+                            <LeftSide>
+                                <h3>Delivery</h3>
+                                <hr/>
+                                <DeliveryInformation />
+                            </LeftSide>
+                            <LeftSide>
+                                <h3>Payment</h3>
+                                        <CheckoutForm
+                                            totalCost={context.totalCost}
+                                            kanjiName={kanjiName}
+                                            furiganaName={furiganaName}
+                                            email={email}
+                                            postcode={postcode}
+                                            prefecture={prefecture}
+                                            addressLine1={addressLine1}
+                                            addressLine2={addressLine2}
+                                            phone={phone}
+                                        />
+                            </LeftSide>
+                            </>
+                        </Elements>
                         <RightSide>
                             <h3>合計　¥{context.totalCost}</h3>
                         </RightSide>
