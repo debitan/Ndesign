@@ -1,11 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import Form from 'react-bootstrap/Form'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import Button from 'react-bootstrap/Button'
 
-function CustomerInformation ({isDisabled}) {
+function CustomerInformation ({
+    isDisabled,
+    setKanjiName,
+    setFuriganaName,
+    setEmail,
+    setPostcode,
+    setPrefecture,
+    setAddressLine1,
+    setAddressLine2,
+    setPhone
+    }) {
     return (
         <Form>
         <Form.Group as={Row} controlId="Name">
@@ -13,7 +22,7 @@ function CustomerInformation ({isDisabled}) {
             お名前
             </Form.Label>
             <Col sm={10}>
-            <Form.Control disabled={isDisabled} type="text" />
+            <Form.Control disabled={isDisabled} type="text" onChange={e => setKanjiName(e.target.value)} />
             </Col>
         </Form.Group>
         <Form.Group as={Row} controlId="Furigana">
@@ -21,7 +30,7 @@ function CustomerInformation ({isDisabled}) {
             フリガナ
             </Form.Label>
             <Col sm={10}>
-            <Form.Control disabled={isDisabled} type="text" />
+            <Form.Control disabled={isDisabled} type="text" onChange={e => setFuriganaName(e.target.value)} />
             </Col>
         </Form.Group>
         <Form.Group as={Row} controlId="Email">
@@ -29,7 +38,7 @@ function CustomerInformation ({isDisabled}) {
             Email
             </Form.Label>
             <Col sm={10}>
-            <Form.Control disabled={isDisabled} type="email"/>
+            <Form.Control disabled={isDisabled} type="email" onChange={e => setEmail(e.target.value)} />
             </Col>
         </Form.Group>
         <Form.Group as={Row} controlId="Postcode">
@@ -37,7 +46,7 @@ function CustomerInformation ({isDisabled}) {
             郵便番号
             </Form.Label>
             <Col sm={5}>
-            <Form.Control disabled={isDisabled} type="tel"/>
+            <Form.Control disabled={isDisabled} type="tel" onChange={e => setPostcode(e.target.value)} />
             </Col>
         </Form.Group>
         <Form.Group as={Row} controlId="Region">
@@ -45,7 +54,7 @@ function CustomerInformation ({isDisabled}) {
             都道府県
             </Form.Label>
             <Col sm={5}>
-            <Form.Control disabled={isDisabled} as="select">
+            <Form.Control disabled={isDisabled} as="select" onChange={e => setPrefecture(e.target.value)} >
                 <option value=""></option>
                 <option value="北海道">北海道</option>
                 <option value="青森県">青森県</option>
@@ -102,7 +111,7 @@ function CustomerInformation ({isDisabled}) {
             住所１
             </Form.Label>
             <Col sm={10}>
-            <Form.Control disabled={isDisabled} type="text"/>
+            <Form.Control disabled={isDisabled} type="text" onChange={e => setAddressLine1(e.target.value)} />
             </Col>
         </Form.Group>
         <Form.Group as={Row} controlId="Address2">
@@ -110,7 +119,7 @@ function CustomerInformation ({isDisabled}) {
             住所２
             </Form.Label>
             <Col sm={10}>
-            <Form.Control disabled={isDisabled} type="text"/>
+            <Form.Control disabled={isDisabled} type="text" onChange={e => setAddressLine2(e.target.value)} />
             </Col>
         </Form.Group>
         <Form.Group as={Row} controlId="PhoneNumber">
@@ -118,7 +127,7 @@ function CustomerInformation ({isDisabled}) {
             電話番号
             </Form.Label>
             <Col sm={10}>
-            <Form.Control disabled={isDisabled} type="tel"/>
+            <Form.Control disabled={isDisabled} type="tel" onChange={e => setPhone(e.target.value)} />
             </Col>
         </Form.Group>
         </Form>

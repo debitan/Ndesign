@@ -56,8 +56,20 @@ const StyledCardElement = styled(CardElement)`
   background: white;
 `
 
-function CheckoutForm({ stripe, totalCost }) {
+function CheckoutForm({
+    stripe,
+    totalCost,
+    kanjiName,
+    furiganaName,
+    email,
+    postcode,
+    prefecture,
+    addressLine1,
+    addressLine2,
+    phone
+    }) {
     const [ status, setStatus ] = useState('default')
+    const name = `${kanjiName} ${furiganaName}`
 
     const submit = async e => {
         e.preventDefault()
@@ -72,6 +84,13 @@ function CheckoutForm({ stripe, totalCost }) {
                 body: JSON.stringify({
                     amount: totalCost,
                     token: token.id,
+                    name,
+                    email,
+                    postcode,
+                    prefecture,
+                    addressLine1,
+                    addressLine2,
+                    phone
                 }),
             })
 

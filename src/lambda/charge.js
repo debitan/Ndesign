@@ -20,8 +20,19 @@ exports.handler = (event, context, callback) => {
   stripe.charges
     .create({
       amount: parseInt(data.amount),
-      currency: 'usd',
-      description: 'Dreamcast game shop',
+      currency: 'jpy',
+      description: '±nDesign',
+      receipt_email: data.email,
+      shipping: {
+        address: {
+          line1: data.addressLine1,
+          line2: data.addressLine2,
+          postal_code: data.postcode,
+          state: data.prefecture,
+        },
+        name: data.name,
+        phone: data.phone,
+        },
       source: data.token,
     })
     .then(({ status }) => {
