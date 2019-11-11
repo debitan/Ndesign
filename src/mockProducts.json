@@ -5,7 +5,18 @@
         "type": "ブーケ",
         "price": "5000",
         "category": "bouquet",
-        "slug": "product-1"
+        "slug": "product-1",
+        "description": "トライフラワーを使ったブーケ。壁に掛けても、花瓶に飾っても場面を明るく、お洒落に仕上げてくれます。",
+        "sizes": [
+            "S サイズ",
+            "M サイズ",
+            "L サイズ"
+        ],
+        "colours": [
+            "緑",
+            "青",
+            "赤"
+        ]
     },
     {
         "title": "ドライフラワーブーケ　ブルー",
@@ -13,7 +24,18 @@
         "type": "ブーケ",
         "price": "5000",
         "category": "bouquet",
-        "slug": "product-2"
+        "slug": "product-2",
+        "description": "トライフラワーを使ったブーケ。壁に掛けても、花瓶に飾っても場面を明るく、お洒落に仕上げてくれます。",
+        "sizes": [
+            "S サイズ",
+            "M サイズ",
+            "L サイズ"
+        ],
+        "colours": [
+            "緑",
+            "青",
+            "赤"
+        ]
     },
     {
         "title": "ドライフラワーブーケ　ブルー",
@@ -21,7 +43,18 @@
         "type": "ブーケ",
         "price": "5000",
         "category": "bouquet",
-        "slug": "product-3"
+        "slug": "product-3",
+        "description": "トライフラワーを使ったブーケ。壁に掛けても、花瓶に飾っても場面を明るく、お洒落に仕上げてくれます。",
+        "sizes": [
+            "S サイズ",
+            "M サイズ",
+            "L サイズ"
+        ],
+        "colours": [
+            "緑",
+            "青",
+            "赤"
+        ]
     },
     {
         "title": "ドライフラワーブーケ　ブルー",
@@ -29,7 +62,18 @@
         "type": "ブーケ",
         "price": "5000",
         "category": "decoration",
-        "slug": "product-4"
+        "slug": "product-4",
+        "description": "トライフラワーを使ったブーケ。壁に掛けても、花瓶に飾っても場面を明るく、お洒落に仕上げてくれます。",
+        "sizes": [
+            "S サイズ",
+            "M サイズ",
+            "L サイズ"
+        ],
+        "colours": [
+            "緑",
+            "青",
+            "赤"
+        ]
     },
     {
         "title": "ドライフラワーブーケ　ブルー",
@@ -37,7 +81,18 @@
         "type": "ブーケ",
         "price": "5000",
         "category": "decoration",
-        "slug": "product-5"
+        "slug": "product-5",
+        "description": "トライフラワーを使ったブーケ。壁に掛けても、花瓶に飾っても場面を明るく、お洒落に仕上げてくれます。",
+        "sizes": [
+            "S サイズ",
+            "M サイズ",
+            "L サイズ"
+        ],
+        "colours": [
+            "緑",
+            "青",
+            "赤"
+        ]
     },
     {
         "title": "ドライフラワーブーケ　ブルー",
@@ -45,7 +100,18 @@
         "type": "ブーケ",
         "price": "5000",
         "category": "decoration",
-        "slug": "product-6"
+        "slug": "product-6",
+        "description": "トライフラワーを使ったブーケ。壁に掛けても、花瓶に飾っても場面を明るく、お洒落に仕上げてくれます。",
+        "sizes": [
+            "S サイズ",
+            "M サイズ",
+            "L サイズ"
+        ],
+        "colours": [
+            "緑",
+            "青",
+            "赤"
+        ]
     },
     {
         "title": "ドライフラワーブーケ　ブルー",
@@ -53,7 +119,18 @@
         "type": "ブーケ",
         "price": "5000",
         "category": "decoration",
-        "slug": "product-7"
+        "slug": "product-7",
+        "description": "トライフラワーを使ったブーケ。壁に掛けても、花瓶に飾っても場面を明るく、お洒落に仕上げてくれます。",
+        "sizes": [
+            "S サイズ",
+            "M サイズ",
+            "L サイズ"
+        ],
+        "colours": [
+            "緑",
+            "青",
+            "赤"
+        ]
     },
     {
         "title": "ドライフラワーブーケ　ブルー",
@@ -61,6 +138,17 @@
         "type": "ブーケ",
         "price": "5000",
         "category": "accessory",
-        "slug": "product-8"
+        "slug": "product-8",
+        "description": "トライフラワーを使ったブーケ。壁に掛けても、花瓶に飾っても場面を明るく、お洒落に仕上げてくれます。",
+        "sizes": [
+            "S サイズ",
+            "M サイズ",
+            "L サイズ"
+        ],
+        "colours": [
+            "緑",
+            "青",
+            "赤"
+        ]
     }
 ]
