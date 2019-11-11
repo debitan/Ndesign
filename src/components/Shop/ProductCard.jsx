@@ -24,15 +24,30 @@ const StyledAnchor = styled('a')`
   }
 `
 
+const TitleText = styled('p')`
+  font-size: 16px;
+  font-weight: 500;
+`
+
+const TypeText = styled('p')`
+  color: grey;
+`
+
 function ProductCard({ title, sku, flower, type, price, image, url }) {
     return (
       <StyledAnchor href={url}>
         <Card key={sku}>
           <img style={{ width: '100%' }} src={image} alt={title} />
-          <h4>{title}</h4>
-          <p>¥{price}</p>
-          <p>花材：{flower}</p>
-          <p>タイプ：{type}</p>
+          <TitleText>
+            {title}
+            <br />
+            消費税込 ¥{price}
+          </TitleText>
+          <TypeText>
+            花材：{flower}
+            <br />
+            タイプ：{type}
+          </TypeText>
         </Card>
       </StyledAnchor>
     )

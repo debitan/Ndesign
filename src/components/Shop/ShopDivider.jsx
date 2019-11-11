@@ -46,6 +46,10 @@ const MobileHr = styled('hr')`
     }
 `
 
+const JPText = styled('h5')`
+    color: grey;
+`
+
 function ShopDivider ({ ProductTypeEN, ProductTypeJP }) {
     return (
         <>
@@ -54,7 +58,7 @@ function ShopDivider ({ ProductTypeEN, ProductTypeJP }) {
                 <h1>{ProductTypeEN}</h1>
             </StyledDiv>
             <StyledDiv>
-                <h5>{ProductTypeJP}</h5>
+                <JPText>{ProductTypeJP}</JPText>
             </StyledDiv>
             <StyledHrWrapper>
                 <StyledHr />

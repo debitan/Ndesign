@@ -11,6 +11,17 @@ module.exports = {
     author: `@gatsbyjs`,
   },
   plugins: [
+    {
+      resolve: `gatsby-plugin-prefetch-google-fonts`,
+      options: {
+        fonts: [
+          {
+            family: `Noto Sans JP`,
+            variants: [`300`, `400`, `700`]
+          },
+        ],
+      },
+    },
     `gatsby-plugin-react-helmet`,
     `gatsby-transformer-json`,
     {

@@ -7,7 +7,7 @@ import Container from 'react-bootstrap/Container'
 import Basket from '../images/basket.svg'
 
 const StyledNavbar = styled(Navbar)`
-    background-color: #CDCBD7;
+    background-color: #94b09f;
     padding: 20px;
 `
 
@@ -41,6 +41,7 @@ const BasketLink = styled(StyledLink)`
 
 const StyledBrand = styled(Navbar.Brand)`
     font-size: 26px;
+    font-weight: 300;
     margin-left: 18px;
 `
 
@@ -57,8 +58,10 @@ function NavBar () {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ml-auto">
                         <StyledLink href="#shop">Shop</StyledLink>
-                        <StyledLink href="#event">Event</StyledLink>
-                        <StyledLink href="#about">About</StyledLink>
+                        <StyledLink href="#event">Event Flowers</StyledLink>
+                        <StyledLink href="#about">Weddings</StyledLink>
+                        <StyledLink href="#about">Gallery</StyledLink>
+                        <StyledLink href="#about">Contact</StyledLink>
                         <BasketLink href="/checkout">
                             <StyledImg src={Basket} alt="basket"/>
                         </BasketLink>

@@ -68,7 +68,7 @@ function Checkout() {
                         <Elements>
                             <>
                             <LeftSide>
-                                <h3>Customer Information</h3>
+                                <h3>Delivery</h3>
                                 <hr/>
                                 <CustomerInformation
                                     setKanjiName={setKanjiName}
@@ -81,11 +81,12 @@ function Checkout() {
                                     setPhone={setPhone}
                                 />
                             </LeftSide>
-                            <LeftSide>
+                            {/* reinstate this section if customer information is required. For now, Stripe only need shipping information, it will get the customer information from the card details */}
+                            {/* <LeftSide>
                                 <h3>Delivery</h3>
                                 <hr/>
                                 <DeliveryInformation />
-                            </LeftSide>
+                            </LeftSide> */}
                             <LeftSide>
                                 <h3>Payment</h3>
                                         <CheckoutForm

@@ -5,13 +5,13 @@ import Nav from 'react-bootstrap/Nav'
 import Container from 'react-bootstrap/Container'
 
 const FooterWrapper = styled('footer')`
-    background-color: #CDCBD7;
+    background-color: #94b09f;
     padding: 20px;
     min-height: 200px;
 `
 
 const StyledNavbar = styled(Navbar)`
-    background-color: #CDCBD7;
+    background-color: #94b09f;
     padding: 20px;
 `
 
