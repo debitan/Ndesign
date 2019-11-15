@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 
 import Form from 'react-bootstrap/Form'
@@ -67,78 +67,105 @@ const BuyButton = styled('button')`
 `
 
 const SelectionWrapper = styled(Form)`
-    margin: 40px;
+    margin: 250px 40px 40px 40px;
+`
+
+const AdviceText = styled('p')`
+    font-weight: 500;
+`
+
+const ImageWrapper = styled('div')`
+    margin-bottom: 40px;
 `
 
 const ProductPage = ({ pageContext }) => {
+    const [ size, setSize ] = useState(pageContext.sizes[0])
+    const [ colour, setColour ] = useState(pageContext.colours[0])
+    const [ quantity, setQuantity ] = useState(1)
+    const [ message, setMessage ] = useState('')
+
     return (
     <App>
         <MyContext.Consumer>
             {context => (
                 <StyledWrapper>
                     <LeftSide>
-                        <img src={productImage} style={{ width: "500px"}} alt={pageContext.title} />
+                        <ImageWrapper>
+                            <img src={productImage} style={{ width: "500px"}} alt={pageContext.title} />
+                        </ImageWrapper>
+                        <AdviceText>
+                            * ご注意 *
+                        </AdviceText>
+                        <AdviceText>
+                            • 季節と入荷により花材が変わりますので、写真と全く同じものにはなりません。予め、ご了承ください。オーダーメイドで心を込めてお作りして参りますので、世界に一つのギフトを楽しみください。
+                        </AdviceText>
+                        <AdviceText>
+                            • ご注意を頂いてから全てに心を込めてご提案させていただいておりますので、オーダーには3日から1週間を時間をいただいております。お急ぎの場合は、事前にご相談くださいませ。
+                        </AdviceText>
+                        <AdviceText>
+                            • お支払い方法は、カード決済のみとなります。
+                        </AdviceText>
                     </LeftSide>
                     <RightSide>
-                    <TitleText>{pageContext.title}</TitleText>
-                    <TaxText>消費税込　<PriceText>¥{pageContext.price}</PriceText></TaxText>
-                    <p>
-                        <Label>花材: </Label>{pageContext.flower}
-                        <br />
-                        <Label>タイプ: </Label>{pageContext.type}
-                    </p>
-                    <p>
-                        <Label>アイテム説明: </Label>
-                        <br />
-                        {pageContext.description}
-                    </p>
-                    <SelectionWrapper>
-                        <Form.Group as={Row} controlId="size">
-                            <FormLabel column>
-                                サイズ
-                            </FormLabel>
-                            <Col sm={5}>
-                                <Form.Control as="select">
-                                    {pageContext.sizes.map(size => {
-                                        return (<option value={size}>{size}</option>)
-                                    })}
-                                </Form.Control>
-                            </Col>
-                        </Form.Group>
-                        <Form.Group as={Row} controlId="colour">
-                            <FormLabel column>
-                                カラー
-                            </FormLabel>
-                            <Col sm={5}>
-                                <Form.Control as="select">
-                                    {pageContext.colours.map(colour => {
-                                        return (<option value={colour}>{colour}</option>)
-                                    })}
-                                </Form.Control>
-                            </Col>
-                        </Form.Group>
-                        <Form.Group as={Row}>
-                            <FormLabel column>数量</FormLabel>
-                            <Col sm={3}>
-                                <Form.Control type="number" />
-                            </Col>
-                        </Form.Group>
-                        <Form.Group as={Row}>
-                            <FormLabel column>
-                                ご要望
-                                <br />
-                                （任意）
-                            </FormLabel>
-                            <Col sm={8}>
-                                <Form.Control as="textarea" rows="3" />
-                            </Col>
-                        </Form.Group>
-                        <ButtonWrapper>
-                            <BuyButton onClick={() => {context.handleAddToBasketClick(pageContext.slug)}}>
-                                カートに入れる
-                            </BuyButton>
-                        </ButtonWrapper>
-                    </SelectionWrapper>
+                        <TitleText>{pageContext.title}</TitleText>
+                        <TaxText>消費税込　<PriceText>¥{pageContext.price}</PriceText></TaxText>
+                        <p>
+                            <Label>花材: </Label>{pageContext.flower}
+                            <br />
+                            <Label>タイプ: </Label>{pageContext.type}
+                        </p>
+                        <p>
+                            <Label>アイテム説明: </Label>
+                            <br />
+                            {pageContext.description}
+                        </p>
+                        <SelectionWrapper>
+                            <Form.Group as={Row} controlId="size">
+                                <FormLabel column>
+                                    サイズ
+                                </FormLabel>
+                                <Col sm={5}>
+                                    <Form.Control as="select" onChange={e => setSize(e.target.value)}>
+                                        {pageContext.sizes.map(size => {
+                                            return (<option value={size} key={size}>{size}</option>)
+                                        })}
+                                    </Form.Control>
+                                </Col>
+                            </Form.Group>
+                            <Form.Group as={Row} controlId="colour">
+                                <FormLabel column>
+                                    カラー
+                                </FormLabel>
+                                <Col sm={5}>
+                                    <Form.Control as="select" onChange={e => setColour(e.target.value)}>
+                                        {pageContext.colours.map(colour => {
+                                            return (<option value={colour} key={colour}>{colour}</option>)
+                                        })}
+                                    </Form.Control>
+                                </Col>
+                            </Form.Group>
+                            <Form.Group as={Row}>
+                                <FormLabel column>数量</FormLabel>
+                                <Col sm={3}>
+                                    <Form.Control type="number" defaultValue={1} onChange={e => setQuantity(e.target.value)}/>
+                                </Col>
+                            </Form.Group>
+                            <Form.Group as={Row}>
+                                <FormLabel column>
+                                    ご要望
+                                    <br />
+                                    （任意）
+                                </FormLabel>
+                                <Col sm={8}>
+                                    <Form.Control as="textarea" rows="3" onChange={e => setMessage(e.target.value)}/>
+                                </Col>
+                            </Form.Group>
+                            <ButtonWrapper>
+                                <BuyButton onClick={() => {context.handleAddToBasketClick(pageContext.slug, size, colour, quantity, message)}}>
+                                    カートに入れる
+                                </BuyButton>
+                            </ButtonWrapper>
+                        </SelectionWrapper>
                     </RightSide>
                 </StyledWrapper>)}
         </MyContext.Consumer>
