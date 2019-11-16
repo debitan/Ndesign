@@ -6,16 +6,21 @@ import App from '../components/App'
 import CheckoutForm from '../components/CheckoutForm'
 import MyContext from '../components/MyContext'
 import CustomerInformation from '../components/CustomerInformation'
-import DeliveryInformation from '../components/DeliveryInformation'
+// import DeliveryInformation from '../components/DeliveryInformation'
 
-import ProductImage from '../images/product1.jpg'
+import CartProduct from '../components/CartProduct'
 
 const StyledWrapper = styled('div')`
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 1fr;
     grid-gap: 15px;
     grid-auto-rows: minmax(100px, auto);
     margin: 40px 0 40px 0;
+
+
+    @media (min-width: 992px) {
+        grid-template-columns: 2fr 1fr;
+    }
 `
 
 const LeftSide = styled('div')`
@@ -25,14 +30,16 @@ const LeftSide = styled('div')`
 `
 
 const RightSide = styled('div')`
-    grid-column: 2;
-    /* grid-area: 1 / 2 / 1 / 2; */
+    grid-column: 1;
     border: 1px solid #979797;
     grid-row: 1;
-    position: sticky;
     padding: 15px;
     top: 95px;
-    /* height: 100vh; */
+
+    @media (min-width: 992px) {
+        grid-column: 2;
+        position: sticky;
+    }
 `
 
 function Checkout() {
@@ -54,15 +61,17 @@ function Checkout() {
                             <h3>Shopping Cart</h3>
                             <hr/>
                             {context.itemsInBasket ? context.itemsInBasket.map(item => {
-                                return(
-                                    <div>
-                                        <img src={ProductImage} style={{width: "200px"}} alt={item.title} />
-                                        <p>{item.title}</p>
-                                        <p>¥{item.price}</p>
-                                        <p>{item.flower}</p>
-                                        <p>{item.type}</p>
-                                    </div>
-                                )
+                                return (
+                                    <CartProduct
+                                        key={item.title}
+                                        title={item.title}
+                                        slug={item.slug}
+                                        price={item.price}
+                                        flower={item.flower}
+                                        type={item.type}
+                                        size={item.size}
+                                        quantity={item.quantity}
+                                    />)
                             }) : null}
                         </LeftSide>
                         <Elements>
