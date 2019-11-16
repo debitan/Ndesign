@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useStaticQuery, graphql } from 'gatsby'
 
 import ShopDivider from './ShopDivider'
 import ProductCard from './ProductCard'
@@ -22,18 +23,53 @@ const StyledContainer = styled('div')`
 `
 
 function Products () {
+    const { allSanityProduct } = useStaticQuery(graphql`
+        query MyQuery {
+            allSanityProduct {
+                nodes {
+                    _rawBody
+                    slug {
+                        current
+                    }
+                    variants {
+                        price
+                        size
+                        sku
+                    }
+                    title
+                    images {
+                    asset {
+                        fluid {
+                        base64
+                        aspectRatio
+                        src
+                        srcSet
+                        srcWebp
+                        srcSetWebp
+                        sizes
+                        }
+                    }
+                    }
+                    colours
+                    flower
+                    type
+                }
+            }
+        }
+    `)
     return (
         <>
             <ShopDivider ProductTypeEN="Bouquet" ProductTypeJP="ブーケ" />
                 <StyledContainer>
-                    {mockProducts.map(product => product.category === 'bouquet' ?
+                    {console.log(allSanityProduct.nodes)}
+                    {allSanityProduct.nodes.map(product => product.type === 'ブーケ' ?
                         <ProductCard
-                            image={product1}
+                            image={product.images[0].asset.fluid}
                             title={product.title}
                             flower={product.flower}
                             type={product.type}
-                            price={product.price}
-                            url={`/shop/${product.slug}`}
+                            price={product.variants[0].price}
+                            url={`/shop/${product.slug.current}`}
                         />
                     : null
                     )}
