@@ -1,5 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
+import Img from 'gatsby-image'
+import BlockContent from '@sanity/block-content-to-react'
 
 import Form from 'react-bootstrap/Form'
 import Row from 'react-bootstrap/Row'
@@ -7,10 +9,6 @@ import Col from 'react-bootstrap/Col'
 
 import App from '../components/App'
 import MyContext from '../components/MyContext'
-
-
-import productImage from '../images/product1.jpg'
-
 
 const StyledWrapper = styled('div')`
     display: grid;
@@ -78,11 +76,26 @@ const ImageWrapper = styled('div')`
     margin-bottom: 40px;
 `
 
+const serializers = {
+    types: {
+        code: props => (
+            <pre data-language={props.node.language}>
+                <code>{props.node.code}</code>
+            </pre>
+        )
+    }
+}
+
 const ProductPage = ({ pageContext }) => {
-    const [ size, setSize ] = useState(pageContext.sizes[0])
+    const [ variant, setVariant ] = useState(pageContext.variants[0])
+    const [ size, setSize ] = useState(pageContext.variants[0].size)
     const [ colour, setColour ] = useState(pageContext.colours[0])
     const [ quantity, setQuantity ] = useState(1)
     const [ message, setMessage ] = useState('')
+
+    useEffect(() => {
+        setVariant(...pageContext.variants.filter(variant => variant.size === size))
+    }, size)
 
     return (
     <App>
@@ -91,7 +104,7 @@ const ProductPage = ({ pageContext }) => {
                 <StyledWrapper>
                     <LeftSide>
                         <ImageWrapper>
-                            <img src={productImage} style={{ width: "500px"}} alt={pageContext.title} />
+                            <Img fluid={pageContext.images[0].asset.fluid} style={{ width: "500px"}} alt={pageContext.title} />
                         </ImageWrapper>
                         <AdviceText>
                             * ご注意 *
@@ -108,7 +121,7 @@ const ProductPage = ({ pageContext }) => {
                     </LeftSide>
                     <RightSide>
                         <TitleText>{pageContext.title}</TitleText>
-                        <TaxText>消費税込　<PriceText>¥{pageContext.price}</PriceText></TaxText>
+                        <TaxText>消費税込　<PriceText>¥{variant.price} </PriceText></TaxText>
                         <p>
                             <Label>花材: </Label>{pageContext.flower}
                             <br />
@@ -117,7 +130,7 @@ const ProductPage = ({ pageContext }) => {
                         <p>
                             <Label>アイテム説明: </Label>
                             <br />
-                            {pageContext.description}
+                            {/* <BlockContent blocks={pageContext._rawBody} serializers={serializers} /> */}
                         </p>
                         <SelectionWrapper>
                             <Form.Group as={Row} controlId="size">
@@ -126,8 +139,8 @@ const ProductPage = ({ pageContext }) => {
                                 </FormLabel>
                                 <Col sm={5}>
                                     <Form.Control as="select" onChange={e => setSize(e.target.value)}>
-                                        {pageContext.sizes.map(size => {
-                                            return (<option value={size} key={size}>{size}</option>)
+                                        {pageContext.variants.map(variant => {
+                                            return (<option value={variant.size} key={variant.size}>{variant.size}</option>)
                                         })}
                                     </Form.Control>
                                 </Col>
