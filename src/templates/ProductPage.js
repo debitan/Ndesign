@@ -10,6 +10,8 @@ import Col from 'react-bootstrap/Col'
 import App from '../components/App'
 import MyContext from '../components/MyContext'
 
+import serializers from '../serializers'
+
 const StyledWrapper = styled('div')`
     display: grid;
     grid-template-columns: 1fr 2fr;
@@ -65,7 +67,7 @@ const BuyButton = styled('button')`
 `
 
 const SelectionWrapper = styled(Form)`
-    margin: 250px 40px 40px 40px;
+    margin: 40px 40px 40px 40px;
 `
 
 const AdviceText = styled('p')`
@@ -75,16 +77,6 @@ const AdviceText = styled('p')`
 const ImageWrapper = styled('div')`
     margin-bottom: 40px;
 `
-
-const serializers = {
-    types: {
-        code: props => (
-            <pre data-language={props.node.language}>
-                <code>{props.node.code}</code>
-            </pre>
-        )
-    }
-}
 
 const ProductPage = ({ pageContext }) => {
     const [ variant, setVariant ] = useState(pageContext.variants[0])
@@ -130,7 +122,7 @@ const ProductPage = ({ pageContext }) => {
                         <p>
                             <Label>アイテム説明: </Label>
                             <br />
-                            {/* <BlockContent blocks={pageContext._rawBody} serializers={serializers} /> */}
+                            <BlockContent blocks={pageContext._rawBody} serializers={serializers} />
                         </p>
                         <SelectionWrapper>
                             <Form.Group as={Row} controlId="size">
