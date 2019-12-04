@@ -1,33 +1,45 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
+import Img from 'gatsby-image'
+import BlockContent from '@sanity/block-content-to-react'
 
 import Form from 'react-bootstrap/Form'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import Carousel from 'react-bootstrap/Carousel'
 
 import App from '../components/App'
 import MyContext from '../components/MyContext'
 
-
-import productImage from '../images/product1.jpg'
-
+import serializers from '../serializers'
 
 const StyledWrapper = styled('div')`
     display: grid;
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: 1fr;
     grid-gap: 15px;
     grid-auto-rows: minmax(100px, auto);
     margin: 40px 0 40px 0;
+
+    @media (min-width: 992px) {
+        grid-template-columns: 1fr 2fr;
+    }
 `
 
 const LeftSide = styled('div')`
     grid-column: 1;
     padding: 15px;
+    grid-row: 1;
 `
 
 const RightSide = styled('div')`
-    grid-column: 2;
+    grid-column: 1;
+    grid-row: 2;
     padding: 15px;
+
+    @media (min-width: 992px) {
+        grid-column: 2;
+        grid-row: 1;
+    }
 `
 
 const TitleText = styled('h4')`
@@ -67,7 +79,24 @@ const BuyButton = styled('button')`
 `
 
 const SelectionWrapper = styled(Form)`
-    margin: 250px 40px 40px 40px;
+    margin: 40px 40px 40px 40px;
+`
+
+const AdviceTextWrapper = styled('div')`
+    grid-column: 1;
+    display: none;
+
+    @media (min-width: 992px) {
+        display: block;
+    }
+`
+
+const MobileAdviceTextWrapper = styled(AdviceTextWrapper)`
+    display: block;
+
+    @media (min-width: 992px) {
+        display: none;
+    }
 `
 
 const AdviceText = styled('p')`
@@ -76,13 +105,25 @@ const AdviceText = styled('p')`
 
 const ImageWrapper = styled('div')`
     margin-bottom: 40px;
+    width: 100%;
+    display: block;
+
+    @media (min-width: 992px) {
+        width: 500px;
+        height: 650px;
+    }
 `
 
 const ProductPage = ({ pageContext }) => {
-    const [ size, setSize ] = useState(pageContext.sizes[0])
+    const [ variant, setVariant ] = useState(pageContext.variants[0])
+    const [ size, setSize ] = useState(pageContext.variants[0].size)
     const [ colour, setColour ] = useState(pageContext.colours[0])
     const [ quantity, setQuantity ] = useState(1)
     const [ message, setMessage ] = useState('')
+
+    useEffect(() => {
+        setVariant(...pageContext.variants.filter(variant => variant.size === size))
+    }, size)
 
     return (
     <App>
@@ -91,24 +132,39 @@ const ProductPage = ({ pageContext }) => {
                 <StyledWrapper>
                     <LeftSide>
                         <ImageWrapper>
-                            <img src={productImage} style={{ width: "500px"}} alt={pageContext.title} />
+                            <Carousel>
+                                <Carousel.Item>
+                                    <Img fluid={pageContext.images[0].asset.fluid} alt={pageContext.title} />
+                                </Carousel.Item>
+                                <Carousel.Item>
+                                    <Img fluid={pageContext.images[1].asset.fluid} alt={pageContext.title} />
+                                </Carousel.Item>
+                                <Carousel.Item>
+                                    <Img fluid={pageContext.images[2].asset.fluid} alt={pageContext.title} />
+                                </Carousel.Item>
+                                <Carousel.Item>
+                                    <Img fluid={pageContext.images[3].asset.fluid} alt={pageContext.title} />
+                                </Carousel.Item>
+                            </Carousel>
                         </ImageWrapper>
-                        <AdviceText>
-                            * ご注意 *
-                        </AdviceText>
-                        <AdviceText>
-                            • 季節と入荷により花材が変わりますので、写真と全く同じものにはなりません。予め、ご了承ください。オーダーメイドで心を込めてお作りして参りますので、世界に一つのギフトを楽しみください。
-                        </AdviceText>
-                        <AdviceText>
-                            • ご注意を頂いてから全てに心を込めてご提案させていただいておりますので、オーダーには3日から1週間を時間をいただいております。お急ぎの場合は、事前にご相談くださいませ。
-                        </AdviceText>
-                        <AdviceText>
-                            • お支払い方法は、カード決済のみとなります。
-                        </AdviceText>
+                        <AdviceTextWrapper>
+                            <AdviceText>
+                                * ご注意 *
+                            </AdviceText>
+                            <AdviceText>
+                                • 季節と入荷により花材が変わりますので、写真と全く同じものにはなりません。予め、ご了承ください。オーダーメイドで心を込めてお作りして参りますので、世界に一つのギフトを楽しみください。
+                            </AdviceText>
+                            <AdviceText>
+                                • ご注意を頂いてから全てに心を込めてご提案させていただいておりますので、オーダーには3日から1週間を時間をいただいております。お急ぎの場合は、事前にご相談くださいませ。
+                            </AdviceText>
+                            <AdviceText>
+                                • お支払い方法は、カード決済のみとなります。
+                            </AdviceText>
+                        </AdviceTextWrapper>
                     </LeftSide>
                     <RightSide>
                         <TitleText>{pageContext.title}</TitleText>
-                        <TaxText>消費税込　<PriceText>¥{pageContext.price}</PriceText></TaxText>
+                        <TaxText>消費税込　<PriceText>¥{variant.price} </PriceText></TaxText>
                         <p>
                             <Label>花材: </Label>{pageContext.flower}
                             <br />
@@ -117,7 +173,7 @@ const ProductPage = ({ pageContext }) => {
                         <p>
                             <Label>アイテム説明: </Label>
                             <br />
-                            {pageContext.description}
+                            <BlockContent blocks={pageContext._rawBody} serializers={serializers} />
                         </p>
                         <SelectionWrapper>
                             <Form.Group as={Row} controlId="size">
@@ -126,8 +182,8 @@ const ProductPage = ({ pageContext }) => {
                                 </FormLabel>
                                 <Col sm={5}>
                                     <Form.Control as="select" onChange={e => setSize(e.target.value)}>
-                                        {pageContext.sizes.map(size => {
-                                            return (<option value={size} key={size}>{size}</option>)
+                                        {pageContext.variants.map(variant => {
+                                            return (<option value={variant.size} key={variant.size}>{variant.size}</option>)
                                         })}
                                     </Form.Control>
                                 </Col>
@@ -167,6 +223,20 @@ const ProductPage = ({ pageContext }) => {
                             </ButtonWrapper>
                         </SelectionWrapper>
                     </RightSide>
+                    <MobileAdviceTextWrapper>
+                            <AdviceText>
+                                * ご注意 *
+                            </AdviceText>
+                            <AdviceText>
+                                • 季節と入荷により花材が変わりますので、写真と全く同じものにはなりません。予め、ご了承ください。オーダーメイドで心を込めてお作りして参りますので、世界に一つのギフトを楽しみください。
+                            </AdviceText>
+                            <AdviceText>
+                                • ご注意を頂いてから全てに心を込めてご提案させていただいておりますので、オーダーには3日から1週間を時間をいただいております。お急ぎの場合は、事前にご相談くださいませ。
+                            </AdviceText>
+                            <AdviceText>
+                                • お支払い方法は、カード決済のみとなります。
+                            </AdviceText>
+                        </MobileAdviceTextWrapper>
                 </StyledWrapper>)}
         </MyContext.Consumer>
     </App>

@@ -58,6 +58,18 @@ module.exports = {
         functionsOutput: `${__dirname}/lambda`,
       },
     },
+    {
+      resolve: 'gatsby-source-sanity',
+      options: {
+        projectId: '2kb1rq6t',
+        dataset: 'production',
+        // a token with read permissions is required
+        // if you have a private dataset
+        token: process.env.MY_SANITY_TOKEN,
+        watchMode: true,
+        overlayDrafts: true,
+      },
+    },
   ],
   developMiddleware: app => {
     app.use(

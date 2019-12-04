@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-// import Img from 'gatsby-image'
+import Img from 'gatsby-image'
 
 const Card = styled('div')`
   display: flex;
@@ -37,7 +37,7 @@ function ProductCard({ title, sku, flower, type, price, image, url }) {
     return (
       <StyledAnchor href={url}>
         <Card key={sku}>
-          <img style={{ width: '100%' }} src={image} alt={title} />
+          <Img style={{ width: '100%' }} fluid={image} alt={title} />
           <TitleText>
             {title}
             <br />
