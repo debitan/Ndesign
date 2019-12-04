@@ -6,6 +6,7 @@ import BlockContent from '@sanity/block-content-to-react'
 import Form from 'react-bootstrap/Form'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import Carousel from 'react-bootstrap/Carousel'
 
 import App from '../components/App'
 import MyContext from '../components/MyContext'
@@ -76,6 +77,9 @@ const AdviceText = styled('p')`
 
 const ImageWrapper = styled('div')`
     margin-bottom: 40px;
+    width: 500px;
+    height: 650px;
+    display: block;
 `
 
 const ProductPage = ({ pageContext }) => {
@@ -96,7 +100,20 @@ const ProductPage = ({ pageContext }) => {
                 <StyledWrapper>
                     <LeftSide>
                         <ImageWrapper>
-                            <Img fluid={pageContext.images[0].asset.fluid} style={{ width: "500px"}} alt={pageContext.title} />
+                            <Carousel>
+                                <Carousel.Item>
+                                    <Img fluid={pageContext.images[0].asset.fluid} alt={pageContext.title} />
+                                </Carousel.Item>
+                                <Carousel.Item>
+                                    <Img fluid={pageContext.images[1].asset.fluid} alt={pageContext.title} />
+                                </Carousel.Item>
+                                <Carousel.Item>
+                                    <Img fluid={pageContext.images[2].asset.fluid} alt={pageContext.title} />
+                                </Carousel.Item>
+                                <Carousel.Item>
+                                    <Img fluid={pageContext.images[3].asset.fluid} alt={pageContext.title} />
+                                </Carousel.Item>
+                            </Carousel>
                         </ImageWrapper>
                         <AdviceText>
                             * ご注意 *
