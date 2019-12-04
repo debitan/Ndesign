@@ -15,20 +15,31 @@ import serializers from '../serializers'
 
 const StyledWrapper = styled('div')`
     display: grid;
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: 1fr;
     grid-gap: 15px;
     grid-auto-rows: minmax(100px, auto);
     margin: 40px 0 40px 0;
+
+    @media (min-width: 992px) {
+        grid-template-columns: 1fr 2fr;
+    }
 `
 
 const LeftSide = styled('div')`
     grid-column: 1;
     padding: 15px;
+    grid-row: 1;
 `
 
 const RightSide = styled('div')`
-    grid-column: 2;
+    grid-column: 1;
+    grid-row: 2;
     padding: 15px;
+
+    @media (min-width: 992px) {
+        grid-column: 2;
+        grid-row: 1;
+    }
 `
 
 const TitleText = styled('h4')`
@@ -71,15 +82,36 @@ const SelectionWrapper = styled(Form)`
     margin: 40px 40px 40px 40px;
 `
 
+const AdviceTextWrapper = styled('div')`
+    grid-column: 1;
+    display: none;
+
+    @media (min-width: 992px) {
+        display: block;
+    }
+`
+
+const MobileAdviceTextWrapper = styled(AdviceTextWrapper)`
+    display: block;
+
+    @media (min-width: 992px) {
+        display: none;
+    }
+`
+
 const AdviceText = styled('p')`
     font-weight: 500;
 `
 
 const ImageWrapper = styled('div')`
     margin-bottom: 40px;
-    width: 500px;
-    height: 650px;
+    width: 100%;
     display: block;
+
+    @media (min-width: 992px) {
+        width: 500px;
+        height: 650px;
+    }
 `
 
 const ProductPage = ({ pageContext }) => {
@@ -115,18 +147,20 @@ const ProductPage = ({ pageContext }) => {
                                 </Carousel.Item>
                             </Carousel>
                         </ImageWrapper>
-                        <AdviceText>
-                            * ご注意 *
-                        </AdviceText>
-                        <AdviceText>
-                            • 季節と入荷により花材が変わりますので、写真と全く同じものにはなりません。予め、ご了承ください。オーダーメイドで心を込めてお作りして参りますので、世界に一つのギフトを楽しみください。
-                        </AdviceText>
-                        <AdviceText>
-                            • ご注意を頂いてから全てに心を込めてご提案させていただいておりますので、オーダーには3日から1週間を時間をいただいております。お急ぎの場合は、事前にご相談くださいませ。
-                        </AdviceText>
-                        <AdviceText>
-                            • お支払い方法は、カード決済のみとなります。
-                        </AdviceText>
+                        <AdviceTextWrapper>
+                            <AdviceText>
+                                * ご注意 *
+                            </AdviceText>
+                            <AdviceText>
+                                • 季節と入荷により花材が変わりますので、写真と全く同じものにはなりません。予め、ご了承ください。オーダーメイドで心を込めてお作りして参りますので、世界に一つのギフトを楽しみください。
+                            </AdviceText>
+                            <AdviceText>
+                                • ご注意を頂いてから全てに心を込めてご提案させていただいておりますので、オーダーには3日から1週間を時間をいただいております。お急ぎの場合は、事前にご相談くださいませ。
+                            </AdviceText>
+                            <AdviceText>
+                                • お支払い方法は、カード決済のみとなります。
+                            </AdviceText>
+                        </AdviceTextWrapper>
                     </LeftSide>
                     <RightSide>
                         <TitleText>{pageContext.title}</TitleText>
@@ -189,6 +223,20 @@ const ProductPage = ({ pageContext }) => {
                             </ButtonWrapper>
                         </SelectionWrapper>
                     </RightSide>
+                    <MobileAdviceTextWrapper>
+                            <AdviceText>
+                                * ご注意 *
+                            </AdviceText>
+                            <AdviceText>
+                                • 季節と入荷により花材が変わりますので、写真と全く同じものにはなりません。予め、ご了承ください。オーダーメイドで心を込めてお作りして参りますので、世界に一つのギフトを楽しみください。
+                            </AdviceText>
+                            <AdviceText>
+                                • ご注意を頂いてから全てに心を込めてご提案させていただいておりますので、オーダーには3日から1週間を時間をいただいております。お急ぎの場合は、事前にご相談くださいませ。
+                            </AdviceText>
+                            <AdviceText>
+                                • お支払い方法は、カード決済のみとなります。
+                            </AdviceText>
+                        </MobileAdviceTextWrapper>
                 </StyledWrapper>)}
         </MyContext.Consumer>
     </App>
