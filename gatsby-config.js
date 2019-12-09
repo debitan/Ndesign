@@ -44,7 +44,6 @@ module.exports = {
         display: `minimal-ui`,
       },
     },
-    `gatsby-plugin-offline`,
     {
       resolve: `gatsby-plugin-stripe`,
       options: {
@@ -71,6 +70,7 @@ module.exports = {
       },
     },
     `gatsby-plugin-netlify`,
+    `gatsby-plugin-remove-serviceworker`,
   ],
   developMiddleware: app => {
     app.use(
