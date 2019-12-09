@@ -70,6 +70,7 @@ module.exports = {
         overlayDrafts: true,
       },
     },
+    `gatsby-plugin-netlify`,
   ],
   developMiddleware: app => {
     app.use(
