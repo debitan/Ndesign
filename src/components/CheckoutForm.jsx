@@ -2,14 +2,7 @@ import React, { useState} from 'react'
 import styled from 'styled-components'
 import { CardElement, injectStripe } from 'react-stripe-elements'
 
-const CheckoutFormComplete = styled('div')`
-  color: #7fdc45;
-  font-weight: 700;
-  text-align: center;
-`
-
 const CheckoutFormWrapper = styled('form')`
-  border-top: 1px solid #eee;
   margin: 0 auto;
   max-width: 800px;
   padding-top: 2rem;
@@ -66,7 +59,10 @@ function CheckoutForm({
     prefecture,
     addressLine1,
     addressLine2,
-    phone
+    phone,
+    setConfirmed,
+    setLast4,
+    setOrderId
     }) {
     const [ status, setStatus ] = useState('default')
     const name = `${kanjiName} ${furiganaName}`
@@ -95,7 +91,10 @@ function CheckoutForm({
             })
 
             if (response.ok) {
-                setStatus('complete')
+                const data = await response.json()
+                setStatus(data.status)
+                setLast4(data.payment_method_details.card.last4)
+                setOrderId(data.id)
             } else {
                 throw new Error('Network response was not ok')
             }
@@ -104,8 +103,8 @@ function CheckoutForm({
         }
     }
 
-    if (status === 'complete') {
-        return <CheckoutFormComplete>Payment successful</CheckoutFormComplete>
+    if (status === 'succeeded') {
+        setConfirmed(true)
     }
 
     return (

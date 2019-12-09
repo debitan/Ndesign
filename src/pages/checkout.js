@@ -7,6 +7,9 @@ import CheckoutForm from '../components/CheckoutForm'
 import MyContext from '../components/MyContext'
 import CustomerInformation from '../components/CustomerInformation'
 // import DeliveryInformation from '../components/DeliveryInformation'
+import Confirmation from '../components/Cart/Confirmation'
+import StyledHr from '../components/shared/StyledHr'
+import MobileHr from '../components/shared/MobileHr'
 
 import CartProduct from '../components/CartProduct'
 
@@ -42,6 +45,15 @@ const RightSide = styled('div')`
     }
 `
 
+const CostContainer = styled('div')`
+    display: flex;
+    justify-content: space-between;
+`
+
+const TotalCostContainer = styled(CostContainer)`
+    justify-content: flex-end;
+`
+
 function Checkout() {
     const [kanjiName, setKanjiName] = useState('')
     const [furiganaName, setFuriganaName] = useState('')
@@ -51,15 +63,29 @@ function Checkout() {
     const [addressLine1, setAddressLine1] = useState('')
     const [addressLine2, setAddressLine2] = useState('')
     const [phone, setPhone] = useState('')
+    const [confirmed, setConfirmed] = useState(false)
+    const [last4, setLast4] = useState('')
+    const [orderId, setOrderId] = useState('')
 
     return (
         <MyContext.Consumer>
             {context => (
                 <App>
+                    {confirmed ? (<Confirmation
+                        orderId={orderId}
+                        last4={last4}
+                        kanjiName={kanjiName}
+                        postcode={postcode}
+                        addressLine1={addressLine1}
+                        addressLine2={addressLine2}
+                        phone={phone}
+                        totalCost={context.totalCost}
+                     />) : (
                     <StyledWrapper>
                         <LeftSide>
                             <h3>Shopping Cart</h3>
-                            <hr/>
+                            <StyledHr />
+                            <MobileHr />
                             {context.itemsInBasket ? context.itemsInBasket.map(item => {
                                 return (
                                     <CartProduct
@@ -71,6 +97,7 @@ function Checkout() {
                                         type={item.type}
                                         size={item.size}
                                         quantity={item.quantity}
+                                        image={item.image}
                                     />)
                             }) : null}
                         </LeftSide>
@@ -78,7 +105,8 @@ function Checkout() {
                             <>
                             <LeftSide>
                                 <h3>Delivery</h3>
-                                <hr/>
+                                <StyledHr />
+                                <MobileHr />
                                 <CustomerInformation
                                     setKanjiName={setKanjiName}
                                     setFuriganaName={setFuriganaName}
@@ -98,8 +126,10 @@ function Checkout() {
                             </LeftSide> */}
                             <LeftSide>
                                 <h3>Payment</h3>
+                                <StyledHr />
+                                <MobileHr />
                                         <CheckoutForm
-                                            totalCost={context.totalCost}
+                                            totalCost={context.totalCost + 1000}
                                             kanjiName={kanjiName}
                                             furiganaName={furiganaName}
                                             email={email}
@@ -108,14 +138,34 @@ function Checkout() {
                                             addressLine1={addressLine1}
                                             addressLine2={addressLine2}
                                             phone={phone}
+                                            setConfirmed={setConfirmed}
+                                            setLast4={setLast4}
+                                            setOrderId={setOrderId}
                                         />
                             </LeftSide>
                             </>
                         </Elements>
                         <RightSide>
-                            <h3>合計　¥{context.totalCost}</h3>
+                            <h3>合計</h3>
+                            <StyledHr />
+                            <MobileHr />
+                            <CostContainer>
+                                <h5>商品合計</h5>
+                                <h5>¥{Number(context.totalCost).toLocaleString('jp')}</h5>
+                            </CostContainer>
+                            <CostContainer>
+                                <span>送料　全国一律</span>
+                                <span>¥1,000</span>
+                            </CostContainer>
+                            <StyledHr/>
+                            <MobileHr />
+                            <TotalCostContainer>
+                                <h3>¥{Number(context.totalCost + 1000).toLocaleString('jp')}</h3>
+                            </TotalCostContainer>
+                            <button onClick={() => context.setItemsInBasket([])}>Empty cart</button>
                         </RightSide>
                     </StyledWrapper>
+                    )}
                 </App>
     )}
         </MyContext.Consumer>

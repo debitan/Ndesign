@@ -119,7 +119,7 @@ const ProductPage = ({ pageContext }) => {
     const [ size, setSize ] = useState(pageContext.variants[0].size)
     const [ colour, setColour ] = useState(pageContext.colours[0])
     const [ quantity, setQuantity ] = useState(1)
-    const [ message, setMessage ] = useState('')
+    // const [ message, setMessage ] = useState('')
 
     useEffect(() => {
         setVariant(...pageContext.variants.filter(variant => variant.size === size))
@@ -206,7 +206,7 @@ const ProductPage = ({ pageContext }) => {
                                     <Form.Control type="number" defaultValue={1} onChange={e => setQuantity(e.target.value)}/>
                                 </Col>
                             </Form.Group>
-                            <Form.Group as={Row}>
+                            {/* <Form.Group as={Row}>
                                 <FormLabel column>
                                     ご要望
                                     <br />
@@ -215,9 +215,12 @@ const ProductPage = ({ pageContext }) => {
                                 <Col sm={8}>
                                     <Form.Control as="textarea" rows="3" onChange={e => setMessage(e.target.value)}/>
                                 </Col>
-                            </Form.Group>
+                            </Form.Group> */}
                             <ButtonWrapper>
-                                <BuyButton onClick={() => {context.handleAddToBasketClick(pageContext.slug, size, colour, quantity, message)}}>
+                                <BuyButton onClick={(e) => {
+                                    e.preventDefault()
+                                    context.handleAddToBasketClick(...Object.values(pageContext.slug), size, colour, Number(quantity), Number(variant.price), pageContext.images[0].asset.fluid)
+                                    }}>
                                     カートに入れる
                                 </BuyButton>
                             </ButtonWrapper>

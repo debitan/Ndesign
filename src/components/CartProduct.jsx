@@ -1,19 +1,11 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
+import Img from 'gatsby-image'
 
 import Form from 'react-bootstrap/Form'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
-
-import ProductImage from '../images/product1.jpg'
 
 const Wrapper = styled('div')`
     display: flex;
-`
-
-const StyledImage = styled('img')`
-    margin: 10px 20px 10px 0;
-    height: 200px;
 `
 
 const StyledInfo = styled('div')`
@@ -55,39 +47,47 @@ const TypeText = styled('p')`
   color: grey;
 `
 
-function CartProduct({title, slug, price, flower, type, size, quantity}) {
+const ImageWrapper = styled('div')`
+    margin: 10px 20px 10px 0;
+    width: 200px;
+`
+
+function CartProduct({title, slug, price, flower, type, size, quantity, image}) {
     const [ checkoutQuantity, setCheckoutQuantity ] = useState(quantity)
 
     return(
     <Wrapper>
-        <StyledImage src={ProductImage} alt={title} />
+        <ImageWrapper>
+            <Img style={{ width: '100%' }} fluid={image} alt={title}/>
+        </ImageWrapper>
+        {console.log(image)}
         <div>
-        <StyledInfo>
-            <TitleText>
-                <StyledAnchor href={`/shop/${slug}`}>
-                    {title}
-                </StyledAnchor>
-            </TitleText>
-            <br />
-            <TitleText>
-                <span>¥{price}</span>
-            </TitleText>
-        </StyledInfo>
-        <StyledInfo>
-            <TypeText>
-                花材：{flower}
+            <StyledInfo>
+                <TitleText>
+                    <StyledAnchor href={`/shop/${slug}`}>
+                        {title}
+                    </StyledAnchor>
+                </TitleText>
                 <br />
-                タイプ：{type}
-                <br />
-                サイズ: {size}
-            </TypeText>
-            <Form>
-                <Form.Control style={{width: '50px'}} type="number" defaultValue={checkoutQuantity} onChange={e => setCheckoutQuantity(e.target.value)}/>
-                <br />
-            <StyledAnchor>削除</StyledAnchor>
-            </Form>
-        </StyledInfo>
-    <TotalCost>商品合計　　消費税込　　￥{quantity * price}</TotalCost>
+                <TitleText>
+                    <span>¥{Number(price).toLocaleString('jp')}</span>
+                </TitleText>
+            </StyledInfo>
+            <StyledInfo>
+                <TypeText>
+                    花材：{flower}
+                    <br />
+                    タイプ：{type}
+                    <br />
+                    サイズ: {size}
+                </TypeText>
+                <Form>
+                    <Form.Control style={{width: '50px'}} type="number" defaultValue={checkoutQuantity} onChange={e => setCheckoutQuantity(e.target.value)}/>
+                    <br />
+                <StyledAnchor>削除</StyledAnchor>
+                </Form>
+            </StyledInfo>
+            <TotalCost>商品合計　　消費税込　　￥{Number(quantity * price).toLocaleString('jp')}</TotalCost>
         </div>
     </Wrapper>
     )
