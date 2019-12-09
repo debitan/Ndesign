@@ -60,7 +60,6 @@ function CartProduct({title, slug, price, flower, type, size, quantity, image}) 
         <ImageWrapper>
             <Img style={{ width: '100%' }} fluid={image} alt={title}/>
         </ImageWrapper>
-        {console.log(image)}
         <div>
             <StyledInfo>
                 <TitleText>

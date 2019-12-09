@@ -61,7 +61,6 @@ function Products () {
         <>
             <ShopDivider ProductTypeEN="Bouquet" ProductTypeJP="ブーケ" />
                 <StyledContainer>
-                    {console.log(allSanityProduct.nodes)}
                     {allSanityProduct.nodes.map(product => product.type === 'ブーケ' ?
                         <ProductCard
                             image={product.images[0].asset.fluid}
