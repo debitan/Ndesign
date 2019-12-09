@@ -35,10 +35,10 @@ exports.handler = (event, context, callback) => {
         },
       source: data.token,
     })
-    .then(({ status }) => {
+    .then(({ status, payment_method_details, id }) => {
       return callback(null, {
         statusCode: 200,
-        body: JSON.stringify({ status }),
+        body: JSON.stringify({ status, payment_method_details, id }),
       });
     })
     .catch(err => {
