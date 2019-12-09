@@ -70,7 +70,6 @@ module.exports = {
       },
     },
     `gatsby-plugin-netlify`,
-    `gatsby-plugin-remove-serviceworker`,
     `gatsby-plugin-styled-components`,
   ],
   developMiddleware: app => {
