@@ -75,7 +75,7 @@ function CheckoutForm({
         try {
             let { token } = await stripe.createToken({ name: 'Name' })
 
-            let response = await fetch('/.netlify/functions/charge', {
+            let response = await fetch('/api/charge', {
                 method: 'POST',
                 body: JSON.stringify({
                     amount: totalCost,

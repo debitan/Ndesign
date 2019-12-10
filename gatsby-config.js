@@ -6,9 +6,9 @@ var proxy = require('http-proxy-middleware')
 
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    title: `nDesign - florist x art director`,
+    description: `Beautiful flowers expertly designed in Tokyo.`,
+    author: `@ThisisDMatthews`,
   },
   plugins: [
     {
@@ -33,28 +33,10 @@ module.exports = {
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
-    // {
-    //   resolve: `gatsby-plugin-manifest`,
-    //   options: {
-    //     name: `gatsby-starter-default`,
-    //     short_name: `starter`,
-    //     start_url: `/`,
-    //     background_color: `#663399`,
-    //     theme_color: `#663399`,
-    //     display: `minimal-ui`,
-    //   },
-    // },
     {
       resolve: `gatsby-plugin-stripe`,
       options: {
         async: true,
-      },
-    },
-    {
-      resolve: `gatsby-plugin-netlify-functions`,
-      options: {
-        functionsSrc: `${__dirname}/src/lambda`,
-        functionsOutput: `${__dirname}/lambda`,
       },
     },
     {
@@ -69,18 +51,16 @@ module.exports = {
         overlayDrafts: false,
       },
     },
-    `gatsby-plugin-netlify`,
-    `gatsby-plugin-remove-serviceworker`,
     `gatsby-plugin-styled-components`,
   ],
   developMiddleware: app => {
     app.use(
-      "/.netlify/functions/",
+      "/api/charge/",
       proxy({
         target: "http://localhost:9000",
         secure: false,
         pathRewrite: {
-          "/.netlify/functions/": "",
+          "/api/charge/": "",
         },
       })
     )

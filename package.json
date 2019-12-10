@@ -1,9 +1,9 @@
 {
-  "name": "gatsby-starter-default",
+  "name": "ndesign-florist-x-art-director",
   "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
+  "description": "Beautiful flowers expertly designed in Tokyo",
   "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "David Matthews <dwm503@gmail.com>",
   "dependencies": {
     "@sanity/block-content-to-react": "^2.0.7",
     "babel-plugin-styled-components": "^1.10.6",
@@ -11,11 +11,8 @@
     "env-cmd": "^10.0.1",
     "gatsby": "^2.18.7",
     "gatsby-image": "^2.2.27",
-    "gatsby-plugin-netlify": "^2.1.27",
-    "gatsby-plugin-netlify-functions": "0.0.3",
     "gatsby-plugin-prefetch-google-fonts": "^1.4.3",
     "gatsby-plugin-react-helmet": "^3.1.11",
-    "gatsby-plugin-remove-serviceworker": "^1.0.0",
     "gatsby-plugin-sharp": "^2.2.29",
     "gatsby-plugin-stripe": "^1.2.3",
     "gatsby-plugin-styled-components": "^3.1.14",
@@ -33,14 +30,10 @@
   },
   "devDependencies": {
     "http-proxy-middleware": "^0.20.0",
-    "netlify-lambda": "^1.6.3",
     "npm-run-all": "^4.1.5",
     "prettier": "^1.18.2",
     "stripe": "^7.10.0"
   },
-  "keywords": [
-    "gatsby"
-  ],
   "license": "MIT",
   "scripts": {
     "develop": "gatsby develop -p 8080",
@@ -50,12 +43,5 @@
     "build": "gatsby build && netlify-lambda build src/lambda",
     "build:app": "gatsby build",
     "build:lambda": "netlify-lambda build src/lambda"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
-  },
-  "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
   }
 }
