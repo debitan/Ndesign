@@ -46,9 +46,9 @@ function Confirmation ({
     phone,
     totalCost
 }) {
-    // const { setItemsInBasket } = React.useContext(MyContext)
+    const { setItemsInBasket } = React.useContext(MyContext)
 
-    // window.onbeforeunload = () => setItemsInBasket([])
+    window.onbeforeunload = () => setItemsInBasket([])
 
     return (
         <MyContext.Consumer>

@@ -1,0 +1,7 @@
+{
+    "env": {
+        "STRIPE_SECRET_KEY": "@stripe_secret_key",
+        "STRIPE_PUBLIC_KEY": "@stripe_public_key",
+        "MY_SANITY_TOKEN": "@my_sanity_token"
+    }
+}
