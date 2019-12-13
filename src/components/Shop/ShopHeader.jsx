@@ -1,14 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useStaticQuery, graphql } from 'gatsby'
 
 import FullWidthContainer from '../shared/FullWidthContainer'
-
-import ShopHeaderImg from '../../images/ShopHeaderImg.jpg'
-
-const StyledImageContainer = styled('div')`
-    height: 300px;
-    position: relative;
-`
+import StyledImageContainer from '../shared/StyledImageContainer'
+import StyledImage from '../shared/StyledImage'
 
 const ImageText = styled('div')`
     position: absolute;
@@ -18,18 +14,39 @@ const ImageText = styled('div')`
     background: transparent;
 `
 
-const StyledImage = styled('img')`
-    width: 100%;
-    height: 100%;
-`
-
 function ShopHeader () {
+    const data = useStaticQuery(graphql`
+        query ShopPageQuery {
+            allSanityContent {
+            edges {
+                node {
+                image {
+                    asset {
+                    fluid {
+                        base64
+                        aspectRatio
+                        src
+                        srcSet
+                        srcWebp
+                        srcSetWebp
+                        sizes
+                    }
+                    }
+                }
+                }
+            }
+            }
+        }
+      `)
+
+    const ShopHeaderImage = data.allSanityContent.edges[0].node.image.asset.fluid
+
     return (
         <FullWidthContainer paddingTop={40} paddingBottom={40}>
             <h1>Shop</h1>
             <br />
-            <StyledImageContainer>
-                <StyledImage source={ShopHeaderImg} />
+            <StyledImageContainer height={300}>
+                <StyledImage fluid={ShopHeaderImage} alt={'Shop header image of flowers'} />
                 <ImageText>
                     <h4>
                     Mother's Day

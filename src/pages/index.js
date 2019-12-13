@@ -1,8 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useStaticQuery, graphql } from 'gatsby'
 
 import App from '../components/App'
 import FullWidthContainer from '../components/shared/FullWidthContainer'
+import StyledImageContainer from '../components/shared/StyledImageContainer'
+import StyledImage from '../components/shared/StyledImage'
+
 
 const Banner = styled('div')`
     display: grid;
@@ -34,7 +38,63 @@ const BannerText = styled('div')`
     font-weight: 500;
 `
 
+const ImageText = styled('div')`
+    font-size: 16px;
+    font-weight: 600;
+
+    @media (min-width: 900px) {
+        font-size: 20px;
+        line-height: 2;
+        text-align: left;
+    }
+`
+
+const ImageTextWrapper = styled('div')`
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.5);
+    padding: 10px;
+    width: 80%;
+
+    @media (min-width: 900px) {
+        padding: 40px;
+        width: fit-content;
+        transform: translate(0%, -50%);
+        top: 50%;
+        left: 0%;
+        min-width: 20%;
+    }
+`
+
 function Shop() {
+    const data = useStaticQuery(graphql`
+        query HomePageQuery {
+            allSanityContent {
+            edges {
+                node {
+                image {
+                    asset {
+                    fluid {
+                        base64
+                        aspectRatio
+                        src
+                        srcSet
+                        srcWebp
+                        srcSetWebp
+                        sizes
+                    }
+                    }
+                }
+                }
+            }
+            }
+        }
+      `)
+
+    const topImage = data.allSanityContent.edges[0].node.image.asset.fluid
+
     return (
         <App>
             <FullWidthContainer>
@@ -43,6 +103,20 @@ function Shop() {
                     <BannerText>オーダーメイドアイテムも承ります</BannerText>
                     <BannerText>ウェディング・イベント装花</BannerText>
                 </Banner>
+                <StyledImageContainer height={600}>
+                    <StyledImage fluid={topImage} alt='Header image of flowers' height={100} width={100} />
+                    <ImageTextWrapper>
+                        <ImageText>
+                            店舗を持たない花屋です<br/>
+                            <br/>
+                            生花、プリザーブドフラワー、<br/>
+                            アーティフィシャルフラワーを駆使し<br/>
+                            <br/>
+                            それぞれの場面、空間、もの、ひと、に<br/>
+                            ［花】を通してデザインを提案します
+                        </ImageText>
+                    </ImageTextWrapper>
+                </StyledImageContainer>
             </FullWidthContainer>
         </App>
     )
