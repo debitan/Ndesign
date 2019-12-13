@@ -6,8 +6,10 @@ import App from '../components/App'
 import FullWidthContainer from '../components/shared/FullWidthContainer'
 import StyledImageContainer from '../components/shared/StyledImageContainer'
 import StyledImage from '../components/shared/StyledImage'
+import Divider from '../components/shared/Divider'
 
 import noriko from '../images/noriko.svg'
+import shop from '../images/shop.svg'
 
 
 const Banner = styled('div')`
@@ -83,7 +85,7 @@ const IntroWrapper = styled('div')`
         flex-flow: column;
         justify-content: center;
         align-items: center;
-        padding: 40px;
+        padding: 40px 40px 0px 40px;
         line-height: 2;
         text-align: center;
 `
@@ -157,6 +159,9 @@ function Shop() {
                 </Text>
                 <Signature src={noriko} alt='のりこのサイン' />
             </IntroWrapper>
+            <FullWidthContainer>
+                <Divider title={shop} alt='Shop' line={true} />
+            </FullWidthContainer>
         </App>
     )
 }

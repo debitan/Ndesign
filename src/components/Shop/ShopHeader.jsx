@@ -5,6 +5,9 @@ import { useStaticQuery, graphql } from 'gatsby'
 import FullWidthContainer from '../shared/FullWidthContainer'
 import StyledImageContainer from '../shared/StyledImageContainer'
 import StyledImage from '../shared/StyledImage'
+import Divider from '../shared/Divider'
+
+import shop from '../../images/shop.svg'
 
 const ImageText = styled('div')`
     position: absolute;
@@ -42,9 +45,8 @@ function ShopHeader () {
     const ShopHeaderImage = data.allSanityContent.edges[0].node.image.asset.fluid
 
     return (
-        <FullWidthContainer paddingTop={40} paddingBottom={40}>
-            <h1>Shop</h1>
-            <br />
+        <FullWidthContainer paddingTop={0} paddingBottom={40}>
+            <Divider title={shop} alt='Shop' />
             <StyledImageContainer height={300}>
                 <StyledImage fluid={ShopHeaderImage} alt={'Shop header image of flowers'} />
                 <ImageText>
