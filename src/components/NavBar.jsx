@@ -9,6 +9,14 @@ import Basket from '../images/basket.svg'
 const StyledNavbar = styled(Navbar)`
     background-color: #94b09f;
     padding: 20px;
+
+    button {
+        border: none;
+
+        :focus {
+            outline: none;
+        }
+    }
 `
 
 const StyledLink = styled(Nav.Link)`
