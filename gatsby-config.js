@@ -2,8 +2,6 @@ require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
 })
 
-var proxy = require('http-proxy-middleware')
-
 module.exports = {
   siteMetadata: {
     title: `nDesign - florist x art director`,
@@ -52,17 +50,5 @@ module.exports = {
       },
     },
     `gatsby-plugin-styled-components`,
-  ],
-  developMiddleware: app => {
-    app.use(
-      "/api/charge/",
-      proxy({
-        target: "http://localhost:9000",
-        secure: false,
-        pathRewrite: {
-          "/api/charge/": "",
-        },
-      })
-    )
-  },
+  ]
 }

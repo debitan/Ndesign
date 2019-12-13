@@ -1,23 +1,20 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
 
-exports.handler = (event, context, callback) => {
+module.exports = async (req, res) => {
   // Only allow POST
-  if (event.httpMethod !== 'POST') {
-    return callback(null, { statusCode: 405, body: 'Method Not Allowed' });
+  if (req.method !== 'POST') {
+    res.status(405).send('Method Not Allowed')
   }
 
-  const data = JSON.parse(event.body);
+  const data = JSON.parse(req.body);
 
   if (!data.token || parseInt(data.amount) < 1) {
-    return callback(null, {
-      statusCode: 400,
-      body: JSON.stringify({
-        message: 'Some required fields were not supplied.',
-      }),
-    });
-  }
+    res.status(400).send(JSON.stringify({
+      message: 'Some required fields were not supplied.',
+    }))
+    }
 
-  stripe.charges
+  await stripe.charges
     .create({
       amount: parseInt(data.amount),
       currency: 'jpy',
@@ -36,17 +33,11 @@ exports.handler = (event, context, callback) => {
       source: data.token,
     })
     .then(({ status, payment_method_details, id }) => {
-      return callback(null, {
-        statusCode: 200,
-        body: JSON.stringify({ status, payment_method_details, id }),
-      });
-    })
+      res.status(200).send(JSON.stringify({ status, payment_method_details, id }))
+      })
     .catch(err => {
-      return callback(null, {
-        statusCode: 400,
-        body: JSON.stringify({
-          message: `Error: ${err.message}`,
-        }),
-      });
+      res.status(400).send(JSON.stringify({
+        message: `Error: ${err.message}`,
+      }))
     });
 };
