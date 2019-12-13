@@ -50,18 +50,8 @@ const Text = styled(BannerText)`
     }
 `
 
-const ImageText = styled('div')`
-    font-size: 16px;
-    font-weight: 600;
 
-    @media (min-width: 900px) {
-        font-size: 20px;
-        line-height: 2;
-        text-align: left;
-    }
-`
-
-const ImageTextWrapper = styled('div')`
+const LeadImageTextWrapper = styled('div')`
     position: absolute;
     top: 50%;
     left: 50%;
@@ -77,6 +67,58 @@ const ImageTextWrapper = styled('div')`
         top: 50%;
         left: 0%;
         min-width: 20%;
+    }
+`
+
+const LeadImageText = styled('div')`
+    font-size: 16px;
+    font-weight: 600;
+
+    @media (min-width: 900px) {
+        font-size: 20px;
+        line-height: 2;
+        text-align: left;
+    }
+`
+
+const ShopImageTextWrapper = styled('div')`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.5);
+    padding: 10px;
+    height: 100%;
+    min-width: 33%;
+    width: fit-content;
+`
+
+const ShopImageText = styled('div')`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+    font-size: 16px;
+    font-weight: 500;
+    align-self: baseline;
+
+    @media (min-width: 900px) {
+        align-self: auto;
+    }
+`
+
+const ShopImageTextTitle = styled('h3')`
+    font-weight: 400;
+`
+
+const ShopImageSubText = styled('span')`
+    display: none;
+
+    @media (min-width: 900px) {
+        display: block;
     }
 `
 
@@ -131,8 +173,8 @@ function Shop() {
                 </Banner>
                 <StyledImageContainer height={600}>
                     <StyledImage fluid={topImage} alt='Header image of flowers' height={100} width={100} />
-                    <ImageTextWrapper>
-                        <ImageText>
+                    <LeadImageTextWrapper>
+                        <LeadImageText>
                             店舗を持たない花屋です<br/>
                             <br/>
                             生花、プリザーブドフラワー、<br/>
@@ -140,8 +182,8 @@ function Shop() {
                             <br/>
                             それぞれの場面、空間、もの、ひと、に<br/>
                             『花』を通してデザインを提案します
-                        </ImageText>
-                    </ImageTextWrapper>
+                        </LeadImageText>
+                    </LeadImageTextWrapper>
                 </StyledImageContainer>
             </FullWidthContainer>
             <IntroWrapper>
@@ -161,6 +203,28 @@ function Shop() {
             </IntroWrapper>
             <FullWidthContainer>
                 <Divider title={shop} alt='Shop' line={true} />
+                <StyledImageContainer height={300}>
+                    <StyledImage fluid={topImage} alt='Header image of flowers' height={100} width={100} />
+                    <ShopImageTextWrapper>
+                        <ShopImageText>
+                            <ShopImageTextTitle>
+                                Mother's Day
+                            </ShopImageTextTitle>
+                            <h4>
+                                母のひのプレゼント特集
+                            </h4>
+                            <h4>
+                                受付中
+                            </h4>
+                            <br/>
+                            <br/>
+                            <ShopImageSubText>
+                            大切なお母さんへ、<br/>
+                            感謝の気持ちを届けます。
+                            </ShopImageSubText>
+                        </ShopImageText>
+                    </ShopImageTextWrapper>
+                </StyledImageContainer>
             </FullWidthContainer>
         </App>
     )
