@@ -15,7 +15,7 @@ module.exports = {
         fonts: [
           {
             family: `Noto Sans JP`,
-            variants: [`300`, `400`, `700`]
+            variants: [`300`, `400`, `500`, `600`, `700`]
           },
         ],
       },

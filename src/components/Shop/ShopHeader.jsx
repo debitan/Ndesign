@@ -1,14 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import ShopHeaderImg from '../../images/ShopHeaderImg.jpg'
+import FullWidthContainer from '../shared/FullWidthContainer'
 
-const StyledContainer = styled('div')`
-    text-align: center;
-    padding: 40px 0 40px 0;
-    margin-left: calc(50% - 50vw);
-    margin-right: calc(50% - 50vw);
-`
+import ShopHeaderImg from '../../images/ShopHeaderImg.jpg'
 
 const StyledImageContainer = styled('div')`
     height: 300px;
@@ -30,7 +25,7 @@ const StyledImage = styled('img')`
 
 function ShopHeader () {
     return (
-        <StyledContainer>
+        <FullWidthContainer paddingTop={40} paddingBottom={40}>
             <h1>Shop</h1>
             <br />
             <StyledImageContainer>
@@ -50,7 +45,7 @@ function ShopHeader () {
                     </p>
                 </ImageText>
             </StyledImageContainer>
-        </StyledContainer>
+        </FullWidthContainer>
     )
 }
 
