@@ -10,6 +10,7 @@ import Divider from '../components/shared/Divider'
 
 import noriko from '../images/noriko.svg'
 import shop from '../images/shop.svg'
+import newItem from '../images/newItem.svg'
 
 
 const Banner = styled('div')`
@@ -132,8 +133,31 @@ const IntroWrapper = styled('div')`
         text-align: center;
 `
 
-const Signature = styled('img')`
+const SvgImage = styled('img')`
     padding: 30px 0;
+`
+
+const SeeMoreButton = styled('a')`
+    width: 50%;
+    border: 3px solid black;
+    border-radius: 100em;
+    color: black;
+    text-decoration: none;
+    padding: 5px;
+    margin-bottom: 10px;
+
+    :hover {
+        text-decoration: none;
+        color: black;
+    }
+
+    @media (min-width: 900px) {
+        width: 25%;
+    }
+`
+
+const ButtonWrapper = styled(IntroWrapper)`
+    padding: 40px;
 `
 
 function Shop() {
@@ -199,7 +223,7 @@ function Shop() {
                     それぞれの場面、空間、もの、ひと、に『花』を通じて<br />
                     幅広く生活しています。<br />
                 </Text>
-                <Signature src={noriko} alt='のりこのサイン' />
+                <SvgImage src={noriko} alt='のりこのサイン' />
             </IntroWrapper>
             <FullWidthContainer>
                 <Divider title={shop} alt='Shop' line={true} />
@@ -226,6 +250,10 @@ function Shop() {
                     </ShopImageTextWrapper>
                 </StyledImageContainer>
             </FullWidthContainer>
+            <ButtonWrapper>
+                <SeeMoreButton href='/shop'>もっと見る</SeeMoreButton>
+                <SvgImage src={newItem} alt='新作' />
+            </ButtonWrapper>
         </App>
     )
 }
