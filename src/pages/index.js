@@ -7,6 +7,8 @@ import FullWidthContainer from '../components/shared/FullWidthContainer'
 import StyledImageContainer from '../components/shared/StyledImageContainer'
 import StyledImage from '../components/shared/StyledImage'
 
+import noriko from '../images/noriko.svg'
+
 
 const Banner = styled('div')`
     display: grid;
@@ -38,6 +40,14 @@ const BannerText = styled('div')`
     font-weight: 500;
 `
 
+const Text = styled(BannerText)`
+    font-size: 14px;
+
+    @media (min-width: 900px) {
+        font-size: 16px;
+    }
+`
+
 const ImageText = styled('div')`
     font-size: 16px;
     font-weight: 600;
@@ -66,6 +76,20 @@ const ImageTextWrapper = styled('div')`
         left: 0%;
         min-width: 20%;
     }
+`
+
+const IntroWrapper = styled('div')`
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+        align-items: center;
+        padding: 40px;
+        line-height: 2;
+        text-align: center;
+`
+
+const Signature = styled('img')`
+    padding: 30px 0;
 `
 
 function Shop() {
@@ -113,11 +137,26 @@ function Shop() {
                             アーティフィシャルフラワーを駆使し<br/>
                             <br/>
                             それぞれの場面、空間、もの、ひと、に<br/>
-                            ［花】を通してデザインを提案します
+                            『花』を通してデザインを提案します
                         </ImageText>
                     </ImageTextWrapper>
                 </StyledImageContainer>
             </FullWidthContainer>
+            <IntroWrapper>
+                <Text>
+                    一人ひとりに合わせたオーダーメイドをつくりたくて<br />
+                    （あなたの好み）±NDesignという名前をつけました。<br />
+                    <br />
+                    量産はせず、オーダーメイドで心を込めてお作ります。<br />
+                    <br />
+                    フラワーデサインの仕事に就いてから<br />
+                    生活のどんなところにも花を混ぜ込んで行きたくて、<br />
+                    ディスプレイからアクセサリーまで<br />
+                    それぞれの場面、空間、もの、ひと、に『花』を通じて<br />
+                    幅広く生活しています。<br />
+                </Text>
+                <Signature src={noriko} alt='のりこのサイン' />
+            </IntroWrapper>
         </App>
     )
 }
