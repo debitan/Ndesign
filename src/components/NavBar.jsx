@@ -65,11 +65,11 @@ function NavBar () {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ml-auto">
-                        <StyledLink href="#shop">Shop</StyledLink>
-                        <StyledLink href="#event">Event Flowers</StyledLink>
-                        <StyledLink href="#about">Weddings</StyledLink>
-                        <StyledLink href="#about">Gallery</StyledLink>
-                        <StyledLink href="#about">Contact</StyledLink>
+                        <StyledLink href="/shop">Shop</StyledLink>
+                        <StyledLink href="/event">Event Flowers</StyledLink>
+                        <StyledLink href="/wedding">Weddings</StyledLink>
+                        <StyledLink href="/gallery">Gallery</StyledLink>
+                        <StyledLink href="/contact">Contact</StyledLink>
                         <BasketLink href="/checkout">
                             <StyledImg src={Basket} alt="basket"/>
                         </BasketLink>
