@@ -7,6 +7,7 @@ import FullWidthContainer from '../components/shared/FullWidthContainer'
 import StyledImageContainer from '../components/shared/StyledImageContainer'
 import StyledImage from '../components/shared/StyledImage'
 import Divider from '../components/shared/Divider'
+import ProductCard from '../components/Shop/ProductCard'
 
 import noriko from '../images/noriko.svg'
 import shop from '../images/shop.svg'
@@ -138,26 +139,48 @@ const SvgImage = styled('img')`
 `
 
 const SeeMoreButton = styled('a')`
-    width: 50%;
+    width: 60%;
     border: 3px solid black;
     border-radius: 100em;
-    color: black;
+    color: white;
+    background-color: black;
     text-decoration: none;
     padding: 5px;
     margin-bottom: 10px;
 
     :hover {
         text-decoration: none;
-        color: black;
+        color: white;
     }
 
-    @media (min-width: 900px) {
-        width: 25%;
+    @media (min-width: 768px) {
+        width: 50%;
+    }
+    @media (min-width: 1000px) {
+        width: 30%;
     }
 `
 
 const ButtonWrapper = styled(IntroWrapper)`
     padding: 40px;
+`
+
+const ShopContainer = styled('div')`
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+justify-items: center;
+
+@media (min-width: 900px) {
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+    justify-content: space-between;
+
+    a:last-child {
+        display: none;
+    }
+}
 `
 
 function Shop() {
@@ -182,10 +205,41 @@ function Shop() {
                 }
             }
             }
+            allSanityProduct(limit: 4, sort: {fields: _updatedAt, order: DESC}) {
+                nodes {
+                _rawBody
+                slug {
+                    current
+                }
+                variants {
+                    price
+                    size
+                    sku
+                }
+                title
+                images {
+                    asset {
+                    fluid {
+                        base64
+                        aspectRatio
+                        src
+                        srcSet
+                        srcWebp
+                        srcSetWebp
+                        sizes
+                    }
+                    }
+                }
+                colours
+                flower
+                type
+                }
+            }
         }
       `)
 
     const topImage = data.allSanityContent.edges[0].node.image.asset.fluid
+    const products = data.allSanityProduct.nodes
 
     return (
         <App>
@@ -251,8 +305,22 @@ function Shop() {
                 </StyledImageContainer>
             </FullWidthContainer>
             <ButtonWrapper>
-                <SeeMoreButton href='/shop'>もっと見る</SeeMoreButton>
                 <SvgImage src={newItem} alt='新作' />
+            </ButtonWrapper>
+            <ShopContainer>
+                {products.map(product =>
+                    <ProductCard
+                        image={product.images[0].asset.fluid}
+                        title={product.title}
+                        flower={product.flower}
+                        type={product.type}
+                        price={product.variants[0].price}
+                        url={`/shop/${product.slug.current}`}
+                    />
+                )}
+            </ShopContainer>
+            <ButtonWrapper>
+                <SeeMoreButton href='/shop'>ショッピングアイテム一覧</SeeMoreButton>
             </ButtonWrapper>
         </App>
     )

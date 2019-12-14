@@ -5,9 +5,6 @@ import { useStaticQuery, graphql } from 'gatsby'
 import ShopDivider from './ShopDivider'
 import ProductCard from './ProductCard'
 
-import mockProducts from '../../mockProducts.json'
-import product1 from '../../images/product1.jpg'
-
 const StyledContainer = styled('div')`
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -24,7 +21,7 @@ const StyledContainer = styled('div')`
 
 function Products () {
     const { allSanityProduct } = useStaticQuery(graphql`
-        query MyQuery {
+        query ProductQuery {
             allSanityProduct {
                 nodes {
                     _rawBody

@@ -33,11 +33,26 @@ const TypeText = styled('p')`
   color: grey;
 `
 
+const StyledImage = styled(Img)`
+  width: 200px;
+  height: 200px;
+
+  @media (min-width: 1000px) {
+    width: 250px;
+    height: 250px;
+  }
+
+  @media (min-width: 1200px) {
+    width: 300px;
+    height: 300px;
+  }
+`
+
 function ProductCard({ title, sku, flower, type, price, image, url }) {
     return (
       <StyledAnchor href={url}>
         <Card key={sku}>
-          <Img style={{ width: '100%' }} fluid={image} alt={title} />
+          <StyledImage fluid={image} alt={title} />
           <TitleText>
             {title}
             <br />
