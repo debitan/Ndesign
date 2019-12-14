@@ -1,17 +1,21 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useStaticQuery, graphql } from 'gatsby'
+import Img from 'gatsby-image'
 
 import App from '../components/App'
 import FullWidthContainer from '../components/shared/FullWidthContainer'
 import StyledImageContainer from '../components/shared/StyledImageContainer'
 import StyledImage from '../components/shared/StyledImage'
 import Divider from '../components/shared/Divider'
+import StyledAnchor from '../components/shared/StyledAnchor'
 import ProductCard from '../components/Shop/ProductCard'
 
 import noriko from '../images/noriko.svg'
 import shop from '../images/shop.svg'
 import newItem from '../images/newItem.svg'
+import eventFlowers from '../images/eventFlowers.svg'
+import wedding from '../images/wedding.svg'
 
 
 const Banner = styled('div')`
@@ -183,27 +187,95 @@ justify-items: center;
 }
 `
 
+const EventContainer = styled('div')`
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+
+    @media (min-width: 900px) {
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 20px;
+        padding: 40px 0;
+        margin-left: 0;
+        margin-right: 0;
+    }
+`
+const EventAnchor = styled(StyledAnchor)`
+    width: 100%;
+`
+
+const EventImage = styled(Img)`
+  width: 100%;
+
+  @media (min-width: 1000px) {
+    width: 350px;
+    height: 350px;
+  }
+
+  @media (min-width: 1200px) {
+    width: 500px;
+    height: 500px;
+  }
+`
+
+const EventDiv = styled('div')`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+    width: 100%;
+`
+
+const EventSvg = styled(SvgImage)`
+    width: 10rem;
+    height: 3.5rem;
+    padding: 20px 0 10px 0;
+
+    @media (min-screen: 900px) {
+        width: 13rem;
+        height:4rem;
+    }
+`
+
+const EventTextWrapper = styled(IntroWrapper)`
+    padding: 0 0 30px 0;
+
+    @media (min-width: 900px) {
+        padding: 0;
+    }
+`
+
+const TextWithRule = styled('span')`
+    color: #757474;
+    font-size: 16px;
+    border-top: 4px solid black;
+    padding: 10px 0;
+`
+
 function Shop() {
     const data = useStaticQuery(graphql`
         query HomePageQuery {
             allSanityContent {
-            edges {
-                node {
-                image {
-                    asset {
-                    fluid {
-                        base64
-                        aspectRatio
-                        src
-                        srcSet
-                        srcWebp
-                        srcSetWebp
-                        sizes
+                edges {
+                  node {
+                    title
+                    image {
+                      asset {
+                        fluid {
+                          base64
+                          aspectRatio
+                          src
+                          srcSet
+                          srcWebp
+                          srcSetWebp
+                          sizes
+                        }
+                      }
                     }
-                    }
+                  }
                 }
-                }
-            }
             }
             allSanityProduct(limit: 4, sort: {fields: _updatedAt, order: DESC}) {
                 nodes {
@@ -238,7 +310,9 @@ function Shop() {
         }
       `)
 
-    const topImage = data.allSanityContent.edges[0].node.image.asset.fluid
+    const topImage = data.allSanityContent.edges.find(edge => edge.node.title === 'メインページ').node.image.asset.fluid
+    const eventImage = data.allSanityContent.edges.find(edge => edge.node.title === 'イベントページ').node.image.asset.fluid
+    const weddingImage = data.allSanityContent.edges.find(edge => edge.node.title === 'ウエディングページ').node.image.asset.fluid
     const products = data.allSanityProduct.nodes
 
     return (
@@ -322,6 +396,32 @@ function Shop() {
             <ButtonWrapper>
                 <SeeMoreButton href='/shop'>ショッピングアイテム一覧</SeeMoreButton>
             </ButtonWrapper>
+            <FullWidthContainer>
+                <Divider title={eventFlowers} alt='Shop' line={true} />
+            </FullWidthContainer>
+            <EventTextWrapper>
+                <Text>空間装飾、ウエディング装花、撮影プロップ、店舗ディスプレーデザイン、ギフトetc…短発、定期それぞれ承っています。</Text>
+            </EventTextWrapper>
+            <EventContainer>
+                <EventAnchor href="/event">
+                    <EventDiv>
+                        <EventImage fluid={eventImage}/>
+                        <EventSvg src={eventFlowers} alt='Event flowers'  />
+                        <TextWithRule>
+                            短発・定期装花
+                        </TextWithRule>
+                    </EventDiv>
+                </EventAnchor>
+                <EventAnchor href='/wedding'>
+                    <EventDiv>
+                        <EventImage fluid={weddingImage}/>
+                        <EventSvg src={wedding} alt='Wedding'  />
+                        <TextWithRule>
+                            短発・定期装花
+                        </TextWithRule>
+                    </EventDiv>
+                </EventAnchor>
+            </EventContainer>
         </App>
     )
 }

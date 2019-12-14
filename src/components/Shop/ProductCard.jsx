@@ -2,6 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import Img from 'gatsby-image'
 
+import StyledAnchor from '../shared/StyledAnchor'
+
 const Card = styled('div')`
   display: flex;
   flex-direction: column;
@@ -12,16 +14,6 @@ const Card = styled('div')`
   background-color: #fff;
   border-radius: 6px;
   width: 100%;
-`
-
-const StyledAnchor = styled('a')`
-  color: black;
-  text-decoration: none;
-
-  :hover, :visited {
-    color: black;
-    text-decoration: none;
-  }
 `
 
 const TitleText = styled('p')`
