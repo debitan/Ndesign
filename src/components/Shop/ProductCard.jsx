@@ -11,7 +11,7 @@ const Card = styled('div')`
   margin-bottom: 1rem;
   background-color: #fff;
   border-radius: 6px;
-  max-width: 300px;
+  width: 100%;
 `
 
 const StyledAnchor = styled('a')`

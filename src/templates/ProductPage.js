@@ -133,18 +133,11 @@ const ProductPage = ({ pageContext }) => {
                     <LeftSide>
                         <ImageWrapper>
                             <Carousel>
-                                <Carousel.Item>
-                                    <Img fluid={pageContext.images[0].asset.fluid} alt={pageContext.title} />
-                                </Carousel.Item>
-                                <Carousel.Item>
-                                    <Img fluid={pageContext.images[1].asset.fluid} alt={pageContext.title} />
-                                </Carousel.Item>
-                                <Carousel.Item>
-                                    <Img fluid={pageContext.images[2].asset.fluid} alt={pageContext.title} />
-                                </Carousel.Item>
-                                <Carousel.Item>
-                                    <Img fluid={pageContext.images[3].asset.fluid} alt={pageContext.title} />
-                                </Carousel.Item>
+                                {pageContext.images.map(image =>
+                                    <Carousel.Item>
+                                        <Img fluid={image.asset.fluid} alt={pageContext.title} />
+                                    </Carousel.Item>
+                                )}
                             </Carousel>
                         </ImageWrapper>
                         <AdviceTextWrapper>

@@ -75,28 +75,28 @@ function Products () {
                 </StyledContainer>
             <ShopDivider ProductTypeEN="Decoration" ProductTypeJP="デコレーション" />
                 <StyledContainer>
-                    {mockProducts.map(product => product.category === 'decoration' ?
+                    {allSanityProduct.nodes.map(product => product.type === 'デコレーション' ?
                         <ProductCard
-                            image={product1}
-                            title={product.title}
-                            flower={product.flower}
-                            type={product.type}
-                            price={product.price}
-                            url={`/shop/${product.slug}`}
+                        image={product.images[0].asset.fluid}
+                        title={product.title}
+                        flower={product.flower}
+                        type={product.type}
+                        price={product.variants[0].price}
+                        url={`/shop/${product.slug.current}`}
                         />
                     : null
                     )}
                 </StyledContainer>
             <ShopDivider ProductTypeEN="Accessories" ProductTypeJP="アクセサリー" />
                 <StyledContainer>
-                    {mockProducts.map(product => product.category === 'accessory' ?
+                    {allSanityProduct.nodes.map(product => product.type === 'アクセサリー' ?
                         <ProductCard
-                            image={product1}
-                            title={product.title}
-                            flower={product.flower}
-                            type={product.type}
-                            price={product.price}
-                            url={`/shop/${product.slug}`}
+                        image={product.images[0].asset.fluid}
+                        title={product.title}
+                        flower={product.flower}
+                        type={product.type}
+                        price={product.variants[0].price}
+                        url={`/shop/${product.slug.current}`}
                         />
                     : null
                     )}
