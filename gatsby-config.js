@@ -50,5 +50,11 @@ module.exports = {
       },
     },
     `gatsby-plugin-styled-components`,
+    {
+      resolve: `gatsby-source-instagram`,
+      options: {
+        username: `plusorminus.ndesign`,
+      },
+    },
   ]
 }

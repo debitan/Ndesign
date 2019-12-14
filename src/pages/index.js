@@ -16,6 +16,7 @@ import shop from '../images/shop.svg'
 import newItem from '../images/newItem.svg'
 import eventFlowers from '../images/eventFlowers.svg'
 import wedding from '../images/wedding.svg'
+import instagram from '../images/instagram.svg'
 
 
 const Banner = styled('div')`
@@ -202,8 +203,15 @@ const EventContainer = styled('div')`
         margin-right: 0;
     }
 `
+
 const EventAnchor = styled(StyledAnchor)`
     width: 100%;
+`
+
+const InstagramAnchor = styled(EventAnchor)`
+    justify-content: center;
+    align-items: center;
+    display: flex;
 `
 
 const EventImage = styled(Img)`
@@ -252,6 +260,40 @@ const TextWithRule = styled('span')`
     font-size: 16px;
     border-top: 4px solid black;
     padding: 10px 0;
+`
+
+const InstagramTextWrapper = styled('div')`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`
+
+const InstagramText = styled('span')`
+    color: #757474;
+    font-size: 16px;
+`
+
+const InstagramImageWrapper = styled('div')`
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-auto-rows: 0;
+    justify-items: center;
+    padding-top: 40px;
+    margin-bottom: -30px;
+    grid-gap: 20px;
+
+    @media (min-width: 1000px) {
+        grid-template-columns: repeat(5, 1fr);
+        padding: 40px 0 10px 0;
+        margin-left: 0;
+        margin-right: 0;
+        margin-bottom: 0;
+
+        img {
+            display: block;
+        }
+    }
 `
 
 function Shop() {
@@ -307,6 +349,20 @@ function Shop() {
                 type
                 }
             }
+            allInstaNode(sort: {fields: timestamp, order: DESC}, limit: 5) {
+                edges {
+                  node {
+                    id
+                    localFile {
+                        childImageSharp {
+                          fluid {
+                            ...GatsbyImageSharpFluid
+                          }
+                        }
+                      }
+                  }
+                }
+            }
         }
       `)
 
@@ -314,6 +370,7 @@ function Shop() {
     const eventImage = data.allSanityContent.edges.find(edge => edge.node.title === 'イベントページ').node.image.asset.fluid
     const weddingImage = data.allSanityContent.edges.find(edge => edge.node.title === 'ウエディングページ').node.image.asset.fluid
     const products = data.allSanityProduct.nodes
+    const instaImages = data.allInstaNode.edges
 
     return (
         <App>
@@ -422,6 +479,24 @@ function Shop() {
                     </EventDiv>
                 </EventAnchor>
             </EventContainer>
+            <FullWidthContainer>
+                <Divider title={instagram} alt='Shop' line={true} />
+            </FullWidthContainer>
+            <InstagramTextWrapper>
+                <InstagramAnchor href={'https://www.instagram.com/plusorminus.ndesign/'} >
+                    <InstagramText>@plusorminus.ndesign</InstagramText>
+                </InstagramAnchor>
+            </InstagramTextWrapper>
+            <InstagramImageWrapper>
+                {instaImages.map(post =>
+                    <EventAnchor href={`https://www.instagram.com/p/${post.node.id}/`} >
+                        <StyledImage fluid={post.node.localFile.childImageSharp.fluid} height={100} weight={100} />
+                    </EventAnchor>
+                )}
+            </InstagramImageWrapper>
+            <ButtonWrapper>
+                <SeeMoreButton href='https://www.instagram.com/plusorminus.ndesign/'>インストグラム一覧</SeeMoreButton>
+            </ButtonWrapper>
         </App>
     )
 }
