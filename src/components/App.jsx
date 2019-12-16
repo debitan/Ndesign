@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import Helmet from 'react-helmet'
 
 import SEO from '../components/SEO'
 import NavBar from '../components/NavBar'
@@ -12,16 +13,25 @@ const StyledContainer = styled(Container)`
   font-family: 'Noto Sans JP', sans-serif;
 `
 
+const MobileNoOverflowWrapper = styled('body')`
+  overflow-x: hidden;
+`
+
 function App ({children}) {
   return (
     <>
+      <Helmet>
+        <html lang="jp" defer={false} />
+      </Helmet>
+      <SEO title="±Ndesign"/>
+      <MobileNoOverflowWrapper>
         <NavBar />
-        <SEO title="±Ndesign"/>
         <StyledContainer>
           {children}
         </StyledContainer>
         <Footer />
-      </>
+      </MobileNoOverflowWrapper>
+    </>
   )
 }
 
