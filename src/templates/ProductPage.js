@@ -15,13 +15,14 @@ import serializers from '../serializers'
 
 const StyledWrapper = styled('div')`
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     grid-gap: 15px;
     grid-auto-rows: minmax(100px, auto);
-    margin: 40px 0 40px 0;
+    padding: 20px 0 20px 0;
 
     @media (min-width: 992px) {
         grid-template-columns: 1fr 2fr;
+        padding: 40px 0 40px 0;
     }
 `
 
@@ -80,6 +81,8 @@ const BuyButton = styled('button')`
 
 const SelectionWrapper = styled(Form)`
     margin: 40px 40px 40px 40px;
+    display: flex;
+    flex-flow: column;
 `
 
 const AdviceTextWrapper = styled('div')`
@@ -104,13 +107,12 @@ const AdviceText = styled('p')`
 `
 
 const ImageWrapper = styled('div')`
-    margin-bottom: 40px;
     width: 100%;
     display: block;
 
     @media (min-width: 992px) {
         width: 500px;
-        height: 650px;
+        margin-bottom: 40px;
     }
 `
 
