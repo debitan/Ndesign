@@ -21,7 +21,7 @@ function App ({children}) {
   return (
     <>
       <Helmet>
-        <html lang="jp" defer={false} />
+        <html lang="ja" defer={false} />
       </Helmet>
       <SEO title="±Ndesign"/>
       <MobileNoOverflowWrapper>
