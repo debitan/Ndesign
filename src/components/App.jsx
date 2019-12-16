@@ -5,7 +5,6 @@ import Helmet from 'react-helmet'
 import SEO from '../components/SEO'
 import NavBar from '../components/NavBar'
 import Footer from '../components/Footer'
-import 'bootstrap/dist/css/bootstrap.min.css'
 import Container from 'react-bootstrap/Container'
 
 const StyledContainer = styled(Container)`
@@ -22,6 +21,12 @@ function App ({children}) {
     <>
       <Helmet>
         <html lang="ja" defer={false} />
+        <link
+          rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous"
+        />
       </Helmet>
       <SEO title="±Ndesign"/>
       <MobileNoOverflowWrapper>
