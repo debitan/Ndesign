@@ -72,8 +72,8 @@ function Checkout() {
             {context => (
                 <App>
                     {confirmed ? (<Confirmation
-                        orderId={orderId}
-                        last4={last4}
+                        orderId={orderId || 'abc12345678'}
+                        last4={last4 || '1234'}
                         kanjiName={kanjiName}
                         postcode={postcode}
                         addressLine1={addressLine1}
@@ -163,6 +163,7 @@ function Checkout() {
                                 <h3>¥{Number(context.totalCost + 1000).toLocaleString('jp')}</h3>
                             </TotalCostContainer>
                             <button onClick={() => context.setItemsInBasket([])}>Empty cart</button>
+                            <button onClick={() => setConfirmed(true)}>Force confirmation</button>
                         </RightSide>
                     </StyledWrapper>
                     )}
