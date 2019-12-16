@@ -144,13 +144,13 @@ const SvgImage = styled('img')`
 `
 
 const SeeMoreButton = styled('a')`
-    width: 60%;
+    width: fit-content;
     border: 3px solid black;
     border-radius: 100em;
     color: white;
     background-color: black;
     text-decoration: none;
-    padding: 5px;
+    padding: 0 10px;
     margin-bottom: 10px;
 
     :hover {
@@ -167,13 +167,21 @@ const SeeMoreButton = styled('a')`
 `
 
 const ButtonWrapper = styled(IntroWrapper)`
-    padding: 40px;
+    padding: 20px;
+`
+
+const TopPaddingFlexWrapper = styled(IntroWrapper)`
+    padding: 10px 0 0 0;
 `
 
 const ShopContainer = styled('div')`
 display: grid;
 grid-template-columns: repeat(2, 1fr);
 justify-items: center;
+
+@media (min-width: 480px) {
+    grid-template-columns: repeat(2, 1fr);
+}
 
 @media (min-width: 900px) {
     display: grid;
@@ -435,9 +443,9 @@ function Shop() {
                     </ShopImageTextWrapper>
                 </StyledImageContainer>
             </FullWidthContainer>
-            <ButtonWrapper>
+            <TopPaddingFlexWrapper>
                 <SvgImage src={newItem} alt='新作' />
-            </ButtonWrapper>
+            </TopPaddingFlexWrapper>
             <ShopContainer>
                 {products.map(product =>
                     <ProductCard

@@ -8,9 +8,8 @@ const Card = styled('div')`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  align-items: flex-start;
+  align-items: center;
   padding: 1rem;
-  margin-bottom: 1rem;
   background-color: #fff;
   border-radius: 6px;
   width: 100%;
@@ -19,15 +18,30 @@ const Card = styled('div')`
 const TitleText = styled('p')`
   font-size: 16px;
   font-weight: 500;
+  padding-top: 10px;
+
+  @media (min-width: 480px) {
+    font-size: 16px;
+  }
 `
 
 const TypeText = styled('p')`
+  font-size: 14px;
   color: grey;
+
+  @media (min-width: 480px) {
+    font-size: 16px;
+  }
 `
 
 const StyledImage = styled(Img)`
-  width: 200px;
-  height: 200px;
+  width: 140px;
+  height: 140px;
+
+  @media (min-width: 480px) {
+    width: 200px;
+    height: 200px;
+  }
 
   @media (min-width: 1000px) {
     width: 250px;
