@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import JPText from './JPText'
 
 const DividerWrapper = styled('div')`
     display: flex;
@@ -15,12 +16,12 @@ const Line = styled('div')`
     margin: 0 30px;
 `
 
-const Divider = ({title, alt, line}) => {
+const Divider = ({title, alt, JPTitle}) => {
     return (
         <DividerWrapper>
-            {line && <Line />}
             <img src={title} alt={alt}/>
-            {line && <Line />}
+            <JPText>{JPTitle}</JPText>
+            <Line />
         </DividerWrapper>
     )
 }

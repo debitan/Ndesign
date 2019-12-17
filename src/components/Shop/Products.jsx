@@ -4,6 +4,9 @@ import { useStaticQuery, graphql } from 'gatsby'
 
 import ShopDivider from './ShopDivider'
 import ProductCard from './ProductCard'
+import BilingualDivider from '../shared/BilingualDivider'
+
+import bouquet from '../../images/bouquet.svg'
 
 const StyledContainer = styled('div')`
     display: grid;
@@ -56,7 +59,11 @@ function Products () {
     `)
     return (
         <>
-            <ShopDivider ProductTypeEN="Bouquet" ProductTypeJP="ブーケ" />
+            <BilingualDivider
+                title={bouquet}
+                alt="Bouquet"
+                JPTitle="ブーケ"
+            />
                 <StyledContainer>
                     {allSanityProduct.nodes.map(product => product.type === 'ブーケ' ?
                         <ProductCard
