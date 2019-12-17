@@ -24,6 +24,13 @@ const StyledDiv = styled('div')`
 const InformationTitle = styled('p')`
     color: grey;
     text-decoration: underline;
+    padding-bottom: 10px;
+    line-height: 2;
+`
+
+const InformationBody = styled('p')`
+    padding-bottom: 10px;
+    line-height: 2;
 `
 
 const PriceWrapper = styled('div')`
@@ -34,6 +41,21 @@ const PriceWrapper = styled('div')`
 const TotalHr = styled(StyledHr)`
     width: 33%;
     margin-right: 0;
+`
+
+const OrderInformationGrid = styled('div')`
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    grid-gap: 20px;
+    grid-auto-flow: column;
+`
+
+const OrderInformationLeft = styled('div')`
+    grid-column: 1;
+`
+
+const OrderInformationRight = styled('div')`
+    grid-column: 2;
 `
 
 function Confirmation ({
@@ -71,18 +93,38 @@ function Confirmation ({
             </StyledContainer>
             <StyledHr />
             <MobileHr />
-            <InformationTitle>注文番号</InformationTitle>
-            <p>{orderId}</p>
-            <InformationTitle>注文日</InformationTitle>
-            <p>{new Intl.DateTimeFormat('ja-JP',{ year: 'numeric', month: 'long', day: 'numeric' }).format(Date.now())}</p>
-            <InformationTitle>決済方法</InformationTitle>
-            <p>クレジットカード　**** **** **** {last4}</p>
-            <InformationTitle>配達先</InformationTitle>
-            <p>{kanjiName}</p>
-            <p>{postcode}</p>
-            <p>{addressLine1}</p>
-            {addressLine2 && <p>{addressLine2}</p>}
-            {phone && <p>{phone}</p>}
+            <OrderInformationGrid>
+                <OrderInformationLeft>
+                    <InformationTitle>注文番号</InformationTitle>
+                </OrderInformationLeft>
+                <OrderInformationLeft>
+                    <InformationTitle>注文日</InformationTitle>
+                </OrderInformationLeft>
+                <OrderInformationLeft>
+                    <InformationTitle>決済方法</InformationTitle>
+                </OrderInformationLeft>
+                <OrderInformationLeft>
+                    <InformationTitle>配達先</InformationTitle>
+                </OrderInformationLeft>
+                <OrderInformationRight>
+                    <InformationBody>{orderId}</InformationBody>
+                </OrderInformationRight>
+                <OrderInformationRight>
+                    <InformationBody>{new Intl.DateTimeFormat('ja-JP',{ year: 'numeric', month: 'long', day: 'numeric' }).format(Date.now())}</InformationBody>
+                </OrderInformationRight>
+                <OrderInformationRight>
+                    <InformationBody>クレジットカード　**** **** **** {last4}</InformationBody>
+                </OrderInformationRight>
+                <OrderInformationRight>
+                    <InformationBody>
+                        <div>{kanjiName}</div>
+                        <div>{postcode}</div>
+                        <div>{addressLine1}</div>
+                        {addressLine2 && <div>{addressLine2}</div>}
+                        {phone && <div>{phone}</div>}
+                    </InformationBody>
+                </OrderInformationRight>
+            </OrderInformationGrid>
             <StyledContainer>
             <StyledDiv>
             <h1>Item Information</h1>
