@@ -27,3 +27,5 @@ const Divider = ({title, alt, JPTitle}) => {
 }
 
 export default Divider
+
+// img svgs need height of 36 here to be uniform

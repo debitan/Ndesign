@@ -7,6 +7,7 @@ const CheckoutFormWrapper = styled('form')`
   max-width: 800px;
   padding-top: 2rem;
   text-align: center;
+
 `
 
 const CheckoutFormButton = styled('button')`
