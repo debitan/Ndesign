@@ -2,11 +2,12 @@ import React from 'react'
 import styled from 'styled-components'
 import { useStaticQuery, graphql } from 'gatsby'
 
-import ShopDivider from './ShopDivider'
 import ProductCard from './ProductCard'
 import BilingualDivider from '../shared/BilingualDivider'
 
 import bouquet from '../../images/bouquet.svg'
+import decoration from '../../images/decoration.svg'
+import accessories from '../../images/accessories.svg'
 
 const StyledContainer = styled('div')`
     display: grid;
@@ -77,7 +78,11 @@ function Products () {
                     : null
                     )}
                 </StyledContainer>
-            <ShopDivider ProductTypeEN="Decoration" ProductTypeJP="デコレーション" />
+            <BilingualDivider
+                title={decoration}
+                alt="Decoration"
+                JPTitle="デコレーション"
+            />
                 <StyledContainer>
                     {allSanityProduct.nodes.map(product => product.type === 'デコレーション' ?
                         <ProductCard
@@ -91,7 +96,11 @@ function Products () {
                     : null
                     )}
                 </StyledContainer>
-            <ShopDivider ProductTypeEN="Accessories" ProductTypeJP="アクセサリー" />
+            <BilingualDivider
+                title={accessories}
+                alt="Accessories"
+                JPTitle="アクセサリー"
+            />
                 <StyledContainer>
                     {allSanityProduct.nodes.map(product => product.type === 'アクセサリー' ?
                         <ProductCard
