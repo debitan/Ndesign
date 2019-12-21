@@ -1,59 +1,49 @@
 import React from 'react'
 import styled from 'styled-components'
-import Navbar from 'react-bootstrap/Navbar'
-import Nav from 'react-bootstrap/Nav'
 import Container from 'react-bootstrap/Container'
+import { Location } from '@reach/router'
+
+import StyledAnchor from '../components/shared/StyledAnchor'
 
 const FooterWrapper = styled('footer')`
     background-color: #94b09f;
     padding: 20px;
-    min-height: 200px;
 `
 
-const StyledNavbar = styled(Navbar)`
-    background-color: #94b09f;
-    padding: 20px;
+const FlexColumn = styled('div')`
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-flow: column;
 `
 
-const StyledLink = styled(Nav.Link)`
-    margin: 10px;
-    font-weight: bold;
-    align-self: center;
-`
-
-const StyledBrand = styled(Navbar.Brand)`
-    font-size: 26px;
-`
-
-const StyledP = styled('p')`
-    padding: 50px 0 20px 50px;
-`
-
-const StyledContainer = styled(Container)`
-  align-content: center;
+const StyledLink = styled(StyledAnchor)`
+    margin: 10px 0;
+    border-bottom: ${props => props.location === props.href ? '2px solid black' : 'none'};
 `
 
 function Footer() {
     return (
-        <FooterWrapper>
-            <StyledContainer>
-                <StyledNavbar expand="lg" sticky="top">
-                    <Nav className="flex-column">
-                        <StyledBrand href="#home">±Ndesign</StyledBrand>
-                        <StyledLink href="#shop">Shop</StyledLink>
-                        <StyledLink href="#event">Events</StyledLink>
-                        <StyledLink href="#event">Weddings</StyledLink>
-                        <StyledLink href="#about">About</StyledLink>
-                    </Nav>
-                    <Nav className="flex-column">
-                        <StyledLink href="#shop">オーダー・配達について</StyledLink>
-                        <StyledLink href="#event">お花の取り扱い</StyledLink>
-                        <StyledLink href="#about">問い合せ</StyledLink>
-                    </Nav>
-                </StyledNavbar>
-                <StyledP>© Created for Plusminus Ndesign by Noinu ltd.</StyledP>
-            </StyledContainer>
-        </FooterWrapper>
+        <Location>
+            {({ location }) => {
+                    return (
+                        <FooterWrapper>
+                            <Container>
+                                <FlexColumn>
+                                    <StyledLink href="/" location={location.pathname}>Home</StyledLink>
+                                    <StyledLink href="/shop/" location={location.pathname}>Shop</StyledLink>
+                                    <StyledLink href="/events/" location={location.pathname}>Event Flowers</StyledLink>
+                                    <StyledLink href="/weddings/" location={location.pathname}>Weddings</StyledLink>
+                                    <StyledLink href="/gallery/" location={location.pathname}>Gallery</StyledLink>
+                                    <StyledLink href="/contact/" location={location.pathname}>Contact</StyledLink>
+                                    <StyledLink href="/delivery/" location={location.pathname}>オーダー・配達について</StyledLink>
+                                    <p>© Created for Plusminus Ndesign by Noinu ltd.</p>
+                                </FlexColumn>
+                            </Container>
+                        </FooterWrapper>
+                    )
+            }}
+        </Location>
     )
 }
 

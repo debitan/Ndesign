@@ -9,17 +9,17 @@ module.exports = {
     author: `@ThisisDMatthews`,
   },
   plugins: [
-    {
-      resolve: `gatsby-plugin-prefetch-google-fonts`,
-      options: {
-        fonts: [
-          {
-            family: `Noto Sans JP`,
-            variants: [`300`, `400`, `500`, `600`, `700`]
-          },
-        ],
-      },
-    },
+    // {
+    //   resolve: `gatsby-plugin-prefetch-google-fonts`,
+    //   options: {
+    //     fonts: [
+    //       {
+    //         family: `Hepta Slab`,
+    //         variants: [`100`, `200`, `300`, `400`, `500`, `600`, `700`]
+    //       },
+    //     ],
+    //   },
+    // },
     `gatsby-plugin-react-helmet`,
     `gatsby-transformer-json`,
     {

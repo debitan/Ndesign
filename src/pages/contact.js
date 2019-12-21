@@ -18,19 +18,6 @@ const ContactPage = () => {
     return (
         <App>
             <ColumnDivider
-                svg={contact}
-                alt='Contact'
-                JPTitle='お問い合わせ'
-            />
-            <p>
-                ±Ndesignはオンライン専門のフローリストです。
-            </p>
-            <p>
-                よく分からないことや質問などございましたら<a href='mailto:plusorminuswebdesign@gmail.com'>plusorminus.ndesign@gmail.com</a>まで何なりとご連絡ください。
-                <br />
-                合わせて、下記のよくあるご質問もご確認ください。
-            </p>
-            <ColumnDivider
                 svg={faqs}
                 alt='FAQs'
                 JPTitle='よくあるご質問'
@@ -64,6 +51,20 @@ const ContactPage = () => {
                     bodyText2='銀行振込をご希望の場合はご連絡頂きますよう、お願い致します。'
                 />
             </Accordion>
+            <ColumnDivider
+                svg={contact}
+                alt='Contact'
+                JPTitle='お問い合わせ'
+            />
+            <p>
+                ±Ndesignはオンライン専門のフローリストです。
+            </p>
+            <p>
+                よく分からないことや質問などございましたら<a href='mailto:plusorminuswebdesign@gmail.com'>plusorminus.ndesign@gmail.com</a>まで何なりとご連絡ください。
+                <br />
+                合わせて、下記のよくあるご質問もご確認ください。
+            </p>
+            <br />
         </App>
     )
 }

@@ -15,7 +15,7 @@ import noriko from '../images/noriko.svg'
 import shop from '../images/shop.svg'
 import newItem from '../images/newItem.svg'
 import eventFlowers from '../images/eventFlowers.svg'
-import wedding from '../images/wedding.svg'
+import weddings from '../images/weddings.svg'
 import instagram from '../images/instagram.svg'
 
 
@@ -477,10 +477,10 @@ function Shop() {
                         </TextWithRule>
                     </EventDiv>
                 </EventAnchor>
-                <EventAnchor href='/wedding'>
+                <EventAnchor href='/weddings'>
                     <EventDiv>
                         <EventImage fluid={weddingImage}/>
-                        <EventSvg src={wedding} alt='Wedding'  />
+                        <EventSvg src={weddings} alt='Weddings'  />
                         <TextWithRule>
                             短発・定期装花
                         </TextWithRule>

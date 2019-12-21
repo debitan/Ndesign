@@ -1,19 +1,16 @@
 import React from 'react'
 import styled from 'styled-components'
 import Helmet from 'react-helmet'
+import '@openfonts/hepta-slab_all'
 
 import SEO from '../components/SEO'
 import NavBar from '../components/NavBar'
 import Footer from '../components/Footer'
 import Container from 'react-bootstrap/Container'
 
-const StyledContainer = styled(Container)`
-  align-content: center;
-  font-family: 'Noto Sans JP', sans-serif;
-`
-
 const MobileNoOverflowWrapper = styled('body')`
   overflow-x: hidden;
+  font-family: 'Hepta Slab', serif;
 
   @media (min-width: 992px) {
       overflow-x: visible;
@@ -35,9 +32,9 @@ function App ({children}) {
       <SEO title="±Ndesign"/>
       <MobileNoOverflowWrapper>
         <NavBar />
-        <StyledContainer>
+        <Container>
           {children}
-        </StyledContainer>
+        </Container>
         <Footer />
       </MobileNoOverflowWrapper>
     </>
