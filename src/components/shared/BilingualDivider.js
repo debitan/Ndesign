@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import JPText from './JPText'
 
 const DividerWrapper = styled('div')`
     display: flex;
@@ -12,17 +13,19 @@ const Line = styled('div')`
     height: 50%;
     border-bottom: 1px solid black;
     width: 100%;
-    margin: 0 30px;
+    margin-left: 30px;
 `
 
-const Divider = ({title, alt, line}) => {
+const Divider = ({title, alt, JPTitle}) => {
     return (
         <DividerWrapper>
-            {line && <Line />}
             <img src={title} alt={alt}/>
-            {line && <Line />}
+            <JPText>{JPTitle}</JPText>
+            <Line />
         </DividerWrapper>
     )
 }
 
 export default Divider
+
+// img svgs need height of 36 here to be uniform

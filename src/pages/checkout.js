@@ -5,21 +5,34 @@ import { Elements } from 'react-stripe-elements'
 import App from '../components/App'
 import CheckoutForm from '../components/CheckoutForm'
 import MyContext from '../components/MyContext'
-import CustomerInformation from '../components/CustomerInformation'
-// import DeliveryInformation from '../components/DeliveryInformation'
+import CustomerInformationForm from '../components/CustomerInformationForm'
+import DeliveryInformation from '../components/DeliveryInformation'
 import Confirmation from '../components/Cart/Confirmation'
 import StyledHr from '../components/shared/StyledHr'
 import MobileHr from '../components/shared/MobileHr'
-
+import CheckoutDivider from '../components/shared/CheckoutDivider'
 import CartProduct from '../components/CartProduct'
+
+import shoppingCart from '../images/shoppingCart.svg'
+import shoppingCartIcon from '../images/shoppingCartIcon.svg'
+import delivery from '../images/delivery.svg'
+import deliveryIcon from '../images/deliveryIcon.svg'
+import payment from '../images/payment.svg'
+import paymentIcon from '../images/paymentIcon.svg'
 
 const StyledWrapper = styled('div')`
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     grid-gap: 15px;
     grid-auto-rows: minmax(100px, auto);
     margin: 40px 0 40px 0;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
 
+    @media (min-width: 480px) {
+        margin-left: 0;
+        margin-right: 0;
+    }
 
     @media (min-width: 992px) {
         grid-template-columns: 2fr 1fr;
@@ -30,6 +43,10 @@ const LeftSide = styled('div')`
     grid-column: 1;
     border: 1px solid #979797;
     padding: 15px;
+
+    div :first-child {
+        padding-top: 15px;
+    }
 `
 
 const RightSide = styled('div')`
@@ -38,6 +55,7 @@ const RightSide = styled('div')`
     grid-row: 1;
     padding: 15px;
     top: 95px;
+    height: fit-content;
 
     @media (min-width: 992px) {
         grid-column: 2;
@@ -52,6 +70,10 @@ const CostContainer = styled('div')`
 
 const TotalCostContainer = styled(CostContainer)`
     justify-content: flex-end;
+`
+
+const Gokei = styled('div')`
+    padding-top: 15px;
 `
 
 function Checkout() {
@@ -72,8 +94,8 @@ function Checkout() {
             {context => (
                 <App>
                     {confirmed ? (<Confirmation
-                        orderId={orderId}
-                        last4={last4}
+                        orderId={orderId || 'abc12345678'}
+                        last4={last4 || '1234'}
                         kanjiName={kanjiName}
                         postcode={postcode}
                         addressLine1={addressLine1}
@@ -83,9 +105,13 @@ function Checkout() {
                      />) : (
                     <StyledWrapper>
                         <LeftSide>
-                            <h3>Shopping Cart</h3>
-                            <StyledHr />
-                            <MobileHr />
+                            <CheckoutDivider
+                                icon={shoppingCartIcon}
+                                title={shoppingCart}
+                                alt='Shopping Cart'
+                                JPTitle='ショッピングカート'
+                                background={true}
+                            />
                             {context.itemsInBasket ? context.itemsInBasket.map(item => {
                                 return (
                                     <CartProduct
@@ -104,10 +130,14 @@ function Checkout() {
                         <Elements>
                             <>
                             <LeftSide>
-                                <h3>Delivery</h3>
-                                <StyledHr />
-                                <MobileHr />
-                                <CustomerInformation
+                                <CheckoutDivider
+                                    icon={deliveryIcon}
+                                    title={delivery}
+                                    alt='Delivery'
+                                    JPTitle='送付先'
+                                    background={true}
+                                />
+                                <CustomerInformationForm
                                     setKanjiName={setKanjiName}
                                     setFuriganaName={setFuriganaName}
                                     setEmail={setEmail}
@@ -118,16 +148,14 @@ function Checkout() {
                                     setPhone={setPhone}
                                 />
                             </LeftSide>
-                            {/* reinstate this section if customer information is required. For now, Stripe only need shipping information, it will get the customer information from the card details */}
-                            {/* <LeftSide>
-                                <h3>Delivery</h3>
-                                <hr/>
-                                <DeliveryInformation />
-                            </LeftSide> */}
                             <LeftSide>
-                                <h3>Payment</h3>
-                                <StyledHr />
-                                <MobileHr />
+                                <CheckoutDivider
+                                    icon={paymentIcon}
+                                    title={payment}
+                                    alt='Payment'
+                                    JPTitle='結済方法'
+                                    background={true}
+                                />
                                         <CheckoutForm
                                             totalCost={context.totalCost + 1000}
                                             kanjiName={kanjiName}
@@ -146,23 +174,27 @@ function Checkout() {
                             </>
                         </Elements>
                         <RightSide>
-                            <h3>合計</h3>
-                            <StyledHr />
-                            <MobileHr />
-                            <CostContainer>
-                                <h5>商品合計</h5>
-                                <h5>¥{Number(context.totalCost).toLocaleString('jp')}</h5>
-                            </CostContainer>
-                            <CostContainer>
-                                <span>送料　全国一律</span>
-                                <span>¥1,000</span>
-                            </CostContainer>
-                            <StyledHr/>
-                            <MobileHr />
-                            <TotalCostContainer>
-                                <h3>¥{Number(context.totalCost + 1000).toLocaleString('jp')}</h3>
-                            </TotalCostContainer>
-                            <button onClick={() => context.setItemsInBasket([])}>Empty cart</button>
+                            <CheckoutDivider
+                                singleTitle='合計'
+                                background={true}
+                            />
+                            <Gokei>
+                                <CostContainer>
+                                    <h5>商品合計</h5>
+                                    <h5>¥{Number(context.totalCost).toLocaleString('jp')}</h5>
+                                </CostContainer>
+                                <CostContainer>
+                                    <span>送料　全国一律</span>
+                                    <span>¥1,000</span>
+                                </CostContainer>
+                                <StyledHr/>
+                                <MobileHr />
+                                <TotalCostContainer>
+                                    <h3>¥{Number(context.totalCost + 1000).toLocaleString('jp')}</h3>
+                                </TotalCostContainer>
+                                <button onClick={() => context.setItemsInBasket([])}>Empty cart</button>
+                                <button onClick={() => setConfirmed(true)}>Force confirmation</button>
+                            </Gokei>
                         </RightSide>
                     </StyledWrapper>
                     )}

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import CustomerInformation from './CustomerInformation'
+import CustomerInformation from './CustomerInformationForm'
 
 import Form from 'react-bootstrap/Form'
 

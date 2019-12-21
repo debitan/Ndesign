@@ -4,8 +4,11 @@ import Img from 'gatsby-image'
 
 import Form from 'react-bootstrap/Form'
 
+import ProductImage from '../components/shared/ProductImage'
+
 const Wrapper = styled('div')`
     display: flex;
+    padding-top: 15px;
 `
 
 const StyledInfo = styled('div')`
@@ -22,10 +25,6 @@ const StyledInfo = styled('div')`
     @media (min-width: 768px) {
         min-width: 450px;
     }
-`
-
-const TotalCost = styled(StyledInfo)`
-    justify-content: flex-end;
 `
 
 const StyledAnchor = styled('a')`
@@ -47,9 +46,8 @@ const TypeText = styled('p')`
   color: grey;
 `
 
-const ImageWrapper = styled('div')`
+const CartProductImage = styled(ProductImage)`
     margin: 10px 20px 10px 0;
-    width: 200px;
 `
 
 function CartProduct({title, slug, price, flower, type, size, quantity, image}) {
@@ -57,14 +55,12 @@ function CartProduct({title, slug, price, flower, type, size, quantity, image}) 
 
     return(
     <Wrapper>
-        <ImageWrapper>
-            <Img style={{ width: '100%' }} fluid={image} alt={title}/>
-        </ImageWrapper>
+        <CartProductImage fluid={image} alt={title}/>
         <div>
             <StyledInfo>
                 <TitleText>
                     <StyledAnchor href={`/shop/${slug}`}>
-                        {title}
+                        title
                     </StyledAnchor>
                 </TitleText>
                 <br />
@@ -74,11 +70,11 @@ function CartProduct({title, slug, price, flower, type, size, quantity, image}) 
             </StyledInfo>
             <StyledInfo>
                 <TypeText>
-                    花材：{flower}
+                    花材：flower
                     <br />
-                    タイプ：{type}
+                    タイプ：type
                     <br />
-                    サイズ: {size}
+                    サイズ: size
                 </TypeText>
                 <Form>
                     <Form.Control style={{width: '50px'}} type="number" defaultValue={checkoutQuantity} onChange={e => setCheckoutQuantity(e.target.value)}/>
@@ -86,7 +82,6 @@ function CartProduct({title, slug, price, flower, type, size, quantity, image}) 
                 <StyledAnchor>削除</StyledAnchor>
                 </Form>
             </StyledInfo>
-            <TotalCost>商品合計　　消費税込　　￥{Number(quantity * price).toLocaleString('jp')}</TotalCost>
         </div>
     </Wrapper>
     )

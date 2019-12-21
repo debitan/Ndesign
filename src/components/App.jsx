@@ -14,6 +14,10 @@ const StyledContainer = styled(Container)`
 
 const MobileNoOverflowWrapper = styled('body')`
   overflow-x: hidden;
+
+  @media (min-width: 992px) {
+      overflow-x: visible;
+  }
 `
 
 function App ({children}) {
