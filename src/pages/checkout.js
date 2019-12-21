@@ -12,11 +12,8 @@ import MobileHr from '../components/shared/MobileHr'
 import CheckoutDivider from '../components/shared/CheckoutDivider'
 import CartProduct from '../components/CartProduct'
 
-import shoppingCart from '../images/shoppingCart.svg'
 import shoppingCartIcon from '../images/shoppingCartIcon.svg'
-import delivery from '../images/delivery.svg'
 import deliveryIcon from '../images/deliveryIcon.svg'
-import payment from '../images/payment.svg'
 import paymentIcon from '../images/paymentIcon.svg'
 
 const StyledWrapper = styled('div')`
@@ -106,8 +103,7 @@ function Checkout() {
                         <LeftSide>
                             <CheckoutDivider
                                 icon={shoppingCartIcon}
-                                title={shoppingCart}
-                                alt='Shopping Cart'
+                                title='Shopping Cart'
                                 JPTitle='ショッピングカート'
                                 background={true}
                             />
@@ -131,8 +127,7 @@ function Checkout() {
                             <LeftSide>
                                 <CheckoutDivider
                                     icon={deliveryIcon}
-                                    title={delivery}
-                                    alt='Delivery'
+                                    title='Delivery'
                                     JPTitle='送付先'
                                     background={true}
                                 />
@@ -150,8 +145,7 @@ function Checkout() {
                             <LeftSide>
                                 <CheckoutDivider
                                     icon={paymentIcon}
-                                    title={payment}
-                                    alt='Payment'
+                                    title='Payment'
                                     JPTitle='結済方法'
                                     background={true}
                                 />

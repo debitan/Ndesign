@@ -8,15 +8,12 @@ import FullWidthContainer from '../components/shared/FullWidthContainer'
 import StyledImageContainer from '../components/shared/StyledImageContainer'
 import StyledImage from '../components/shared/StyledImage'
 import Divider from '../components/shared/Divider'
+import DividerTitle from '../components/shared/DividerTitle'
 import StyledAnchor from '../components/shared/StyledAnchor'
 import ProductCard from '../components/Shop/ProductCard'
 
 import noriko from '../images/noriko.svg'
-import shop from '../images/shop.svg'
 import newItem from '../images/newItem.svg'
-import eventFlowers from '../images/eventFlowers.svg'
-import weddings from '../images/weddings.svg'
-import instagram from '../images/instagram.svg'
 
 
 const Banner = styled('div')`
@@ -242,17 +239,17 @@ const EventDiv = styled('div')`
     align-items: center;
     flex-flow: column;
     width: 100%;
+    padding-bottom: 15px;
+
+    @media (min-width: 900px) {
+        padding-bottom: 0;
+    }
 `
 
-const EventSvg = styled(SvgImage)`
-    width: 10rem;
-    height: 3.5rem;
-    padding: 20px 0 10px 0;
-
-    @media (min-screen: 900px) {
-        width: 13rem;
-        height:4rem;
-    }
+const EventTitle = styled(DividerTitle)`
+    font-size: 20px;
+    padding-top: 15px;
+    padding-bottom: 10px;
 `
 
 const EventTextWrapper = styled(IntroWrapper)`
@@ -419,7 +416,7 @@ function Shop() {
                 <SvgImage src={noriko} alt='のりこのサイン' />
             </IntroWrapper>
             <FullWidthContainer>
-                <Divider title={shop} alt='Shop' line={true} />
+                <Divider title='Shop' line={true} />
                 <StyledImageContainer height={300}>
                     <StyledImage fluid={topImage} alt='Header image of flowers' height={100} width={100} />
                     <ShopImageTextWrapper>
@@ -462,7 +459,7 @@ function Shop() {
                 <SeeMoreButton href='/shop'>ショッピングアイテム一覧</SeeMoreButton>
             </ButtonWrapper>
             <FullWidthContainer>
-                <Divider title={eventFlowers} alt='Shop' line={true} />
+                <Divider title='Event Flowers' line={true} />
             </FullWidthContainer>
             <EventTextWrapper>
                 <Text>空間装飾、ウエディング装花、撮影プロップ、店舗ディスプレーデザイン、ギフトetc…短発、定期それぞれ承っています。</Text>
@@ -471,7 +468,7 @@ function Shop() {
                 <EventAnchor href="/event">
                     <EventDiv>
                         <EventImage fluid={eventImage}/>
-                        <EventSvg src={eventFlowers} alt='Event flowers'  />
+                        <EventTitle>Event Flowers</EventTitle>
                         <TextWithRule>
                             短発・定期装花
                         </TextWithRule>
@@ -480,7 +477,7 @@ function Shop() {
                 <EventAnchor href='/weddings'>
                     <EventDiv>
                         <EventImage fluid={weddingImage}/>
-                        <EventSvg src={weddings} alt='Weddings'  />
+                        <EventTitle>Weddings</EventTitle>
                         <TextWithRule>
                             短発・定期装花
                         </TextWithRule>
@@ -488,7 +485,7 @@ function Shop() {
                 </EventAnchor>
             </EventContainer>
             <FullWidthContainer>
-                <Divider title={instagram} alt='Shop' line={true} />
+                <Divider title='Instagram' line={true} />
             </FullWidthContainer>
             <InstagramTextWrapper>
                 <InstagramAnchor href={'https://www.instagram.com/plusorminus.ndesign/'} >

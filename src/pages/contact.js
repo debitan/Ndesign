@@ -5,9 +5,6 @@ import App from '../components/App'
 import ColumnDivider from '../components/shared/ColumnDivider'
 import AccordionCard from '../components/shared/AccordionCard'
 
-import contact from '../images/contact.svg'
-import faqs from '../images/faqs.svg'
-
 const Accordion = styled('div')`
     padding-bottom: 30px;
 `
@@ -18,8 +15,7 @@ const ContactPage = () => {
     return (
         <App>
             <ColumnDivider
-                svg={faqs}
-                alt='FAQs'
+                title='FAQs'
                 JPTitle='よくあるご質問'
             />
             <Accordion>
@@ -52,8 +48,7 @@ const ContactPage = () => {
                 />
             </Accordion>
             <ColumnDivider
-                svg={contact}
-                alt='Contact'
+                title='Contact'
                 JPTitle='お問い合わせ'
             />
             <p>

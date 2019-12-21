@@ -7,8 +7,6 @@ import StyledImageContainer from '../shared/StyledImageContainer'
 import StyledImage from '../shared/StyledImage'
 import Divider from '../shared/Divider'
 
-import shop from '../../images/shop.svg'
-
 const ImageText = styled('div')`
     position: absolute;
     top: 50%;
@@ -46,7 +44,7 @@ function ShopHeader () {
 
     return (
         <FullWidthContainer paddingTop={0} paddingBottom={40}>
-            <Divider title={shop} alt='Shop' />
+            <Divider title='Shop' />
             <StyledImageContainer height={300}>
                 <StyledImage fluid={ShopHeaderImage} alt={'Shop header image of flowers'} />
                 <ImageText>

@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import Svg from './Svg'
+import DividerTitle from './DividerTitle'
 
 const Divider = styled('div')`
     display: flex;
@@ -18,13 +18,11 @@ const JPText = styled('h6')`
     align-self: center;
 `
 
-const ColumnDivider = ({svg, alt, JPTitle}) => {
+const ColumnDivider = ({ title, JPTitle }) => {
     return (
         <Divider>
-            <Svg src={svg} alt={alt} />
-            <JPText>
-                {JPTitle}
-            </JPText>
+            <DividerTitle>{title}</DividerTitle>
+            <JPText>{JPTitle}</JPText>
         </Divider>
     )
 }

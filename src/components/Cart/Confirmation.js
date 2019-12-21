@@ -6,11 +6,7 @@ import ConfirmationProduct from './ConfirmationProduct'
 import StyledHr from '../shared/StyledHr'
 import MobileHr from '../shared/MobileHr'
 import CheckoutDivider from '../shared/CheckoutDivider'
-import Svg from '../shared/Svg'
-
-import thankYou from '../../images/thankYou.svg'
-import orderInformation from '../../images/orderInformation.svg'
-import itemInformation from '../../images/itemInformation.svg'
+import DividerTitle from '../shared/DividerTitle'
 
 const Wrapper = styled('div')`
     padding: 30px 0 30px 0;
@@ -54,12 +50,8 @@ const OrderInformationRight = styled('div')`
     grid-column: 2;
 `
 
-const ThankYou = styled(Svg)`
-    height: 30px;
-
-    @media (min-width: 768px) {
-        height: 36px;
-    }
+const ThankYou = styled(DividerTitle)`
+    font-weight: 500;
 `
 
 const PaddingTop = styled('div')`
@@ -84,7 +76,7 @@ function Confirmation ({
         <MyContext.Consumer>
         {context => (
             <Wrapper>
-            <ThankYou src={thankYou} alt='Thank you' />
+            <ThankYou>Thank you.</ThankYou>
             <br/>
             <br/>
             <p>ご注文頂き誠にありがとうございます。</p>
@@ -92,8 +84,7 @@ function Confirmation ({
             <br/>
             <p>ご注文を頂いてから全てに心を込めてお作り致しますので、商品到着まで今しばらくお待ちください。</p>
             <CheckoutDivider
-                title={orderInformation}
-                alt='Order Information'
+                title='Order Information'
                 JPTitle='ご注文内容'
             />
             <OrderInformationGrid>
@@ -129,8 +120,7 @@ function Confirmation ({
                 </OrderInformationRight>
             </OrderInformationGrid>
             <CheckoutDivider
-                title={itemInformation}
-                alt='Item Information'
+                title='Item Information'
                 JPTitle='商品内容'
             />
             <PaddingTop>

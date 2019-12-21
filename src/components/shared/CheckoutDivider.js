@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import Svg from './Svg'
+import DividerTitle from './DividerTitle'
 
 const DividerWrapper = styled('div')`
     display: flex;
@@ -58,7 +58,7 @@ const Divider = ({ icon, title, alt, JPTitle, singleTitle, background }) => {
         <>
         <DividerWrapper　background={background} >
             {icon && <Icon src={icon} alt={alt} />}
-            {title && <Svg src={title} alt={alt}/>}
+            {title && <DividerTitle>{title}</DividerTitle>}
             {JPTitle && <JPText>{JPTitle}</JPText>}
             {singleTitle && <Title>{singleTitle}</Title>}
         </DividerWrapper>

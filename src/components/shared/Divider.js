@@ -1,11 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
 
+import DividerTitle from './DividerTitle'
+
 const DividerWrapper = styled('div')`
     display: flex;
     height: 100px;
     justify-content: center;
     align-content: center;
+    margin: 10px 0;
 `
 
 const Line = styled('div')`
@@ -15,11 +18,11 @@ const Line = styled('div')`
     margin: 0 30px;
 `
 
-const Divider = ({title, alt, line}) => {
+const Divider = ({title, line}) => {
     return (
         <DividerWrapper>
             {line && <Line />}
-            <img src={title} alt={alt}/>
+            <DividerTitle>{title}</DividerTitle>
             {line && <Line />}
         </DividerWrapper>
     )

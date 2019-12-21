@@ -5,10 +5,6 @@ import { useStaticQuery, graphql } from 'gatsby'
 import ProductCard from './ProductCard'
 import BilingualDivider from '../shared/BilingualDivider'
 
-import bouquet from '../../images/bouquet.svg'
-import decoration from '../../images/decoration.svg'
-import accessories from '../../images/accessories.svg'
-
 const StyledContainer = styled('div')`
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -61,8 +57,7 @@ function Products () {
     return (
         <>
             <BilingualDivider
-                title={bouquet}
-                alt="Bouquet"
+                title="Bouquet"
                 JPTitle="ブーケ"
             />
                 <StyledContainer>
@@ -79,8 +74,7 @@ function Products () {
                     )}
                 </StyledContainer>
             <BilingualDivider
-                title={decoration}
-                alt="Decoration"
+                title="Decoration"
                 JPTitle="デコレーション"
             />
                 <StyledContainer>
@@ -97,8 +91,7 @@ function Products () {
                     )}
                 </StyledContainer>
             <BilingualDivider
-                title={accessories}
-                alt="Accessories"
+                title="Accessories"
                 JPTitle="アクセサリー"
             />
                 <StyledContainer>

@@ -1,5 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
+
+import DividerTitle from './DividerTitle'
 import JPText from './JPText'
 
 const DividerWrapper = styled('div')`
@@ -19,7 +21,7 @@ const Line = styled('div')`
 const Divider = ({title, alt, JPTitle}) => {
     return (
         <DividerWrapper>
-            <img src={title} alt={alt}/>
+            <DividerTitle>{title}</DividerTitle>
             <JPText>{JPTitle}</JPText>
             <Line />
         </DividerWrapper>
