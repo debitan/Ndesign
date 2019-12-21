@@ -9,7 +9,6 @@
     "@sanity/block-content-to-react": "^2.0.7",
     "babel-plugin-styled-components": "^1.10.6",
     "bootstrap": "^4.3.1",
-    "env-cmd": "^10.0.1",
     "gatsby": "^2.18.7",
     "gatsby-image": "^2.2.27",
     "gatsby-plugin-react-helmet": "^3.1.18",
@@ -37,7 +36,7 @@
   "scripts": {
     "develop": "gatsby develop -p 8080",
     "now-dev": "npm run start -p $PORT",
-    "start": "env-cmd -f .env.development npm run develop",
+    "start": "npm run develop",
     "build": "gatsby build"
   }
 }

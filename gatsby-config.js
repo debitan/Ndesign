@@ -31,12 +31,7 @@ module.exports = {
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
-    {
-      resolve: `gatsby-plugin-stripe`,
-      options: {
-        async: true,
-      },
-    },
+    `gatsby-plugin-stripe`,
     {
       resolve: 'gatsby-source-sanity',
       options: {
