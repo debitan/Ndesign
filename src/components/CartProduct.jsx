@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import Img from 'gatsby-image'
 
 import Form from 'react-bootstrap/Form'
 

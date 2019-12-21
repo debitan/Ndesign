@@ -125,7 +125,7 @@ const ProductPage = ({ pageContext }) => {
 
     useEffect(() => {
         setVariant(...pageContext.variants.filter(variant => variant.size === size))
-    }, size)
+    }, [size])
 
     return (
     <App>

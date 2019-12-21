@@ -2,8 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 
 import MyContext from '../MyContext'
-import JPText from '../shared/JPText'
-import StyledContainer from '../shared/StyledContainer'
 import ConfirmationProduct from './ConfirmationProduct'
 import StyledHr from '../shared/StyledHr'
 import MobileHr from '../shared/MobileHr'
