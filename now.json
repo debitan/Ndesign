@@ -1,7 +1,7 @@
 {
     "env": {
         "STRIPE_SECRET_KEY": "@stripe_secret_key",
-        "GATSBY_STRIPE_PUBLIC_KEY": "@stripe_public_key",
+        "STRIPE_PUBLIC_KEY": "pk_test_hJ3fbHvbQZFxyrbtjNnBrU4k00A6Mx6jvD",
         "MY_SANITY_TOKEN": "@my_sanity_token"
     }
 }

@@ -7,7 +7,7 @@ const StripeWrapper = ({ children }) => {
 
   useEffect(() => {
     (async () => {
-      const obj = await window.Stripe(process.env.GATSBY_STRIPE_PUBLIC_KEY)
+      const obj = await window.Stripe(process.env.STRIPE_PUBLIC_KEY)
       setStripe(obj)
     })()
   }, [])
