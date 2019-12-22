@@ -1,7 +1,3 @@
-require("dotenv").config({
-  path: `.env.${process.env.NODE_ENV}`,
-})
-
 module.exports = {
   siteMetadata: {
     title: `nDesign - florist x art director`,
@@ -9,17 +5,6 @@ module.exports = {
     author: `@ThisisDMatthews`,
   },
   plugins: [
-    // {
-    //   resolve: `gatsby-plugin-prefetch-google-fonts`,
-    //   options: {
-    //     fonts: [
-    //       {
-    //         family: `Hepta Slab`,
-    //         variants: [`100`, `200`, `300`, `400`, `500`, `600`, `700`]
-    //       },
-    //     ],
-    //   },
-    // },
     `gatsby-plugin-react-helmet`,
     `gatsby-transformer-json`,
     {
