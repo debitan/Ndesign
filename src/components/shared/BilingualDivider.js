@@ -18,7 +18,7 @@ const Line = styled('div')`
     margin-left: 30px;
 `
 
-const Divider = ({title, alt, JPTitle}) => {
+const Divider = ({title, JPTitle}) => {
     return (
         <DividerWrapper>
             <DividerTitle>{title}</DividerTitle>

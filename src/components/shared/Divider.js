@@ -6,7 +6,7 @@ import DividerTitle from './DividerTitle'
 const DividerWrapper = styled('div')`
     display: flex;
     height: 100px;
-    justify-content: center;
+    justify-content: ${props => props.justify ? props.justify : 'center'};
     align-content: center;
     margin: 10px 0;
 `
@@ -18,9 +18,9 @@ const Line = styled('div')`
     margin: 0 30px;
 `
 
-const Divider = ({title, line}) => {
+const Divider = ({title, line, justify}) => {
     return (
-        <DividerWrapper>
+        <DividerWrapper justify={justify} >
             {line && <Line />}
             <DividerTitle>{title}</DividerTitle>
             {line && <Line />}
