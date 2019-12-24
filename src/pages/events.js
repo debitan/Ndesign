@@ -5,7 +5,7 @@ import Img from 'gatsby-image'
 
 import App from '../components/App'
 import Divider from '../components/shared/Divider'
-import ProductImage from '../components/shared/ProductImage'
+import FullWidthContainer from '../components/shared/FullWidthContainer'
 
 const ImageGrid = styled('div')`
     display: grid;
@@ -15,8 +15,11 @@ const ImageGrid = styled('div')`
     grid-auto-columns: 0;
     grid-gap: 5px;
     justify-items: center;
-    width: fit-content;
     margin: 30px auto;
+    `
+
+const GridImage = styled(Img)`
+    width: 100%;
 `
 
 const Heading = styled('p')`
@@ -143,6 +146,24 @@ const SubmitButton = styled('button')`
     @media (min-width: 1000px) {
         width: 30%;
     }
+    `
+
+const DateInput = styled(Input)`
+    ::-webkit-inner-spin-button { display: none; }
+    ::-webkit-calendar-picker-indicator { background: transparent; }
+    `
+
+const MessageWrapper = styled('div')`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+    margin-bottom: 20px;
+    text-align: center;
+`
+
+const MainImage = styled(Img)`
+    max-height: calc(100vh - 280px);
 `
 
 const EventPage = () => {
@@ -246,6 +267,15 @@ const EventPage = () => {
                         srcSetWebp
                         sizes
                         }
+                        square: fluid (maxHeight: 300, maxWidth: 300) {
+                        base64
+                        aspectRatio
+                        src
+                        srcSet
+                        srcWebp
+                        srcSetWebp
+                        sizes
+                        }
                     }
                     }
                 }
@@ -255,18 +285,21 @@ const EventPage = () => {
     `)
 
     const eventImage = data.allSanityContent.edges.find(edge => edge.node.title === 'イベントページ').node.image.asset.fluid
+    const eventImageSquare = data.allSanityContent.edges.find(edge => edge.node.title === 'イベントページ').node.image.asset.square
 
     return (
         <App>
             <Divider title='Event Flowers' />
-            <Img fluid={eventImage} alt='Event flowers' />
+            <FullWidthContainer>
+                <MainImage fluid={eventImageSquare} alt='Event flowers' />
+            </FullWidthContainer>
             <ImageGrid>
-                <ProductImage fluid={eventImage} alt='Event flowers' />
-                <ProductImage fluid={eventImage} alt='Event flowers' />
-                <ProductImage fluid={eventImage} alt='Event flowers' />
-                <ProductImage fluid={eventImage} alt='Event flowers' />
-                <ProductImage fluid={eventImage} alt='Event flowers' />
-                <ProductImage fluid={eventImage} alt='Event flowers' />
+                <GridImage fluid={eventImageSquare} alt='Event flowers' />
+                <GridImage fluid={eventImageSquare} alt='Event flowers' />
+                <GridImage fluid={eventImageSquare} alt='Event flowers' />
+                <GridImage fluid={eventImageSquare} alt='Event flowers' />
+                <GridImage fluid={eventImageSquare} alt='Event flowers' />
+                <GridImage fluid={eventImageSquare} alt='Event flowers' />
             </ImageGrid>
             <Heading>短発装飾</Heading>
             <ul>
@@ -301,7 +334,7 @@ const EventPage = () => {
                         </InputWrapper>
                         <InputWrapper>
                             <label for='name'>イベント予定日 *</label>
-                            <Input type='date' name='eventDate' id='eventDate' onChange={handleOnChange} required value={inputs.eventDate} />
+                            <DateInput type='date' name='eventDate' id='eventDate' onChange={handleOnChange} required value={inputs.eventDate} />
                         </InputWrapper>
                         <InputWrapper>
                             <label for='name'>イベント予定会場 *</label>
@@ -358,6 +391,18 @@ const EventPage = () => {
                     </SubmitButton>
                 </ButtonWrapper>
             </form>
+            {!status.info.error && status.info.msg &&
+                <MessageWrapper>
+                <h2>Thank you</h2>
+                <p>２営業日以内にご返信差し上げます。暫しお待ち頂きますよう、お願い致します。</p>
+                </MessageWrapper>
+            }
+            {status.info.error && (
+                <MessageWrapper>
+                <h2>Sorry...</h2>
+                <p>送信できなかったようです。後程、再送信してください。</p>
+                </MessageWrapper>
+            )}
         </App>
     )
 }
