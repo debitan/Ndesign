@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useStaticQuery, graphql } from 'gatsby'
 import Img from 'gatsby-image'
@@ -119,9 +119,10 @@ const ButtonWrapper = styled('div')`
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 20px;
 `
 
-const SubmitButton = styled('input')`
+const SubmitButton = styled('button')`
     width: fit-content;
     border: 3px solid black;
     border-radius: 100em;
@@ -145,6 +146,89 @@ const SubmitButton = styled('input')`
 `
 
 const EventPage = () => {
+    const [status, setStatus] = useState({
+        submitted: false,
+        submitting: false,
+        info: { error: false, msg: null }
+      })
+
+      const [inputs, setInputs] = useState({
+        kanjiName: '',
+        furiganaName: '',
+        eventDate:'',
+        eventLocation:'',
+        email: '',
+        phone:'',
+        oneOff:'',
+        regular:'',
+        celebration:'',
+        undecided:'',
+        description: ''
+      })
+
+      const handleResponse = (status, msg) => {
+        if (status === 200) {
+          setStatus({
+            submitted: true,
+            submitting: false,
+            info: { error: false, msg: msg }
+          })
+          setInputs({
+            kanjiName: '',
+            furiganaName: '',
+            eventDate:'',
+            eventLocation:'',
+            email: '',
+            phone:'',
+            oneOff:'',
+            regular:'',
+            celebration:'',
+            undecided:'',
+            description: ''
+          })
+          let checkboxes = document.querySelectorAll('input[type=checkbox]')
+          checkboxes.forEach(checkbox => checkbox.checked = false)
+        } else {
+          setStatus({
+            info: { error: true, msg: msg }
+          })
+        }
+      }
+
+      const handleOnChange = e => {
+        e.persist()
+        if (e.target.type === 'checkbox') {
+            setInputs(prev => ({
+                ...prev,
+                [e.target.id]: e.target.checked ? 'チェックあり' : ''
+            }))
+        } else {
+        setInputs(prev => ({
+          ...prev,
+          [e.target.id]: e.target.value
+        }))
+        }
+        setStatus({
+          submitted: false,
+          submitting: false,
+          info: { error: false, msg: null }
+        })
+      }
+
+      const handleOnSubmit = async e => {
+        e.preventDefault()
+        setStatus(prevStatus => ({ ...prevStatus, submitting: true }))
+        const res = await fetch('/api/eventFormSend', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(inputs)
+        })
+        const text = await res.text()
+        handleResponse(res.status, text)
+      }
+
     const data = useStaticQuery(graphql`
         query EventPageQuery {
             allSanityContent {
@@ -203,35 +287,35 @@ const EventPage = () => {
                 <li>会場訪問希望</li>
                 <li>会場訪問希望</li>
             </ul>
-            <Divider title='Event Flowers Contact Form' justify='flex-start' />
-            <form action='' method='POST' id='eventForm'>
+            <Divider title='Event Contact Form' justify='flex-start' />
+            <form onSubmit={handleOnSubmit} id='eventForm'>
                 <FormGrid>
                     <div>
                         <InputWrapper>
                             <label for='name'>お名前 *</label>
-                            <Input type='text' name='kanjiName' id='kanjiName' required />
+                            <Input type='text' name='kanjiName' id='kanjiName' onChange={handleOnChange} required value={inputs.kanjiName} />
                         </InputWrapper>
                         <InputWrapper>
                             <label for='name'>フリガナ *</label>
-                            <Input type='text' name='furiganaName' id='furiganaName' required />
+                            <Input type='text' name='furiganaName' id='furiganaName' onChange={handleOnChange} required value={inputs.furiganaName} />
                         </InputWrapper>
                         <InputWrapper>
                             <label for='name'>イベント予定日 *</label>
-                            <Input type='date' name='eventDate' id='eventData' required />
+                            <Input type='date' name='eventDate' id='eventDate' onChange={handleOnChange} required value={inputs.eventDate} />
                         </InputWrapper>
                         <InputWrapper>
                             <label for='name'>イベント予定会場 *</label>
-                            <Input type='text' name='eventLocation' id='eventLocation' required />
+                            <Input type='text' name='eventLocation' id='eventLocation' onChange={handleOnChange} required value={inputs.eventLocation} />
                         </InputWrapper>
                     </div>
                     <div>
                         <InputWrapper>
                             <label for='name'>Email *</label>
-                            <Input type='email' name='email' id='email' required />
+                            <Input type='email' name='email' id='email' onChange={handleOnChange} required value={inputs.email} />
                         </InputWrapper>
                         <InputWrapper>
                             <label for='name'>電話番号</label>
-                            <Input type='tel' name='phone' id='phone' />
+                            <Input type='tel' name='phone' id='phone' onChange={handleOnChange} value={inputs.phone} />
                         </InputWrapper>
                     </div>
                 </FormGrid>
@@ -240,21 +324,21 @@ const EventPage = () => {
                     <CheckboxWrapper>
                         <CheckboxInnerWrapper>
                         <CheckboxInputWrapper>
-                        <CheckboxInput type='checkbox' name='oneOff' id='oneOff' />
+                        <CheckboxInput type='checkbox' name='oneOff' id='oneOff' onChange={handleOnChange} value={inputs.oneOff} />
                         <Label for='oneOff'>短発装飾</Label>
                         </CheckboxInputWrapper>
                         <CheckboxInputWrapper>
-                        <CheckboxInput type='checkbox' name='regular' id='regular' />
+                        <CheckboxInput type='checkbox' name='regular' id='regular' onChange={handleOnChange} value={inputs.regular} />
                         <Label for='regular'>定期装花</Label>
                         </CheckboxInputWrapper>
                         </CheckboxInnerWrapper>
                         <CheckboxInnerWrapper>
                         <CheckboxInputWrapper>
-                        <CheckboxInput type='checkbox' name='celebration' id='celebration' />
+                        <CheckboxInput type='checkbox' name='celebration' id='celebration' onChange={handleOnChange} value={inputs.celebration} />
                         <Label for='celebration'>お祝い花</Label>
                         </CheckboxInputWrapper>
                         <CheckboxInputWrapper>
-                        <CheckboxInput type='checkbox' name='undecided' id='undecided' />
+                        <CheckboxInput type='checkbox' name='undecided' id='undecided' onChange={handleOnChange} value={inputs.undecided} />
                         <Label for='undecided'>未定</Label>
                         </CheckboxInputWrapper>
                         </CheckboxInnerWrapper>
@@ -262,10 +346,16 @@ const EventPage = () => {
                 </CheckboxOuterWrapper>
                 <InputWrapper>
                     <label for='description'>ご相談内容 *</label>
-                    <TextareaInput name='description' form='eventForm' />
+                    <TextareaInput name='description' id='description' onChange={handleOnChange} required value={inputs.description} />
                 </InputWrapper>
                 <ButtonWrapper>
-                    <SubmitButton type='submit' value='問い合わせする' />
+                    <SubmitButton type="submit" disabled={status.submitting}>
+                        {!status.submitting
+                            ? !status.submitted
+                                ? '問い合わせする'
+                                : status.info.msg
+                        : '問い合わせ中'}
+                    </SubmitButton>
                 </ButtonWrapper>
             </form>
         </App>
