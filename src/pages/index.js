@@ -10,6 +10,7 @@ import StyledImage from '../components/shared/StyledImage'
 import Divider from '../components/shared/Divider'
 import DividerTitle from '../components/shared/DividerTitle'
 import StyledAnchor from '../components/shared/StyledAnchor'
+import Button from '../components/shared/Button'
 import ProductCard from '../components/Shop/ProductCard'
 
 import noriko from '../images/noriko.svg'
@@ -138,29 +139,6 @@ const IntroWrapper = styled('div')`
 
 const SvgImage = styled('img')`
     padding: 30px 0;
-`
-
-const SeeMoreButton = styled('a')`
-    width: fit-content;
-    border: 3px solid black;
-    border-radius: 100em;
-    color: white;
-    background-color: black;
-    text-decoration: none;
-    padding: 0 10px;
-    margin-bottom: 10px;
-
-    :hover {
-        text-decoration: none;
-        color: white;
-    }
-
-    @media (min-width: 768px) {
-        width: 50%;
-    }
-    @media (min-width: 1000px) {
-        width: 30%;
-    }
 `
 
 const ButtonWrapper = styled(IntroWrapper)`
@@ -456,7 +434,7 @@ function Shop() {
                 )}
             </ShopContainer>
             <ButtonWrapper>
-                <SeeMoreButton href='/shop'>ショッピングアイテム一覧</SeeMoreButton>
+                <Button href='/shop'>ショッピングアイテム一覧</Button>
             </ButtonWrapper>
             <FullWidthContainer>
                 <Divider title='Event Flowers' line={true} />
@@ -500,7 +478,7 @@ function Shop() {
                 )}
             </InstagramImageWrapper>
             <ButtonWrapper>
-                <SeeMoreButton href='https://www.instagram.com/plusorminus.ndesign/'>インストグラム一覧</SeeMoreButton>
+                <Button href='https://www.instagram.com/plusorminus.ndesign/'>インストグラム一覧</Button>
             </ButtonWrapper>
         </App>
     )
