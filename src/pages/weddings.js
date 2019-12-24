@@ -22,10 +22,6 @@ const GridImage = styled(Img)`
     width: 100%;
 `
 
-const Heading = styled('p')`
-    font-size: 20px;
-`
-
 const InputWrapper = styled('div')`
     display: flex;
     justify-content: flex-start;
@@ -39,12 +35,12 @@ const CheckboxOuterWrapper = styled(InputWrapper)`
 `
 
 const CheckboxWrapper = styled(InputWrapper)`
-    align-items: center;
+    align-items: top;
     display: grid;
     grid-template-columns: 1fr 1fr;
     width: 100%;
 
-    @media (min-width: 480px) {
+    @media (min-width: 992px) {
         display: flex;
         flex-flow: row;
     }
@@ -54,7 +50,7 @@ const CheckboxInnerWrapper = styled('div')`
     display: flex;
     flex-flow: column;
 
-    @media (min-width: 480px) {
+    @media (min-width: 992px) {
         flex-flow: row;
     }
 `
@@ -64,7 +60,7 @@ const CheckboxInputWrapper = styled('div')`
     align-items: center;
     margin-bottom: 10px;
 
-    @media (min-width: 480px) {
+    @media (min-width: 992px) {
         margin-bottom: 0;
     }
 `
@@ -89,6 +85,18 @@ const Label = styled('label')`
     min-width: fit-content;
     padding: 0 10px;
     margin: 0;
+`
+
+const CheckboxLabel = styled(Label)`
+    font-size: 9px;
+
+    @media (min-width: 340px) {
+        font-size: 12px;
+    }
+
+    @media (min-width: 480px) {
+        font-size: 16px;
+    }
 `
 
 const CheckboxInput = styled('input')`
@@ -166,7 +174,7 @@ const MainImage = styled(Img)`
     max-height: calc(100vh - 280px);
 `
 
-const EventPage = () => {
+const WeddingPage = () => {
     const [status, setStatus] = useState({
         submitted: false,
         submitting: false,
@@ -176,14 +184,17 @@ const EventPage = () => {
       const [inputs, setInputs] = useState({
         kanjiName: '',
         furiganaName: '',
-        eventDate:'',
+        eventDate: '',
         eventLocation:'',
         email: '',
-        phone:'',
-        oneOff:'',
-        regular:'',
-        celebration:'',
-        undecided:'',
+        phone: '',
+        bouquetAndButtonhole: '',
+        tableFlowers: '',
+        ringPillow: '',
+        headset: '',
+        roomDecorations: '',
+        giftForParents: '',
+        undecided: '',
         description: ''
       })
 
@@ -197,14 +208,17 @@ const EventPage = () => {
           setInputs({
             kanjiName: '',
             furiganaName: '',
-            eventDate:'',
+            eventDate: '',
             eventLocation:'',
             email: '',
-            phone:'',
-            oneOff:'',
-            regular:'',
-            celebration:'',
-            undecided:'',
+            phone: '',
+            bouquetAndButtonhole: '',
+            tableFlowers: '',
+            ringPillow: '',
+            headset: '',
+            roomDecorations: '',
+            giftForParents: '',
+            undecided: '',
             description: ''
           })
           let checkboxes = document.querySelectorAll('input[type=checkbox]')
@@ -239,7 +253,7 @@ const EventPage = () => {
       const handleOnSubmit = async e => {
         e.preventDefault()
         setStatus(prevStatus => ({ ...prevStatus, submitting: true }))
-        const res = await fetch('/api/eventFormSend', {
+        const res = await fetch('/api/weddingFormSend', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -251,7 +265,7 @@ const EventPage = () => {
       }
 
     const data = useStaticQuery(graphql`
-        query EventPageQuery {
+        query WeddingPageQuery {
             allSanityContent {
                 edges {
                 node {
@@ -284,43 +298,29 @@ const EventPage = () => {
         }
     `)
 
-    const eventImage = data.allSanityContent.edges.find(edge => edge.node.title === 'イベントページ').node.image.asset.fluid
-    const eventImageSquare = data.allSanityContent.edges.find(edge => edge.node.title === 'イベントページ').node.image.asset.square
+    const weddingImage = data.allSanityContent.edges.find(edge => edge.node.title === 'ウエディングページ').node.image.asset.fluid
+    const weddingImageSquare = data.allSanityContent.edges.find(edge => edge.node.title === 'ウエディングページ').node.image.asset.square
 
     return (
         <App>
-            <Divider title='Event Flowers' />
+            <Divider title='Wedding Flowers' />
             <FullWidthContainer>
-                <MainImage fluid={eventImage} alt='Event flowers' />
+                <MainImage fluid={weddingImage} alt='Event flowers' />
             </FullWidthContainer>
             <ImageGrid>
-                <GridImage fluid={eventImageSquare} alt='Event flowers' />
-                <GridImage fluid={eventImageSquare} alt='Event flowers' />
-                <GridImage fluid={eventImageSquare} alt='Event flowers' />
-                <GridImage fluid={eventImageSquare} alt='Event flowers' />
-                <GridImage fluid={eventImageSquare} alt='Event flowers' />
-                <GridImage fluid={eventImageSquare} alt='Event flowers' />
+                <GridImage fluid={weddingImageSquare} alt='Event flowers' />
+                <GridImage fluid={weddingImageSquare} alt='Event flowers' />
+                <GridImage fluid={weddingImageSquare} alt='Event flowers' />
+                <GridImage fluid={weddingImageSquare} alt='Event flowers' />
+                <GridImage fluid={weddingImageSquare} alt='Event flowers' />
+                <GridImage fluid={weddingImageSquare} alt='Event flowers' />
             </ImageGrid>
-            <Heading>短発装飾</Heading>
             <ul>
                 <li>会場訪問希望</li>
                 <li>会場訪問希望</li>
                 <li>会場訪問希望</li>
             </ul>
-            <Heading>短発装飾</Heading>
-            <ul>
-                <li>会場訪問希望</li>
-                <li>会場訪問希望</li>
-                <li>会場訪問希望</li>
-            </ul>
-            <Heading>短発装飾</Heading>
-            <ul>
-                <li>会場訪問希望</li>
-                <li>会場訪問希望</li>
-                <li>会場訪問希望</li>
-                <li>会場訪問希望</li>
-            </ul>
-            <Divider title='Event Contact Form' justify='flex-start' />
+            <Divider title='Wedding Contact Form' justify='flex-start' />
             <form onSubmit={handleOnSubmit} id='eventForm'>
                 <FormGrid>
                     <div>
@@ -333,11 +333,11 @@ const EventPage = () => {
                             <Input type='text' name='furiganaName' id='furiganaName' onChange={handleOnChange} required value={inputs.furiganaName} />
                         </InputWrapper>
                         <InputWrapper>
-                            <label for='name'>イベント予定日 *</label>
+                            <label for='name'>挙式予定日 *</label>
                             <DateInput type='date' name='eventDate' id='eventDate' onChange={handleOnChange} required value={inputs.eventDate} />
                         </InputWrapper>
                         <InputWrapper>
-                            <label for='name'>イベント予定会場 *</label>
+                            <label for='name'>挙式予定会場 *</label>
                             <Input type='text' name='eventLocation' id='eventLocation' onChange={handleOnChange} required value={inputs.eventLocation} />
                         </InputWrapper>
                     </div>
@@ -353,26 +353,38 @@ const EventPage = () => {
                     </div>
                 </FormGrid>
                 <CheckboxOuterWrapper>
-                    <label>種類</label>
+                    <label>希望アイテム</label>
                     <CheckboxWrapper>
                         <CheckboxInnerWrapper>
                         <CheckboxInputWrapper>
-                        <CheckboxInput type='checkbox' name='oneOff' id='oneOff' onChange={handleOnChange} value={inputs.oneOff} />
-                        <Label for='oneOff'>短発装飾</Label>
+                        <CheckboxInput type='checkbox' name='bouquetAndButtonhole' id='bouquetAndButtonhole' onChange={handleOnChange} value={inputs.bouquetAndButtonhole} />
+                        <CheckboxLabel for='bouquetAndButtonhole'>ブーケー＆ブートニア</CheckboxLabel>
                         </CheckboxInputWrapper>
                         <CheckboxInputWrapper>
-                        <CheckboxInput type='checkbox' name='regular' id='regular' onChange={handleOnChange} value={inputs.regular} />
-                        <Label for='regular'>定期装花</Label>
+                        <CheckboxInput type='checkbox' name='tableFlowers' id='tableFlowers' onChange={handleOnChange} value={inputs.tableFlowers} />
+                        <CheckboxLabel for='tableFlowers'>テーブル装飾</CheckboxLabel>
+                        </CheckboxInputWrapper>
+                        <CheckboxInputWrapper>
+                        <CheckboxInput type='checkbox' name='ringPillow' id='ringPillow' onChange={handleOnChange} value={inputs.ringPillow} />
+                        <CheckboxLabel for='ringPillow'>リングピロー</CheckboxLabel>
+                        </CheckboxInputWrapper>
+                        <CheckboxInputWrapper>
+                        <CheckboxInput type='checkbox' name='headset' id='headset' onChange={handleOnChange} value={inputs.headset} />
+                        <CheckboxLabel for='headset'>ヘッドセット</CheckboxLabel>
                         </CheckboxInputWrapper>
                         </CheckboxInnerWrapper>
                         <CheckboxInnerWrapper>
                         <CheckboxInputWrapper>
-                        <CheckboxInput type='checkbox' name='celebration' id='celebration' onChange={handleOnChange} value={inputs.celebration} />
-                        <Label for='celebration'>お祝い花</Label>
+                        <CheckboxInput type='checkbox' name='roomDecorations' id='roomDecorations' onChange={handleOnChange} value={inputs.roomDecorations} />
+                        <CheckboxLabel for='roomDecorations'>空間装飾</CheckboxLabel>
+                        </CheckboxInputWrapper>
+                        <CheckboxInputWrapper>
+                        <CheckboxInput type='checkbox' name='giftForParents' id='giftForParents' onChange={handleOnChange} value={inputs.giftForParents} />
+                        <CheckboxLabel for='giftForParents'>贈呈花</CheckboxLabel>
                         </CheckboxInputWrapper>
                         <CheckboxInputWrapper>
                         <CheckboxInput type='checkbox' name='undecided' id='undecided' onChange={handleOnChange} value={inputs.undecided} />
-                        <Label for='undecided'>未定</Label>
+                        <CheckboxLabel for='undecided'>未定</CheckboxLabel>
                         </CheckboxInputWrapper>
                         </CheckboxInnerWrapper>
                     </CheckboxWrapper>
@@ -407,4 +419,4 @@ const EventPage = () => {
     )
 }
 
-export default EventPage
+export default WeddingPage
