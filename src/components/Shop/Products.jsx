@@ -22,7 +22,7 @@ const StyledContainer = styled('div')`
 function Products () {
     const { allSanityProduct } = useStaticQuery(graphql`
         query ProductQuery {
-            allSanityProduct {
+            allSanityProduct(sort: {fields: type____createdAt, order: DESC}) {
                 nodes {
                     _rawBody
                     slug {
@@ -57,59 +57,35 @@ function Products () {
             }
         }
     `)
+
+    const productTypes = allSanityProduct.nodes.map(product => product.type)
+    const uniqueTypes = Array.from(new Set(productTypes.map(JSON.stringify))).map(JSON.parse)
+
+    console.log(uniqueTypes)
+
     return (
         <>
-            <BilingualDivider
-                title="Bouquet"
-                JPTitle="ブーケ"
-            />
-                <StyledContainer>
-                    {allSanityProduct.nodes.map(product => product.type.jpCategory === 'ブーケ' ?
-                        <ProductCard
-                            image={product.images[0].asset.fluid}
-                            title={product.title}
-                            flower={product.flower}
-                            type={product.type.jpCategory}
-                            price={product.variants[0].price}
-                            url={`/shop/${product.slug.current}`}
-                        />
-                    : null
-                    )}
-                </StyledContainer>
-            <BilingualDivider
-                title="Decoration"
-                JPTitle="デコレーション"
-            />
-                <StyledContainer>
-                    {allSanityProduct.nodes.map(product => product.type.jpCategory === 'デコレーション' ?
-                        <ProductCard
-                        image={product.images[0].asset.fluid}
-                        title={product.title}
-                        flower={product.flower}
-                        type={product.type.jpCategory}
-                        price={product.variants[0].price}
-                        url={`/shop/${product.slug.current}`}
-                        />
-                    : null
-                    )}
-                </StyledContainer>
-            <BilingualDivider
-                title="Accessories"
-                JPTitle="アクセサリー"
-            />
-                <StyledContainer>
-                    {allSanityProduct.nodes.map(product => product.type.jpCategory === 'アクセサリー' ?
-                        <ProductCard
-                        image={product.images[0].asset.fluid}
-                        title={product.title}
-                        flower={product.flower}
-                        type={product.type.jpCategory}
-                        price={product.variants[0].price}
-                        url={`/shop/${product.slug.current}`}
-                        />
-                    : null
-                    )}
-                </StyledContainer>
+            {uniqueTypes.map(type =>
+                <>
+                    <BilingualDivider
+                        title={type.enCategory}
+                        JPTitle={type.jpCategory}
+                    />
+                    <StyledContainer>
+                        {allSanityProduct.nodes.map(product => product.type.jpCategory === type.jpCategory ?
+                            <ProductCard
+                                image={product.images[0].asset.fluid}
+                                title={product.title}
+                                flower={product.flower}
+                                type={product.type.jpCategory}
+                                price={product.variants[0].price}
+                                url={`/shop/${product.slug.current}`}
+                            />
+                        : null
+                        )}
+                    </StyledContainer>
+                </>
+            )}
         </>
     )
 }
