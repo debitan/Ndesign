@@ -282,11 +282,36 @@ const InstagramImageWrapper = styled('div')`
 function Shop() {
     const data = useStaticQuery(graphql`
         query HomePageQuery {
-            allSanityContent {
+            allSanityMainPage {
                 edges {
                   node {
-                    title
-                    image {
+                    topImage {
+                      asset {
+                        fluid {
+                          base64
+                          aspectRatio
+                          src
+                          srcSet
+                          srcWebp
+                          srcSetWebp
+                          sizes
+                        }
+                      }
+                    }
+                    eventImage {
+                      asset {
+                        fluid {
+                          base64
+                          aspectRatio
+                          src
+                          srcSet
+                          srcWebp
+                          srcSetWebp
+                          sizes
+                        }
+                      }
+                    }
+                    weddingImage {
                       asset {
                         fluid {
                           base64
@@ -301,7 +326,7 @@ function Shop() {
                     }
                   }
                 }
-            }
+              }
             allSanityProduct(limit: 4, sort: {fields: _updatedAt, order: DESC}) {
                 nodes {
                 _rawBody
@@ -329,7 +354,10 @@ function Shop() {
                 }
                 colours
                 flower
-                type
+                type {
+                    jpCategory
+                    enCategory
+                }
                 }
             }
             allInstaNode(sort: {fields: timestamp, order: DESC}, limit: 5) {
@@ -349,9 +377,10 @@ function Shop() {
         }
       `)
 
-    const topImage = data.allSanityContent.edges.find(edge => edge.node.title === 'メインページ').node.image.asset.fluid
-    const eventImage = data.allSanityContent.edges.find(edge => edge.node.title === 'イベントページ').node.image.asset.fluid
-    const weddingImage = data.allSanityContent.edges.find(edge => edge.node.title === 'ウエディングページ').node.image.asset.fluid
+    console.log(data)
+    const topImage = data.allSanityMainPage.edges[0].node.topImage.asset.fluid
+    const eventImage = data.allSanityMainPage.edges[0].node.eventImage.asset.fluid
+    const weddingImage = data.allSanityMainPage.edges[0].node.weddingImage.asset.fluid
     const products = data.allSanityProduct.nodes
     const instaImages = data.allInstaNode.edges
 
@@ -427,7 +456,7 @@ function Shop() {
                         image={product.images[0].asset.fluid}
                         title={product.title}
                         flower={product.flower}
-                        type={product.type}
+                        type={product.type.jpCategory}
                         price={product.variants[0].price}
                         url={`/shop/${product.slug.current}`}
                     />

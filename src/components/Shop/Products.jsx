@@ -49,7 +49,10 @@ function Products () {
                     }
                     colours
                     flower
-                    type
+                    type {
+                        jpCategory
+                        enCategory
+                    }
                 }
             }
         }
@@ -61,12 +64,12 @@ function Products () {
                 JPTitle="ブーケ"
             />
                 <StyledContainer>
-                    {allSanityProduct.nodes.map(product => product.type === 'ブーケ' ?
+                    {allSanityProduct.nodes.map(product => product.type.jpCategory === 'ブーケ' ?
                         <ProductCard
                             image={product.images[0].asset.fluid}
                             title={product.title}
                             flower={product.flower}
-                            type={product.type}
+                            type={product.type.jpCategory}
                             price={product.variants[0].price}
                             url={`/shop/${product.slug.current}`}
                         />
@@ -78,12 +81,12 @@ function Products () {
                 JPTitle="デコレーション"
             />
                 <StyledContainer>
-                    {allSanityProduct.nodes.map(product => product.type === 'デコレーション' ?
+                    {allSanityProduct.nodes.map(product => product.type.jpCategory === 'デコレーション' ?
                         <ProductCard
                         image={product.images[0].asset.fluid}
                         title={product.title}
                         flower={product.flower}
-                        type={product.type}
+                        type={product.type.jpCategory}
                         price={product.variants[0].price}
                         url={`/shop/${product.slug.current}`}
                         />
@@ -95,12 +98,12 @@ function Products () {
                 JPTitle="アクセサリー"
             />
                 <StyledContainer>
-                    {allSanityProduct.nodes.map(product => product.type === 'アクセサリー' ?
+                    {allSanityProduct.nodes.map(product => product.type.jpCategory === 'アクセサリー' ?
                         <ProductCard
                         image={product.images[0].asset.fluid}
                         title={product.title}
                         flower={product.flower}
-                        type={product.type}
+                        type={product.type.jpCategory}
                         price={product.variants[0].price}
                         url={`/shop/${product.slug.current}`}
                         />

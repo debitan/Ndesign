@@ -18,29 +18,29 @@ const ImageText = styled('div')`
 function ShopHeader () {
     const data = useStaticQuery(graphql`
         query ShopPageQuery {
-            allSanityContent {
-            edges {
-                node {
-                image {
-                    asset {
-                    fluid {
-                        base64
-                        aspectRatio
-                        src
-                        srcSet
-                        srcWebp
-                        srcSetWebp
-                        sizes
+            allSanitySeasonal {
+                edges {
+                  node {
+                    image {
+                      asset {
+                        fluid {
+                          base64
+                          aspectRatio
+                          src
+                          srcSet
+                          srcWebp
+                          srcSetWebp
+                          sizes
+                        }
+                      }
                     }
-                    }
+                  }
                 }
-                }
+              }
             }
-            }
-        }
       `)
 
-    const ShopHeaderImage = data.allSanityContent.edges[0].node.image.asset.fluid
+    const ShopHeaderImage = data.allSanitySeasonal.edges[0].node.image.asset.fluid
 
     return (
         <FullWidthContainer paddingTop={0} paddingBottom={40}>

@@ -252,40 +252,43 @@ const EventPage = () => {
 
     const data = useStaticQuery(graphql`
         query EventPageQuery {
-            allSanityContent {
+            allSanityEventsPage {
                 edges {
-                node {
-                    title
-                    image {
-                    asset {
+                  node {
+                    topImage {
+                      asset {
                         fluid {
-                        base64
-                        aspectRatio
-                        src
-                        srcSet
-                        srcWebp
-                        srcSetWebp
-                        sizes
+                          base64
+                          aspectRatio
+                          src
+                          srcSet
+                          srcWebp
+                          srcSetWebp
+                          sizes
                         }
-                        square: fluid (maxHeight: 300, maxWidth: 300) {
-                        base64
-                        aspectRatio
-                        src
-                        srcSet
-                        srcWebp
-                        srcSetWebp
-                        sizes
+                      }
+                    }
+                    eventImage {
+                      asset {
+                        fluid {
+                          base64
+                          aspectRatio
+                          src
+                          srcSet
+                          srcWebp
+                          srcSetWebp
+                          sizes
                         }
+                      }
                     }
-                    }
+                  }
                 }
-                }
+              }
             }
-        }
     `)
 
-    const eventImage = data.allSanityContent.edges.find(edge => edge.node.title === 'イベントページ').node.image.asset.fluid
-    const eventImageSquare = data.allSanityContent.edges.find(edge => edge.node.title === 'イベントページ').node.image.asset.square
+    const eventImage = data.allSanityEventsPage.edges[0].node.topImage.asset.fluid
+    const eventImageSquare = data.allSanityEventsPage.edges[0].node.eventImage[0].asset.fluid
 
     return (
         <App>

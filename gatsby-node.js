@@ -55,7 +55,10 @@ exports.createPages = async ({ graphql, actions }) => {
                 }
                 colours
                 flower
-                type
+                type {
+                    jpCategory
+                    enCategory
+                }
             }
         }
     }

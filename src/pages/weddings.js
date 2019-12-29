@@ -266,40 +266,43 @@ const WeddingPage = () => {
 
     const data = useStaticQuery(graphql`
         query WeddingPageQuery {
-            allSanityContent {
+            allSanityWeddingsPage {
                 edges {
-                node {
-                    title
-                    image {
-                    asset {
+                  node {
+                    topImage {
+                      asset {
                         fluid {
-                        base64
-                        aspectRatio
-                        src
-                        srcSet
-                        srcWebp
-                        srcSetWebp
-                        sizes
+                          base64
+                          aspectRatio
+                          src
+                          srcSet
+                          srcWebp
+                          srcSetWebp
+                          sizes
                         }
-                        square: fluid (maxHeight: 300, maxWidth: 300) {
-                        base64
-                        aspectRatio
-                        src
-                        srcSet
-                        srcWebp
-                        srcSetWebp
-                        sizes
+                      }
+                    }
+                    weddingsImage {
+                      asset {
+                        fluid(maxHeight: 300, maxWidth: 300) {
+                          base64
+                          aspectRatio
+                          src
+                          srcSet
+                          srcWebp
+                          srcSetWebp
+                          sizes
                         }
+                      }
                     }
-                    }
-                }
+                  }
                 }
             }
         }
     `)
 
-    const weddingImage = data.allSanityContent.edges.find(edge => edge.node.title === 'ウエディングページ').node.image.asset.fluid
-    const weddingImageSquare = data.allSanityContent.edges.find(edge => edge.node.title === 'ウエディングページ').node.image.asset.square
+    const weddingImage = data.allSanityWeddingsPage.edges[0].node.topImage.asset.fluid
+    const weddingImageSquare = data.allSanityWeddingsPage.edges[0].node.weddingsImage[0].asset.fluid
 
     return (
         <App>
