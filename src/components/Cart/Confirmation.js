@@ -1,5 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useStaticQuery, graphql } from 'gatsby'
+import BlockContent from '@sanity/block-content-to-react'
 
 import MyContext from '../MyContext'
 import ConfirmationProduct from './ConfirmationProduct'
@@ -7,6 +9,7 @@ import StyledHr from '../shared/StyledHr'
 import MobileHr from '../shared/MobileHr'
 import CheckoutDivider from '../shared/CheckoutDivider'
 import DividerTitle from '../shared/DividerTitle'
+import serializers from '../../serializers'
 
 const Wrapper = styled('div')`
     padding: 30px 0 30px 0;
@@ -72,17 +75,19 @@ function Confirmation ({
 
     window.onbeforeunload = () => setItemsInBasket([])
 
+    const data = useStaticQuery(graphql`
+        query ConfirmationPageQuery {
+            sanityConfirmationPage {
+            _rawThankYouMessage
+            }
+        }
+    `)
+
     return (
         <MyContext.Consumer>
         {context => (
             <Wrapper>
-            <ThankYou>Thank you.</ThankYou>
-            <br/>
-            <br/>
-            <p>ご注文頂き誠にありがとうございます。</p>
-            <p>確認メールを送信しましたので、合わせてご確認ください。</p>
-            <br/>
-            <p>ご注文を頂いてから全てに心を込めてお作り致しますので、商品到着まで今しばらくお待ちください。</p>
+            <BlockContent blocks={data.sanityConfirmationPage._rawThankYouMessage} serializers={serializers} />
             <CheckoutDivider
                 title='Order Information'
                 JPTitle='ご注文内容'

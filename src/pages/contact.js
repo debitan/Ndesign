@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
+import { useStaticQuery, graphql } from 'gatsby'
+import BlockContent from '@sanity/block-content-to-react'
 
 import App from '../components/App'
 import ColumnDivider from '../components/shared/ColumnDivider'
 import AccordionCard from '../components/shared/AccordionCard'
+import serializers from '../serializers'
 
 const Accordion = styled('div')`
     padding-bottom: 30px;
@@ -11,6 +14,25 @@ const Accordion = styled('div')`
 
 const ContactPage = () => {
     const [expanded, setExpanded] = useState(['0'])
+
+    const data = useStaticQuery(graphql`
+        query ContactPageQuery {
+            allSanityFaqs {
+                edges {
+                  node {
+                    question
+                    _rawAnswer
+                  }
+                }
+              }
+              sanityContactPage {
+                _rawInformation
+              }
+        }
+    `)
+
+    const firstFaq = data.allSanityFaqs.edges[0]
+    const otherFaqs = data.allSanityFaqs.edges.slice(1)
 
     return (
         <App>
@@ -20,46 +42,23 @@ const ContactPage = () => {
             />
             <Accordion>
                 <AccordionCard
-                    headerText='最短発送はいつですか？'
-                    bodyText='ご注文を頂いてから全てのオーダーには3日から1週間を時間をいただいております。'
-                    defaultOpen={true}
+                        headerText={firstFaq.node.question}
+                        bodyText={<BlockContent blocks={firstFaq.node._rawAnswer} serializers={serializers} />}
+                        defaultOpen={true}
                 />
-                <AccordionCard
-                    headerText='ギフトラッピングはできますか？'
-                    bodyText='全てのShop商品のものにおいて、お渡し時、配送時はギフトラッピングをさせていただいております。'
-                    bodyText2='透明のセロハン、リボン、ボックス、にて、ラッピングさせていただいております。'
-                />
-                <AccordionCard
-                    headerText='送料はいくらですか？'
-                    bodyText='送料は全国一律1,000円となります。'
-                />
-                <AccordionCard
-                    headerText='返品、交換はできますか？'
-                    bodyText='大変申し訳ございません。万一トラブルなどで返品交換ご希望されましても、承りますせんのでご理解いただきますようよろしくお願いします。'
-                />
-                <AccordionCard
-                    headerText='注文後の変更・キャンセルはできますか？'
-                    bodyText='注文後30分以内であれば変更・キャンセル承ることができます。こちらよりメール頂きますようお願い致します。'
-                />
-                <AccordionCard
-                    headerText='クレジットカード以外決済方法はできますか？'
-                    bodyText='当ホームページでは銀行振込及びクレジットカード決済のみ承っております。'
-                    bodyText2='銀行振込をご希望の場合はご連絡頂きますよう、お願い致します。'
-                />
+                {otherFaqs.map(faq =>
+                    <AccordionCard
+                        headerText={faq.node.question}
+                        bodyText={<BlockContent blocks={faq.node._rawAnswer} serializers={serializers} />}
+                    />
+                )}
             </Accordion>
             <ColumnDivider
                 title='Contact'
                 JPTitle='お問い合わせ'
             />
-            <p>
-                ±Ndesignはオンライン専門のフローリストです。
-            </p>
-            <p>
-                よく分からないことや質問などございましたら<a href='mailto:plusorminuswebdesign@gmail.com'>plusorminus.ndesign@gmail.com</a>まで何なりとご連絡ください。
-                <br />
-                合わせて、下記のよくあるご質問もご確認ください。
-            </p>
-            <br />
+           <BlockContent blocks={data.sanityContactPage._rawInformation} serializers={serializers} />
+           <br />
         </App>
     )
 }

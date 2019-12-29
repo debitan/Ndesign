@@ -2,10 +2,12 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useStaticQuery, graphql } from 'gatsby'
 import Img from 'gatsby-image'
+import BlockContent from '@sanity/block-content-to-react'
 
 import App from '../components/App'
 import Divider from '../components/shared/Divider'
 import FullWidthContainer from '../components/shared/FullWidthContainer'
+import seralizers from '../serializers'
 
 const ImageGrid = styled('div')`
     display: grid;
@@ -174,6 +176,10 @@ const MainImage = styled(Img)`
     max-height: calc(100vh - 280px);
 `
 
+const BodyWrapper = styled('div')`
+    margin-top: 20px;
+`
+
 const WeddingPage = () => {
     const [status, setStatus] = useState({
         submitted: false,
@@ -266,63 +272,54 @@ const WeddingPage = () => {
 
     const data = useStaticQuery(graphql`
         query WeddingPageQuery {
-            allSanityWeddingsPage {
-                edges {
-                  node {
-                    topImage {
-                      asset {
-                        fluid {
-                          base64
-                          aspectRatio
-                          src
-                          srcSet
-                          srcWebp
-                          srcSetWebp
-                          sizes
-                        }
-                      }
+            sanityWeddingsPage {
+                topImage {
+                    asset {
+                    fluid {
+                        base64
+                        aspectRatio
+                        src
+                        srcSet
+                        srcWebp
+                        srcSetWebp
+                        sizes
                     }
-                    weddingsImage {
-                      asset {
-                        fluid(maxHeight: 300, maxWidth: 300) {
-                          base64
-                          aspectRatio
-                          src
-                          srcSet
-                          srcWebp
-                          srcSetWebp
-                          sizes
-                        }
-                      }
                     }
-                  }
                 }
-            }
+                weddingsImage {
+                    asset {
+                    fluid(maxHeight: 300, maxWidth: 300) {
+                        base64
+                        aspectRatio
+                        src
+                        srcSet
+                        srcWebp
+                        srcSetWebp
+                        sizes
+                    }
+                    }
+                }
+                _rawBodyText
+                _rawContactText
+                _rawOverlayText
+              }
         }
     `)
-
-    const weddingImage = data.allSanityWeddingsPage.edges[0].node.topImage.asset.fluid
-    const weddingImageSquare = data.allSanityWeddingsPage.edges[0].node.weddingsImage[0].asset.fluid
 
     return (
         <App>
             <Divider title='Wedding Flowers' />
             <FullWidthContainer>
-                <MainImage fluid={weddingImage} alt='Event flowers' />
+                <MainImage fluid={data.sanityWeddingsPage.topImage.asset.fluid} alt='Event flowers' />
             </FullWidthContainer>
             <ImageGrid>
-                <GridImage fluid={weddingImageSquare} alt='Event flowers' />
-                <GridImage fluid={weddingImageSquare} alt='Event flowers' />
-                <GridImage fluid={weddingImageSquare} alt='Event flowers' />
-                <GridImage fluid={weddingImageSquare} alt='Event flowers' />
-                <GridImage fluid={weddingImageSquare} alt='Event flowers' />
-                <GridImage fluid={weddingImageSquare} alt='Event flowers' />
+                {data.sanityWeddingsPage.weddingsImage.map(image =>
+                        <GridImage fluid={image.asset.fluid} alt='Wedding flowers' />
+                )}
             </ImageGrid>
-            <ul>
-                <li>会場訪問希望</li>
-                <li>会場訪問希望</li>
-                <li>会場訪問希望</li>
-            </ul>
+            <BodyWrapper>
+                <BlockContent blocks={data.sanityWeddingsPage._rawBodyText} serializers={seralizers} />
+            </BodyWrapper>
             <Divider title='Wedding Contact Form' justify='flex-start' />
             <form onSubmit={handleOnSubmit} id='eventForm'>
                 <FormGrid>
@@ -408,8 +405,7 @@ const WeddingPage = () => {
             </form>
             {!status.info.error && status.info.msg &&
                 <MessageWrapper>
-                <h2>Thank you</h2>
-                <p>２営業日以内にご返信差し上げます。暫しお待ち頂きますよう、お願い致します。</p>
+                    <BlockContent blocks={data.sanityWeddingsPage._rawContactText} serializers={seralizers} />
                 </MessageWrapper>
             }
             {status.info.error && (
