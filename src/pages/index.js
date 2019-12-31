@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { useStaticQuery, graphql } from 'gatsby'
 import Img from 'gatsby-image'
+import BlockContent from '@sanity/block-content-to-react'
 
 import App from '../components/App'
 import FullWidthContainer from '../components/shared/FullWidthContainer'
@@ -11,7 +12,9 @@ import Divider from '../components/shared/Divider'
 import DividerTitle from '../components/shared/DividerTitle'
 import StyledAnchor from '../components/shared/StyledAnchor'
 import Button from '../components/shared/Button'
+import { SeasonalImageTextWrapper, SeasonalImageText } from '../components//shared/SeasonalImageText'
 import ProductCard from '../components/Shop/ProductCard'
+import serializers from '../serializers'
 
 import noriko from '../images/noriko.svg'
 import newItem from '../images/newItem.svg'
@@ -77,53 +80,11 @@ const LeadImageTextWrapper = styled('div')`
 
 const LeadImageText = styled('div')`
     font-size: 16px;
-    font-weight: 600;
 
     @media (min-width: 900px) {
         font-size: 20px;
         line-height: 2;
         text-align: left;
-    }
-`
-
-const ShopImageTextWrapper = styled('div')`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: rgba(255, 255, 255, 0.5);
-    padding: 10px;
-    height: 100%;
-    min-width: 33%;
-    width: fit-content;
-`
-
-const ShopImageText = styled('div')`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-flow: column;
-    font-size: 16px;
-    font-weight: 500;
-    align-self: baseline;
-
-    @media (min-width: 900px) {
-        align-self: auto;
-    }
-`
-
-const ShopImageTextTitle = styled('h3')`
-    font-weight: 400;
-`
-
-const ShopImageSubText = styled('span')`
-    display: none;
-
-    @media (min-width: 900px) {
-        display: block;
     }
 `
 
@@ -282,24 +243,65 @@ const InstagramImageWrapper = styled('div')`
 function Shop() {
     const data = useStaticQuery(graphql`
         query HomePageQuery {
-            allSanityContent {
-                edges {
-                  node {
-                    title
-                    image {
-                      asset {
-                        fluid {
-                          base64
-                          aspectRatio
-                          src
-                          srcSet
-                          srcWebp
-                          srcSetWebp
-                          sizes
-                        }
-                      }
+            sanityMainPage {
+                topImage {
+                  asset {
+                    fluid {
+                      base64
+                      aspectRatio
+                      src
+                      srcSet
+                      srcWebp
+                      srcSetWebp
+                      sizes
                     }
                   }
+                }
+                eventImage {
+                  asset {
+                    fluid {
+                      base64
+                      aspectRatio
+                      src
+                      srcSet
+                      srcWebp
+                      srcSetWebp
+                      sizes
+                    }
+                  }
+                }
+                weddingImage {
+                  asset {
+                    fluid {
+                      base64
+                      aspectRatio
+                      src
+                      srcSet
+                      srcWebp
+                      srcSetWebp
+                      sizes
+                    }
+                  }
+                }
+                _rawIntroText
+                _rawOverlayText
+                subheader
+                eventText
+            }
+            sanitySeasonal {
+                _rawOverlayText
+                image {
+                    asset {
+                    fluid {
+                        base64
+                        aspectRatio
+                        src
+                        srcSet
+                        srcWebp
+                        srcSetWebp
+                        sizes
+                    }
+                    }
                 }
             }
             allSanityProduct(limit: 4, sort: {fields: _updatedAt, order: DESC}) {
@@ -329,7 +331,10 @@ function Shop() {
                 }
                 colours
                 flower
-                type
+                type {
+                    jpCategory
+                    enCategory
+                }
                 }
             }
             allInstaNode(sort: {fields: timestamp, order: DESC}, limit: 5) {
@@ -349,9 +354,9 @@ function Shop() {
         }
       `)
 
-    const topImage = data.allSanityContent.edges.find(edge => edge.node.title === 'メインページ').node.image.asset.fluid
-    const eventImage = data.allSanityContent.edges.find(edge => edge.node.title === 'イベントページ').node.image.asset.fluid
-    const weddingImage = data.allSanityContent.edges.find(edge => edge.node.title === 'ウエディングページ').node.image.asset.fluid
+    const topImage = data.sanityMainPage.topImage.asset.fluid
+    const eventImage = data.sanityMainPage.eventImage.asset.fluid
+    const weddingImage = data.sanityMainPage.weddingImage.asset.fluid
     const products = data.allSanityProduct.nodes
     const instaImages = data.allInstaNode.edges
 
@@ -359,63 +364,32 @@ function Shop() {
         <App>
             <FullWidthContainer>
                 <Banner>
-                    <BannerText>送料　全国一律1,000円</BannerText>
-                    <BannerText>オーダーメイドアイテムも承ります</BannerText>
-                    <BannerText>ウェディング・イベント装花</BannerText>
+                    {data.sanityMainPage.subheader.map(subheader => <BannerText>{subheader}</BannerText>)}
                 </Banner>
                 <StyledImageContainer height={600}>
                     <StyledImage fluid={topImage} alt='Header image of flowers' height={100} width={100} />
                     <LeadImageTextWrapper>
-                        <LeadImageText>
-                            店舗を持たない花屋です<br/>
-                            <br/>
-                            生花、プリザーブドフラワー、<br/>
-                            アーティフィシャルフラワーを駆使し<br/>
-                            <br/>
-                            それぞれの場面、空間、もの、ひと、に<br/>
-                            『花』を通してデザインを提案します
-                        </LeadImageText>
+                         <LeadImageText>
+                            <BlockContent blocks={data.sanityMainPage._rawOverlayText} serializers={serializers} />
+                         </LeadImageText>
                     </LeadImageTextWrapper>
                 </StyledImageContainer>
             </FullWidthContainer>
             <IntroWrapper>
                 <Text>
-                    一人ひとりに合わせたオーダーメイドをつくりたくて<br />
-                    （あなたの好み）±NDesignという名前をつけました。<br />
-                    <br />
-                    量産はせず、オーダーメイドで心を込めてお作ります。<br />
-                    <br />
-                    フラワーデサインの仕事に就いてから<br />
-                    生活のどんなところにも花を混ぜ込んで行きたくて、<br />
-                    ディスプレイからアクセサリーまで<br />
-                    それぞれの場面、空間、もの、ひと、に『花』を通じて<br />
-                    幅広く生活しています。<br />
+                   <BlockContent blocks={data.sanityMainPage._rawIntroText} serializers={serializers} />
                 </Text>
                 <SvgImage src={noriko} alt='のりこのサイン' />
             </IntroWrapper>
             <FullWidthContainer>
                 <Divider title='Shop' line={true} />
                 <StyledImageContainer height={300}>
-                    <StyledImage fluid={topImage} alt='Header image of flowers' height={100} width={100} />
-                    <ShopImageTextWrapper>
-                        <ShopImageText>
-                            <ShopImageTextTitle>
-                                Mother's Day
-                            </ShopImageTextTitle>
-                            <h4>
-                                母のひのプレゼント特集
-                            </h4>
-                            <h4>
-                                受付中
-                            </h4>
-                            <br/>
-                            <br/>
-                            <ShopImageSubText>
-                            大切なお母さんへ、<br/>
-                            感謝の気持ちを届けます。
-                            </ShopImageSubText>
-                        </ShopImageText>
-                    </ShopImageTextWrapper>
+                    <StyledImage fluid={data.sanitySeasonal.image.asset.fluid} alt='Seasonal flowers' height={100} width={100} />
+                    <SeasonalImageTextWrapper>
+                        <SeasonalImageText>
+                            <BlockContent blocks={data.sanitySeasonal._rawOverlayText} serializers={serializers} />
+                        </SeasonalImageText>
+                    </SeasonalImageTextWrapper>
                 </StyledImageContainer>
             </FullWidthContainer>
             <TopPaddingFlexWrapper>
@@ -427,7 +401,7 @@ function Shop() {
                         image={product.images[0].asset.fluid}
                         title={product.title}
                         flower={product.flower}
-                        type={product.type}
+                        type={product.type.jpCategory}
                         price={product.variants[0].price}
                         url={`/shop/${product.slug.current}`}
                     />
@@ -440,7 +414,7 @@ function Shop() {
                 <Divider title='Event Flowers' line={true} />
             </FullWidthContainer>
             <EventTextWrapper>
-                <Text>空間装飾、ウエディング装花、撮影プロップ、店舗ディスプレーデザイン、ギフトetc…短発、定期それぞれ承っています。</Text>
+                <Text>{data.sanityMainPage.eventText}</Text>
             </EventTextWrapper>
             <EventContainer>
                 <EventAnchor href="/event">

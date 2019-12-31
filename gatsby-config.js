@@ -1,7 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: `nDesign - florist x art director`,
-    description: `Beautiful flowers expertly designed in Tokyo.`,
+    title: `Ndesign - florist x art director`,
     author: `@ThisisDMatthews`,
   },
   plugins: [

@@ -163,7 +163,7 @@ const ProductPage = ({ pageContext }) => {
                         <p>
                             <Label>花材: </Label>{pageContext.flower}
                             <br />
-                            <Label>タイプ: </Label>{pageContext.type}
+                            <Label>タイプ: </Label>{pageContext.type.jpCategory}
                         </p>
                         <p>
                             <Label>アイテム説明: </Label>

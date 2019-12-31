@@ -10,42 +10,41 @@ import PropTypes from "prop-types"
 import Helmet from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
 
-function SEO({ description, lang, meta, title }) {
-  const { site } = useStaticQuery(
-    graphql`
-      query {
-        site {
-          siteMetadata {
-            title
-            description
-            author
-          }
+function SEO({ lang }) {
+  const data = useStaticQuery(graphql`
+    query SettingsQuery {
+      sanitySiteSettings {
+        description
+        keywords
+      }
+      site {
+        siteMetadata {
+          title
+          author
         }
       }
-    `
-  )
-
-  const metaDescription = description || site.siteMetadata.description
+    }
+  `)
 
   return (
     <Helmet
       htmlAttributes={{
         lang,
       }}
-      title={title}
-      titleTemplate={`%s | ${site.siteMetadata.title}`}
+      title={data.site.siteMetadata.title}
+      titleTemplate={`%s | ${data.site.siteMetadata.title}`}
       meta={[
         {
           name: `description`,
-          content: metaDescription,
+          content: data.sanitySiteSettings.description,
         },
         {
           property: `og:title`,
-          content: title,
+          content: data.site.siteMetadata.title,
         },
         {
           property: `og:description`,
-          content: metaDescription,
+          content: data.sanitySiteSettings.description,
         },
         {
           property: `og:type`,
@@ -57,32 +56,31 @@ function SEO({ description, lang, meta, title }) {
         },
         {
           name: `twitter:creator`,
-          content: site.siteMetadata.author,
+          content: data.site.siteMetadata.author,
         },
         {
           name: `twitter:title`,
-          content: title,
+          content: data.site.siteMetadata.title,
         },
         {
           name: `twitter:description`,
-          content: metaDescription,
+          content: data.sanitySiteSettings.description,
         },
-      ].concat(meta)}
+        {
+          name: `keywords`,
+          content: data.sanitySiteSettings.keywords.map(keyword => `${keyword}`)
+        }
+      ]}
     />
   )
 }
 
 SEO.defaultProps = {
-  lang: `en`,
-  meta: [],
-  description: ``,
+  lang: `ja`,
 }
 
 SEO.propTypes = {
-  description: PropTypes.string,
   lang: PropTypes.string,
-  meta: PropTypes.arrayOf(PropTypes.object),
-  title: PropTypes.string.isRequired,
 }
 
 export default SEO

@@ -2,10 +2,12 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useStaticQuery, graphql } from 'gatsby'
 import Img from 'gatsby-image'
+import BlockContent from '@sanity/block-content-to-react'
 
 import App from '../components/App'
 import Divider from '../components/shared/Divider'
 import FullWidthContainer from '../components/shared/FullWidthContainer'
+import seralizers from '../serializers'
 
 const ImageGrid = styled('div')`
     display: grid;
@@ -20,10 +22,6 @@ const ImageGrid = styled('div')`
 
 const GridImage = styled(Img)`
     width: 100%;
-`
-
-const Heading = styled('p')`
-    font-size: 20px;
 `
 
 const InputWrapper = styled('div')`
@@ -166,6 +164,10 @@ const MainImage = styled(Img)`
     max-height: calc(100vh - 280px);
 `
 
+const BodyWrapper = styled('div')`
+    margin-top: 20px;
+`
+
 const EventPage = () => {
     const [status, setStatus] = useState({
         submitted: false,
@@ -252,13 +254,10 @@ const EventPage = () => {
 
     const data = useStaticQuery(graphql`
         query EventPageQuery {
-            allSanityContent {
-                edges {
-                node {
-                    title
-                    image {
+            sanityEventsPage {
+                topImage {
                     asset {
-                        fluid {
+                    fluid {
                         base64
                         aspectRatio
                         src
@@ -266,8 +265,12 @@ const EventPage = () => {
                         srcWebp
                         srcSetWebp
                         sizes
-                        }
-                        square: fluid (maxHeight: 300, maxWidth: 300) {
+                    }
+                    }
+                }
+                eventImage {
+                    asset {
+                    fluid(maxHeight: 300, maxWidth: 300) {
                         base64
                         aspectRatio
                         src
@@ -275,51 +278,30 @@ const EventPage = () => {
                         srcWebp
                         srcSetWebp
                         sizes
-                        }
                     }
                     }
                 }
-                }
+                _rawBodyText
+                _rawContactText
+                _rawOverlayText
+              }
             }
-        }
     `)
-
-    const eventImage = data.allSanityContent.edges.find(edge => edge.node.title === 'イベントページ').node.image.asset.fluid
-    const eventImageSquare = data.allSanityContent.edges.find(edge => edge.node.title === 'イベントページ').node.image.asset.square
 
     return (
         <App>
             <Divider title='Event Flowers' />
             <FullWidthContainer>
-                <MainImage fluid={eventImage} alt='Event flowers' />
+                <MainImage fluid={data.sanityEventsPage.topImage.asset.fluid} alt='Event flowers' />
             </FullWidthContainer>
             <ImageGrid>
-                <GridImage fluid={eventImageSquare} alt='Event flowers' />
-                <GridImage fluid={eventImageSquare} alt='Event flowers' />
-                <GridImage fluid={eventImageSquare} alt='Event flowers' />
-                <GridImage fluid={eventImageSquare} alt='Event flowers' />
-                <GridImage fluid={eventImageSquare} alt='Event flowers' />
-                <GridImage fluid={eventImageSquare} alt='Event flowers' />
+                {data.sanityEventsPage.eventImage.map(image =>
+                    <GridImage fluid={image.asset.fluid} alt='Event flowers' />
+                )}
             </ImageGrid>
-            <Heading>短発装飾</Heading>
-            <ul>
-                <li>会場訪問希望</li>
-                <li>会場訪問希望</li>
-                <li>会場訪問希望</li>
-            </ul>
-            <Heading>短発装飾</Heading>
-            <ul>
-                <li>会場訪問希望</li>
-                <li>会場訪問希望</li>
-                <li>会場訪問希望</li>
-            </ul>
-            <Heading>短発装飾</Heading>
-            <ul>
-                <li>会場訪問希望</li>
-                <li>会場訪問希望</li>
-                <li>会場訪問希望</li>
-                <li>会場訪問希望</li>
-            </ul>
+            <BodyWrapper>
+                <BlockContent blocks={data.sanityEventsPage._rawBodyText} serializers={seralizers} />
+            </BodyWrapper>
             <Divider title='Event Contact Form' justify='flex-start' />
             <form onSubmit={handleOnSubmit} id='eventForm'>
                 <FormGrid>
@@ -393,8 +375,7 @@ const EventPage = () => {
             </form>
             {!status.info.error && status.info.msg &&
                 <MessageWrapper>
-                <h2>Thank you</h2>
-                <p>２営業日以内にご返信差し上げます。暫しお待ち頂きますよう、お願い致します。</p>
+                    <BlockContent blocks={data.sanityEventsPage._rawContactText} serializers={seralizers} />
                 </MessageWrapper>
             }
             {status.info.error && (

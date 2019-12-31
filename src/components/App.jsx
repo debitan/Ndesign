@@ -21,7 +21,6 @@ function App ({children}) {
   return (
     <>
       <Helmet>
-        <html lang="ja" defer={false} />
         <link
           rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -29,7 +28,7 @@ function App ({children}) {
           crossorigin="anonymous"
         />
       </Helmet>
-      <SEO title="±Ndesign"/>
+      <SEO lang="ja" />
       <MobileNoOverflowWrapper>
         <NavBar />
         <Container>
