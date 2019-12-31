@@ -7,7 +7,7 @@ import BlockContent from '@sanity/block-content-to-react'
 import App from '../components/App'
 import Divider from '../components/shared/Divider'
 import FullWidthContainer from '../components/shared/FullWidthContainer'
-import seralizers from '../serializers'
+import serializers from '../serializers'
 
 const ImageGrid = styled('div')`
     display: grid;
@@ -300,7 +300,7 @@ const EventPage = () => {
                 )}
             </ImageGrid>
             <BodyWrapper>
-                <BlockContent blocks={data.sanityEventsPage._rawBodyText} serializers={seralizers} />
+                <BlockContent blocks={data.sanityEventsPage._rawBodyText} serializers={serializers} />
             </BodyWrapper>
             <Divider title='Event Contact Form' justify='flex-start' />
             <form onSubmit={handleOnSubmit} id='eventForm'>
@@ -375,7 +375,7 @@ const EventPage = () => {
             </form>
             {!status.info.error && status.info.msg &&
                 <MessageWrapper>
-                    <BlockContent blocks={data.sanityEventsPage._rawContactText} serializers={seralizers} />
+                    <BlockContent blocks={data.sanityEventsPage._rawContactText} serializers={serializers} />
                 </MessageWrapper>
             }
             {status.info.error && (

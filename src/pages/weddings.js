@@ -3,11 +3,13 @@ import styled from 'styled-components'
 import { useStaticQuery, graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import BlockContent from '@sanity/block-content-to-react'
+import scrollTo from 'gatsby-plugin-smoothscroll'
 
 import App from '../components/App'
 import Divider from '../components/shared/Divider'
 import FullWidthContainer from '../components/shared/FullWidthContainer'
-import seralizers from '../serializers'
+import StyledImageContainer from '../components/shared/StyledImageContainer'
+import serializers from '../serializers'
 
 const ImageGrid = styled('div')`
     display: grid;
@@ -158,6 +160,27 @@ const SubmitButton = styled('button')`
     }
     `
 
+const ScrollButton = styled('button')`
+    width: 50%;
+    min-width: fit-content;
+    border: 3px solid black;
+    border-radius: 100em;
+    color: white;
+    background-color: black;
+    text-decoration: none;
+    padding: 10px;
+    margin-bottom: 10px;
+
+    :hover {
+        text-decoration: none;
+        color: white;
+    }
+
+    @media (min-width: 900px) {
+        width: 80%;
+    }
+    `
+
 const DateInput = styled(Input)`
     ::-webkit-inner-spin-button { display: none; }
     ::-webkit-calendar-picker-indicator { background: transparent; }
@@ -174,10 +197,35 @@ const MessageWrapper = styled('div')`
 
 const MainImage = styled(Img)`
     max-height: calc(100vh - 280px);
+    min-height: 510px;
 `
 
 const BodyWrapper = styled('div')`
     margin-top: 20px;
+`
+
+const LeadImageTextWrapper = styled('div')`
+    margin-top: 30px;
+
+    @media (min-width: 900px) {
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translate(0%, -50%);
+        background: rgba(255, 255, 255, 0.5);
+        padding: 10px;
+        width: fit-content;
+    }
+`
+
+const LeadImageText = styled('div')`
+    font-size: 16px;
+
+    @media (min-width: 900px) {
+        font-size: 20px;
+        line-height: 2;
+        text-align: left;
+    }
 `
 
 const WeddingPage = () => {
@@ -310,7 +358,19 @@ const WeddingPage = () => {
         <App>
             <Divider title='Wedding Flowers' />
             <FullWidthContainer>
-                <MainImage fluid={data.sanityWeddingsPage.topImage.asset.fluid} alt='Event flowers' />
+                <StyledImageContainer>
+                    <MainImage fluid={data.sanityWeddingsPage.topImage.asset.fluid} alt='Event flowers' />
+                    <LeadImageTextWrapper>
+                        <LeadImageText>
+                            <BlockContent blocks={data.sanityWeddingsPage._rawOverlayText} serializers={serializers} />
+                            <ButtonWrapper>
+                                <ScrollButton type='button' onClick={() => scrollTo('#eventForm')}>
+                                    問い合わせする
+                                </ScrollButton>
+                            </ButtonWrapper>
+                        </LeadImageText>
+                    </LeadImageTextWrapper>
+                </StyledImageContainer>
             </FullWidthContainer>
             <ImageGrid>
                 {data.sanityWeddingsPage.weddingsImage.map(image =>
@@ -318,7 +378,7 @@ const WeddingPage = () => {
                 )}
             </ImageGrid>
             <BodyWrapper>
-                <BlockContent blocks={data.sanityWeddingsPage._rawBodyText} serializers={seralizers} />
+                <BlockContent blocks={data.sanityWeddingsPage._rawBodyText} serializers={serializers} />
             </BodyWrapper>
             <Divider title='Wedding Contact Form' justify='flex-start' />
             <form onSubmit={handleOnSubmit} id='eventForm'>
@@ -405,7 +465,7 @@ const WeddingPage = () => {
             </form>
             {!status.info.error && status.info.msg &&
                 <MessageWrapper>
-                    <BlockContent blocks={data.sanityWeddingsPage._rawContactText} serializers={seralizers} />
+                    <BlockContent blocks={data.sanityWeddingsPage._rawContactText} serializers={serializers} />
                 </MessageWrapper>
             }
             {status.info.error && (
