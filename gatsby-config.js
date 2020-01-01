@@ -40,5 +40,6 @@ module.exports = {
         username: `plusorminus.ndesign`,
       },
     },
+    `gatsby-plugin-smoothscroll`,
   ]
 }

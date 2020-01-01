@@ -64,7 +64,7 @@ const LeadImageTextWrapper = styled('div')`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.7);
     padding: 10px;
     width: 80%;
 

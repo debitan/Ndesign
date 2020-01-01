@@ -14,6 +14,7 @@
     "gatsby-image": "^2.2.27",
     "gatsby-plugin-react-helmet": "^3.1.18",
     "gatsby-plugin-sharp": "^2.2.29",
+    "gatsby-plugin-smoothscroll": "^1.0.4",
     "gatsby-plugin-stripe": "^1.2.3",
     "gatsby-plugin-styled-components": "^3.1.14",
     "gatsby-source-filesystem": "^2.1.31",

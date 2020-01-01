@@ -3,11 +3,16 @@ import styled from 'styled-components'
 import { useStaticQuery, graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import BlockContent from '@sanity/block-content-to-react'
+import scrollTo from 'gatsby-plugin-smoothscroll'
 
 import App from '../components/App'
 import Divider from '../components/shared/Divider'
 import FullWidthContainer from '../components/shared/FullWidthContainer'
-import seralizers from '../serializers'
+import StyledImageContainer from '../components/shared/StyledImageContainer'
+import LeadImageTextWrapper from '../components/shared/LeadImageTextWrapper'
+import LeadImageText from '../components/shared/LeadImageText'
+import ScrollButton from '../components/shared/ScrollButton'
+import serializers from '../serializers'
 
 const ImageGrid = styled('div')`
     display: grid;
@@ -174,6 +179,7 @@ const MessageWrapper = styled('div')`
 
 const MainImage = styled(Img)`
     max-height: calc(100vh - 280px);
+    min-height: 510px;
 `
 
 const BodyWrapper = styled('div')`
@@ -310,7 +316,19 @@ const WeddingPage = () => {
         <App>
             <Divider title='Wedding Flowers' />
             <FullWidthContainer>
-                <MainImage fluid={data.sanityWeddingsPage.topImage.asset.fluid} alt='Event flowers' />
+                <StyledImageContainer>
+                    <MainImage fluid={data.sanityWeddingsPage.topImage.asset.fluid} alt='Wedding flowers' />
+                    <LeadImageTextWrapper>
+                        <LeadImageText>
+                            <BlockContent blocks={data.sanityWeddingsPage._rawOverlayText} serializers={serializers} />
+                            <ButtonWrapper>
+                                <ScrollButton type='button' onClick={() => scrollTo('#contactForm')}>
+                                    問い合わせする
+                                </ScrollButton>
+                            </ButtonWrapper>
+                        </LeadImageText>
+                    </LeadImageTextWrapper>
+                </StyledImageContainer>
             </FullWidthContainer>
             <ImageGrid>
                 {data.sanityWeddingsPage.weddingsImage.map(image =>
@@ -318,8 +336,9 @@ const WeddingPage = () => {
                 )}
             </ImageGrid>
             <BodyWrapper>
-                <BlockContent blocks={data.sanityWeddingsPage._rawBodyText} serializers={seralizers} />
+                <BlockContent blocks={data.sanityWeddingsPage._rawBodyText} serializers={serializers} />
             </BodyWrapper>
+            <div id='contactForm' />
             <Divider title='Wedding Contact Form' justify='flex-start' />
             <form onSubmit={handleOnSubmit} id='eventForm'>
                 <FormGrid>
@@ -405,7 +424,7 @@ const WeddingPage = () => {
             </form>
             {!status.info.error && status.info.msg &&
                 <MessageWrapper>
-                    <BlockContent blocks={data.sanityWeddingsPage._rawContactText} serializers={seralizers} />
+                    <BlockContent blocks={data.sanityWeddingsPage._rawContactText} serializers={serializers} />
                 </MessageWrapper>
             }
             {status.info.error && (

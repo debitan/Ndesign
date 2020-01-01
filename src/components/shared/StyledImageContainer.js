@@ -9,6 +9,12 @@ const ImageContainer = styled('div')`
     @media (min-width: 900px) {
         height: ${props => props.height}px;
     }
+
+    @media (min-width: 1200px) {
+        max-width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+    }
 `
 
 const StyledImageContainer = ({ height, children }) => {

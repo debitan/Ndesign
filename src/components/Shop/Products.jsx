@@ -61,8 +61,6 @@ function Products () {
     const productTypes = allSanityProduct.nodes.map(product => product.type)
     const uniqueTypes = Array.from(new Set(productTypes.map(JSON.stringify))).map(JSON.parse)
 
-    console.log(uniqueTypes)
-
     return (
         <>
             {uniqueTypes.map(type =>
