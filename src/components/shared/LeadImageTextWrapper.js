@@ -8,7 +8,7 @@ const LeadImageTextWrapper = styled('div')`
         top: 50%;
         right: 0;
         transform: translate(0%, -50%);
-        background: rgba(255, 255, 255, 0.5);
+        background: rgba(255, 255, 255, 0.7);
         padding: 10px;
         width: fit-content;
     }
