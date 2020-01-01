@@ -3,10 +3,15 @@ import styled from 'styled-components'
 import { useStaticQuery, graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import BlockContent from '@sanity/block-content-to-react'
+import scrollTo from 'gatsby-plugin-smoothscroll'
 
 import App from '../components/App'
 import Divider from '../components/shared/Divider'
 import FullWidthContainer from '../components/shared/FullWidthContainer'
+import StyledImageContainer from '../components/shared/StyledImageContainer'
+import LeadImageTextWrapper from '../components/shared/LeadImageTextWrapper'
+import LeadImageText from '../components/shared/LeadImageText'
+import ScrollButton from '../components/shared/ScrollButton'
 import serializers from '../serializers'
 
 const ImageGrid = styled('div')`
@@ -292,7 +297,19 @@ const EventPage = () => {
         <App>
             <Divider title='Event Flowers' />
             <FullWidthContainer>
-                <MainImage fluid={data.sanityEventsPage.topImage.asset.fluid} alt='Event flowers' />
+                <StyledImageContainer>
+                    <MainImage fluid={data.sanityEventsPage.topImage.asset.fluid} alt='Event flowers' />
+                    <LeadImageTextWrapper>
+                        <LeadImageText>
+                            <BlockContent blocks={data.sanityEventsPage._rawOverlayText} serializers={serializers} />
+                            <ButtonWrapper>
+                                <ScrollButton type='button' onClick={() => scrollTo('#contactForm')}>
+                                    問い合わせする
+                                </ScrollButton>
+                            </ButtonWrapper>
+                        </LeadImageText>
+                    </LeadImageTextWrapper>
+                </StyledImageContainer>
             </FullWidthContainer>
             <ImageGrid>
                 {data.sanityEventsPage.eventImage.map(image =>
@@ -302,6 +319,7 @@ const EventPage = () => {
             <BodyWrapper>
                 <BlockContent blocks={data.sanityEventsPage._rawBodyText} serializers={serializers} />
             </BodyWrapper>
+            <div id='contactForm' />
             <Divider title='Event Contact Form' justify='flex-start' />
             <form onSubmit={handleOnSubmit} id='eventForm'>
                 <FormGrid>
