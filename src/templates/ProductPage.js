@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import Img from 'gatsby-image'
 import BlockContent from '@sanity/block-content-to-react'
 
@@ -10,6 +10,7 @@ import Carousel from 'react-bootstrap/Carousel'
 
 import App from '../components/App'
 import MyContext from '../components/MyContext'
+import PriceText from '../components/PriceText'
 
 import serializers from '../serializers'
 
@@ -52,11 +53,6 @@ const TaxText = styled('p')`
     font-weight: 500;
 `
 
-const PriceText = styled('span')`
-    font-size: 24px;
-    font-weight: 500;
-`
-
 const Label = styled('span')`
     color: grey;
 `
@@ -70,6 +66,16 @@ const ButtonWrapper = styled('div')`
     justify-content: center;
 `
 
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+`;
+
 const BuyButton = styled('button')`
     width: 300px;
     height: 50px;
@@ -77,6 +83,7 @@ const BuyButton = styled('button')`
     color: white;
     border-radius: 37.5px;
     font-size: 18px;
+    animation: ${fadeIn} 1s linear;
 `
 
 const SelectionWrapper = styled(Form)`
@@ -122,6 +129,8 @@ const ProductPage = ({ pageContext }) => {
     const [ colour, setColour ] = useState(pageContext.colours[0])
     const [ quantity, setQuantity ] = useState(1)
     // const [ message, setMessage ] = useState('')
+    const [ isAdded, setIsAdded ] = useState(false)
+    const [ animate, setAnimate ] = useState(0)
 
     useEffect(() => {
         setVariant(...pageContext.variants.filter(variant => variant.size === size))
@@ -159,16 +168,14 @@ const ProductPage = ({ pageContext }) => {
                     </LeftSide>
                     <RightSide>
                         <TitleText>{pageContext.title}</TitleText>
-                        <TaxText>消費税込　<PriceText>¥{variant.price} </PriceText></TaxText>
+                        <TaxText>
+                            消費税込　
+                            <PriceText price={variant.price} />
+                        </TaxText>
                         <p>
                             <Label>花材: </Label>{pageContext.flower}
                             <br />
                             <Label>タイプ: </Label>{pageContext.type.jpCategory}
-                        </p>
-                        <p>
-                            <Label>アイテム説明: </Label>
-                            <br />
-                            <BlockContent blocks={pageContext._rawBody} serializers={serializers} />
                         </p>
                         <SelectionWrapper>
                             <Form.Group as={Row} controlId="size">
@@ -212,14 +219,23 @@ const ProductPage = ({ pageContext }) => {
                                 </Col>
                             </Form.Group> */}
                             <ButtonWrapper>
-                                <BuyButton onClick={(e) => {
-                                    e.preventDefault()
-                                    context.handleAddToBasketClick(...Object.values(pageContext.slug), size, colour, Number(quantity), Number(variant.price), pageContext.images[0].asset.fluid)
+                                <BuyButton
+                                    key={animate}
+                                    onClick={(e) => {
+                                        e.preventDefault()
+                                        context.handleAddToBasketClick(...Object.values(pageContext.slug), size, colour, Number(quantity), Number(variant.price), pageContext.images[0].asset.fluid, pageContext.title, pageContext.flower, pageContext.type.jpCategory, variant.sku)
+                                        setIsAdded(true)
+                                        setAnimate(animate + 1)
                                     }}>
-                                    カートに入れる
+                                        {isAdded ? 'カートに入れました' : 'カートに入れる'}
                                 </BuyButton>
                             </ButtonWrapper>
                         </SelectionWrapper>
+                        <p>
+                            <Label>アイテム説明: </Label>
+                            <br />
+                            <BlockContent blocks={pageContext._rawBody} serializers={serializers} />
+                        </p>
                     </RightSide>
                     <MobileAdviceTextWrapper>
                             <AdviceText>

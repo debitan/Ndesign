@@ -103,7 +103,7 @@ function Checkout() {
                         <LeftSide>
                             <CheckoutDivider
                                 icon={shoppingCartIcon}
-                                title='Shopping Cart'
+                                title='Cart'
                                 JPTitle='ショッピングカート'
                                 background={true}
                             />
@@ -119,6 +119,8 @@ function Checkout() {
                                         size={item.size}
                                         quantity={item.quantity}
                                         image={item.image}
+                                        updateQuantity={context.updateQuantity}
+                                        deleteProduct={context.deleteProduct}
                                     />)
                             }) : null}
                         </LeftSide>
@@ -185,7 +187,6 @@ function Checkout() {
                                 <TotalCostContainer>
                                     <h3>¥{Number(context.totalCost + 1000).toLocaleString('jp')}</h3>
                                 </TotalCostContainer>
-                                <button onClick={() => context.setItemsInBasket([])}>Empty cart</button>
                                 <button onClick={() => setConfirmed(true)}>Force confirmation</button>
                             </Gokei>
                         </RightSide>

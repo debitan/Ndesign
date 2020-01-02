@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 
 import Form from 'react-bootstrap/Form'
@@ -49,8 +49,12 @@ const CartProductImage = styled(ProductImage)`
     margin: 10px 20px 10px 0;
 `
 
-function CartProduct({title, slug, price, flower, type, size, quantity, image}) {
-    const [ checkoutQuantity, setCheckoutQuantity ] = useState(quantity)
+const StyledButton = styled('button')`
+    background: none;
+    border: none;
+`
+
+function CartProduct({title, slug, price, flower, type, size, quantity, image, updateQuantity, deleteProduct}) {
 
     return(
     <Wrapper>
@@ -59,7 +63,7 @@ function CartProduct({title, slug, price, flower, type, size, quantity, image}) 
             <StyledInfo>
                 <TitleText>
                     <StyledAnchor href={`/shop/${slug}`}>
-                        title
+                        {title}
                     </StyledAnchor>
                 </TitleText>
                 <br />
@@ -69,16 +73,25 @@ function CartProduct({title, slug, price, flower, type, size, quantity, image}) 
             </StyledInfo>
             <StyledInfo>
                 <TypeText>
-                    花材：flower
+                    花材：{flower}
                     <br />
-                    タイプ：type
+                    タイプ：{type}
                     <br />
-                    サイズ: size
+                    サイズ: {size}
                 </TypeText>
                 <Form>
-                    <Form.Control style={{width: '50px'}} type="number" defaultValue={checkoutQuantity} onChange={e => setCheckoutQuantity(e.target.value)}/>
+                    <Form.Control style={{width: '60px'}} type="number" min='1' defaultValue={quantity} onChange={e => updateQuantity(slug, size, Number(e.target.value))}/>
                     <br />
-                <StyledAnchor>削除</StyledAnchor>
+                <StyledButton
+                    onClick={
+                        e => {
+                            e.preventDefault()
+                            deleteProduct(slug, size)
+                        }
+                    }
+                >
+                    削除
+                </StyledButton>
                 </Form>
             </StyledInfo>
         </div>
