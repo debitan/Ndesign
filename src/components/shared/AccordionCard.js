@@ -12,6 +12,7 @@ const CardHeader = styled('div')`
     height: fit-content;
     align-items: center;
     padding: 10px;
+    cursor: pointer;
 `
 
 const Dropdown = styled('img')`
@@ -24,6 +25,7 @@ const CollapsableDiv = styled('div')`
     transition: ${props => props.isOpen ? 'opacity 0.5s linear' : 'none'};
     position: ${props => props.isOpen ? 'static' : 'absolute'};
     opacity: ${props => props.isOpen ? '1' : '0'};
+    transform: ${props => props.isOpen ? 'none' : 'translate(-100%, -100%)'}
 `
 
 const AccordionCard = ({headerText, bodyText, bodyText2, defaultOpen = false}) => {

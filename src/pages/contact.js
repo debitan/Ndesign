@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { useStaticQuery, graphql } from 'gatsby'
 import BlockContent from '@sanity/block-content-to-react'
@@ -13,7 +13,6 @@ const Accordion = styled('div')`
 `
 
 const ContactPage = () => {
-    const [expanded, setExpanded] = useState(['0'])
 
     const data = useStaticQuery(graphql`
         query ContactPageQuery {
