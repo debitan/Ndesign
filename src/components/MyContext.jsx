@@ -64,8 +64,12 @@ function MyProvider ({children}) {
     setItemsInBasket(itemsInBasket.filter(item => item !== itemInBasket))
   }
 
+  const quantityOfItemsInBasket = () => {
+    return itemsInBasket.reduce((accumulator, currentValue) => accumulator + currentValue.quantity, 0)
+  }
+
   return (
-      <MyContext.Provider value={{ itemsInBasket, setItemsInBasket, handleAddToBasketClick, totalCost, updateQuantity, deleteProduct }}>
+      <MyContext.Provider value={{ itemsInBasket, setItemsInBasket, handleAddToBasketClick, totalCost, updateQuantity, deleteProduct, quantityOfItemsInBasket }}>
           {children}
       </MyContext.Provider>
   )
