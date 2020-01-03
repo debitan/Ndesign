@@ -21,7 +21,7 @@ export default async function(req, res) {
   } = req.body
 
   const content = {
-    to: 'dwm503@gmail.com',
+    to: 'plusorminus.ndesign@gmail.com',
     from: email,
     subject: `新しいウエディング問い合わせ From - ${email}`,
     text: `
