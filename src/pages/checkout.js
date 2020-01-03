@@ -11,6 +11,7 @@ import StyledHr from '../components/shared/StyledHr'
 import MobileHr from '../components/shared/MobileHr'
 import CheckoutDivider from '../components/shared/CheckoutDivider'
 import CartProduct from '../components/CartProduct'
+import NoItems from '../components/NoItems'
 
 import shoppingCartIcon from '../images/shoppingCartIcon.svg'
 import deliveryIcon from '../images/deliveryIcon.svg'
@@ -98,7 +99,9 @@ function Checkout() {
                         addressLine2={addressLine2}
                         phone={phone}
                         totalCost={context.totalCost}
-                     />) : (
+                     />) : context.quantityOfItemsInBasket() === 0 ? (
+                        <NoItems />
+                     ) : (
                     <StyledWrapper>
                         <LeftSide>
                             <CheckoutDivider
